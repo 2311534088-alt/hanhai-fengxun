@@ -6,4 +6,6 @@ __pycache__/
 build/
 dist/
 review_packages/
+data/raw/
+data/processed/
 

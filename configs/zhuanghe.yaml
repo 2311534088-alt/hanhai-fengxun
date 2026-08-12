@@ -1,12 +1,9 @@
-schema_version: 1
-purpose: project_data_clipping_region
-warning: not_an_administrative_boundary
-longitude_deg_east:
-  min: 121.5
-  max: 124.5
-latitude_deg_north:
-  min: 38.5
-  max: 40.5
-winter_months: [11, 12, 1, 2, 3]
-data_status: no_public_files_downloaded_in_repository
-
+{
+  "schema_version": 1,
+  "purpose": "project_data_clipping_region",
+  "warning": "not_an_administrative_boundary",
+  "longitude_deg_east": {"min": 121.5, "max": 124.5},
+  "latitude_deg_north": {"min": 38.5, "max": 40.5},
+  "winter_months": [11, 12, 1, 2, 3],
+  "data_status": "no_public_files_bundled_in_repository"
+}

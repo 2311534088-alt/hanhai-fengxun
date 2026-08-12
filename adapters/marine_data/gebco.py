@@ -1,7 +1,17 @@
-"""GEBCO local-file adapter skeleton for non-negative depth magnitude."""
+"""GEBCO elevation NetCDF/CSV adapter with explicit depth conversion."""
 
-from core.marine import MarineQualityFlag
+from __future__ import annotations
+
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from core.marine import MarineEnvironment, MarineQualityFlag
 from adapters.marine_data.csv_reader import MarineCSVReader, ProviderCSVSchema
+from adapters.marine_data.netcdf import (
+    ZHUANGHE_STUDY_REGION, StudyRegion, coordinate_name, finite_or_none,
+    open_netcdf, require_units, variable_name,
+)
 
 
 def csv_reader(quality_flag: MarineQualityFlag = MarineQualityFlag.PROVISIONAL) -> MarineCSVReader:
@@ -11,6 +21,41 @@ def csv_reader(quality_flag: MarineQualityFlag = MarineQualityFlag.PROVISIONAL) 
     }, quality_flag))
 
 
-def read_local_netcdf(_path: str) -> None:
-    raise NotImplementedError("TODO: add optional NetCDF reader after elevation-to-depth convention is confirmed")
+def records_from_dataset(
+    dataset: Any,
+    source_id: str,
+    reference_time: datetime,
+    region: StudyRegion = ZHUANGHE_STUDY_REGION,
+    quality_flag: MarineQualityFlag = MarineQualityFlag.PUBLIC_PRODUCT_FILE,
+) -> list[MarineEnvironment]:
+    elevation_name = variable_name(dataset, ("elevation",))
+    require_units(dataset[elevation_name], {"m", "meter", "metre"}, elevation_name)
+    lat_name = coordinate_name(dataset, ("lat", "latitude"))
+    lon_name = coordinate_name(dataset, ("lon", "longitude"))
+    frame = dataset[[elevation_name]].to_dataframe().reset_index()
+    records: list[MarineEnvironment] = []
+    for row in frame.to_dict("records"):
+        elevation = finite_or_none(row[elevation_name])
+        latitude, longitude = float(row[lat_name]), float(row[lon_name])
+        longitude = ((longitude + 180.0) % 360.0) - 180.0
+        if elevation is None or elevation >= 0 or not region.contains(latitude, longitude):
+            continue
+        records.append(MarineEnvironment(
+            timestamp=reference_time, latitude=latitude, longitude=longitude,
+            water_depth=-elevation,
+            source=f"GEBCO:{source_id}", quality_flag=quality_flag,
+        ))
+    return records
 
+
+def read_local_netcdf(
+    path: str | Path,
+    reference_time: datetime,
+    region: StudyRegion = ZHUANGHE_STUDY_REGION,
+    source_id: str | None = None,
+) -> list[MarineEnvironment]:
+    dataset = open_netcdf(path)
+    try:
+        return records_from_dataset(dataset, source_id or Path(path).name, reference_time, region)
+    finally:
+        dataset.close()

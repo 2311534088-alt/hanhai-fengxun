@@ -10,6 +10,7 @@ from math import isfinite
 
 class MarineQualityFlag(str, Enum):
     VERIFIED_SOURCE = "VERIFIED_SOURCE"
+    PUBLIC_PRODUCT_FILE = "PUBLIC_PRODUCT_FILE"
     PROVISIONAL = "PROVISIONAL"
     MISSING = "MISSING"
     SIMULATED = "SIMULATED / DEMO ONLY"
@@ -53,4 +54,3 @@ class MarineEnvironment:
     def _bounded(name: str, value: float, low: float, high: float) -> None:
         if not isinstance(value, (int, float)) or not isfinite(value) or not low <= value <= high:
             raise ValueError(f"{name} must be in [{low}, {high}]")
-

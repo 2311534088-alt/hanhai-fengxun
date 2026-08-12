@@ -18,7 +18,7 @@
 - 统一船态与海洋环境数据模型；
 - 本地 CSV 历史/模拟任务回放；
 - 使用浪、风、流、船态及已知船型尺度的可解释规则型风险 baseline；
-- ERA5、Copernicus WAVERYS/GLORYS、GEBCO 本地文件 Adapter 骨架；
+- ERA5、Copernicus WAVERYS/GLORYS、GEBCO 真实本地 NetCDF pipeline；
 - 共振物理接口与 Pareto 候选接口；
 - 命令行 Demo 和基础测试。
 
@@ -28,7 +28,7 @@
 - Pareto多目标航速优化；
 - ZLUSV-200 ROS实时数据接口。
 
-当前 baseline 不是最终“多源海况注意力融合算法”，所有经验权重均为 `PRELIMINARY / NEEDS CALIBRATION`。仓库没有下载或内置任何庄河真实公共数据；示例任务全部为 `SIMULATED / DEMO ONLY`。
+当前 baseline 不是最终“多源海况注意力融合算法”，所有经验权重均为 `PRELIMINARY / NEEDS CALIBRATION`。仓库没有内置任何庄河真实公共数据文件；用户提供的公共再分析/模式/地形文件会被标记为 `PUBLIC_PRODUCT_FILE`，不等于庄河现场实测。示例任务全部为 `SIMULATED / DEMO ONLY`。
 
 ## 软件架构
 

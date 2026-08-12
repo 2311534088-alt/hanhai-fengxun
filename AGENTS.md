@@ -11,4 +11,6 @@
 - 公共数据必须记录产品、文件来源与质量标记；未实际下载或验证的文件不得写成已获得。
 - 所有 baseline 经验权重必须标注 `PRELIMINARY / NEEDS CALIBRATION`，不得称为训练结果。
 - 未知船体参数必须保持 `null`，任何算法不得以默认常数替代真实辨识结果。
+- `PUBLIC_PRODUCT_FILE` 只表示公共产品文件通过 schema/单位校验，不得表述为现场观测或庄河实测。
+- `data/raw/` 与 `data/processed/` 不进入 Git；派生产物必须配套记录产品 ID 和输入 SHA-256。
 
