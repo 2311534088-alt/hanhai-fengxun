@@ -13,4 +13,6 @@
 - 未知船体参数必须保持 `null`，任何算法不得以默认常数替代真实辨识结果。
 - `PUBLIC_PRODUCT_FILE` 只表示公共产品文件通过 schema/单位校验，不得表述为现场观测或庄河实测。
 - `data/raw/` 与 `data/processed/` 不进入 Git；派生产物必须配套记录产品 ID 和输入 SHA-256。
+- 不得把 nearest-neighbor 字段组装描述为最终“多源融合”；超出采样容差必须返回空值并保留拒绝 provenance。
+- 工程估计动力学只能标记为 `ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED`，不得称为厂家、实测或水池试验参数。
 

@@ -2,6 +2,7 @@ import unittest
 
 from adapters.ros_zlusv200 import CONTROL_MODE, READ_ONLY, send_control_command
 from core.risk import VesselParameters
+from core.resonance import ParameterSource, load_engineering_estimate
 
 
 class SafetyTests(unittest.TestCase):
@@ -17,3 +18,9 @@ class SafetyTests(unittest.TestCase):
         self.assertIsNone(vessel.metacentric_height_m)
         self.assertIsNone(vessel.roll_damping_ratio)
         self.assertIsNone(vessel.roll_moment_of_inertia_kg_m2)
+
+    def test_engineering_estimate_does_not_modify_known_parameter_model(self):
+        vessel = VesselParameters(model="ZLUSV-200")
+        estimate, _ = load_engineering_estimate()
+        self.assertIsNone(vessel.roll_natural_period_s)
+        self.assertEqual(estimate.parameter_source, ParameterSource.ENGINEERING_ESTIMATE)

@@ -10,7 +10,7 @@ from adapters.marine_data.csv_reader import MarineCSVReader, ProviderCSVSchema
 from adapters.marine_data.netcdf import (
     ZHUANGHE_STUDY_REGION, StudyRegion, as_datetime, coordinate_name,
     finite_or_none, from_direction_to_travel, open_netcdf, require_units,
-    validate_time_and_region, variable_name,
+    subset_dataset, validate_time_and_region, variable_name,
 )
 
 
@@ -36,6 +36,10 @@ def records_from_dataset(
     time_name = coordinate_name(dataset, ("time",))
     lat_name = coordinate_name(dataset, ("latitude", "lat"))
     lon_name = coordinate_name(dataset, ("longitude", "lon"))
+    dataset = subset_dataset(
+        dataset[[hs_name, tp_name, direction_name]], region,
+        time_candidates=(time_name,), latitude_candidates=(lat_name,), longitude_candidates=(lon_name,),
+    )
     frame = dataset[[hs_name, tp_name, direction_name]].to_dataframe().reset_index()
     records: list[MarineEnvironment] = []
     for row in frame.to_dict("records"):

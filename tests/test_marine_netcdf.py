@@ -2,6 +2,7 @@ import io
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
+from unittest.mock import patch
 
 try:
     import numpy as np
@@ -18,6 +19,7 @@ from adapters.marine_data.netcdf import (
 from adapters.marine_data.pipeline import (
     build_provenance_manifest, ingest_local_public_files, write_canonical_csv,
 )
+from adapters.marine_data.sampler import MarineEnvironmentSampler, SamplingTolerance
 from core.marine import MarineQualityFlag
 
 
@@ -42,6 +44,32 @@ class MarineNetCDFTests(unittest.TestCase):
         self.assertAlmostEqual(records[0].wind_speed, 5.0)
         self.assertAlmostEqual(records[0].wind_direction, 36.8698976458)
         self.assertEqual(records[0].quality_flag, MarineQualityFlag.PUBLIC_PRODUCT_FILE)
+
+    def test_descending_latitude_and_360_longitude_are_subset_before_expansion(self):
+        dataset = xr.Dataset(
+            {
+                "u10": (("time", "latitude", "longitude"), np.ones((2, 3, 3)), {"units": "m/s"}),
+                "v10": (("time", "latitude", "longitude"), np.ones((2, 3, 3)), {"units": "m/s"}),
+            },
+            coords={
+                "time": np.array(["2026-01-15", "2026-07-15"], dtype="datetime64[ns]"),
+                "latitude": [41.0, 39.5, 38.0],
+                "longitude": [121.0, 122.5, 300.0],
+            },
+        )
+        expanded_sizes = []
+        original_to_dataframe = xr.Dataset.to_dataframe
+
+        def capture_sizes(selected, *args, **kwargs):
+            expanded_sizes.append(dict(selected.sizes))
+            return original_to_dataframe(selected, *args, **kwargs)
+
+        with patch.object(xr.Dataset, "to_dataframe", new=capture_sizes):
+            records = era5.records_from_dataset(dataset, "fixture.nc", REGION)
+        self.assertEqual(len(records), 1)
+        self.assertEqual(expanded_sizes, [{"time": 1, "latitude": 1, "longitude": 1}])
+        self.assertEqual(records[0].latitude, 39.5)
+        self.assertEqual(records[0].longitude, 122.5)
 
     def test_waverys_from_direction_becomes_travel_direction(self):
         dataset = xr.Dataset(
@@ -137,3 +165,62 @@ class DirectionConversionTests(unittest.TestCase):
         region = load_study_region()
         self.assertEqual(region.longitude_min, 121.5)
         self.assertEqual(region.winter_months, (11, 12, 1, 2, 3))
+
+
+class MarineSamplerTests(unittest.TestCase):
+    def setUp(self):
+        self.target_time = datetime(2026, 1, 15, 8, tzinfo=timezone.utc)
+
+    def _record(self, source, *, minutes=0, latitude=39.6, longitude=122.5, **values):
+        from datetime import timedelta
+        from core.marine import MarineEnvironment
+        return MarineEnvironment(
+            timestamp=self.target_time + timedelta(minutes=minutes),
+            latitude=latitude, longitude=longitude, source=source,
+            quality_flag=MarineQualityFlag.PUBLIC_PRODUCT_FILE, **values,
+        )
+
+    def test_nearest_sampling_from_different_grids_preserves_field_provenance(self):
+        records = [
+            self._record("ERA5:wind.nc", minutes=20, latitude=39.61, wind_speed=8.0, wind_direction=90.0),
+            self._record("WAVERYS:wave.nc", minutes=-30, longitude=122.52, Hs=1.4, Tp=5.0, wave_direction=170.0),
+            self._record(
+                "GLORYS:current.nc", minutes=40, latitude=39.58,
+                surface_current_speed=0.3, surface_current_direction=45.0,
+            ),
+            self._record("GEBCO:depth.nc", minutes=-10000, longitude=122.51, water_depth=24.0),
+        ]
+        result = MarineEnvironmentSampler(records, SamplingTolerance(3600, 5000)).sample(
+            self.target_time, 39.6, 122.5,
+        )
+        self.assertEqual(result.Hs, 1.4)
+        self.assertEqual(result.wind_speed, 8.0)
+        self.assertEqual(result.surface_current_speed, 0.3)
+        self.assertEqual(result.water_depth, 24.0)
+        self.assertEqual(result.provenance_by_field["Hs"].source, "WAVERYS:wave.nc")
+        self.assertEqual(result.provenance_by_field["wind_speed"].time_offset_seconds, 1200)
+        self.assertIsNone(result.provenance_by_field["water_depth"].time_offset_seconds)
+        self.assertTrue(result.provenance_by_field["surface_current_speed"].within_tolerance)
+
+    def test_tolerance_excess_returns_null_with_rejection_provenance(self):
+        records = [self._record("ERA5:far.nc", minutes=180, latitude=41.0, wind_speed=12.0)]
+        result = MarineEnvironmentSampler(records, SamplingTolerance(3600, 5000)).sample(
+            self.target_time, 39.6, 122.5,
+        )
+        self.assertIsNone(result.wind_speed)
+        provenance = result.provenance_by_field["wind_speed"]
+        self.assertEqual(provenance.source, "ERA5:far.nc")
+        self.assertFalse(provenance.within_tolerance)
+        self.assertGreater(provenance.time_offset_seconds, 3600)
+        self.assertGreater(provenance.spatial_distance_m, 5000)
+
+    def test_valid_candidate_is_preferred_over_closer_but_out_of_tolerance_candidate(self):
+        records = [
+            self._record("ERA5:too-old.nc", minutes=120, wind_speed=20.0),
+            self._record("ERA5:valid.nc", minutes=30, latitude=39.61, wind_speed=7.0),
+        ]
+        result = MarineEnvironmentSampler(records, SamplingTolerance(3600, 5000)).sample(
+            self.target_time, 39.6, 122.5,
+        )
+        self.assertEqual(result.wind_speed, 7.0)
+        self.assertEqual(result.provenance_by_field["wind_speed"].source, "ERA5:valid.nc")

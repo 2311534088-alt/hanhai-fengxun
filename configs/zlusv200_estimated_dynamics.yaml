@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "model": "ZLUSV-200",
+  "parameter_source": "ENGINEERING_ESTIMATE",
+  "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "description": "基于实艇尺度与低保真水动力模型的工程估计",
+  "reference_displacement_kg": 100.0,
+  "GM_m": {"nominal": 0.18, "lower": 0.12, "upper": 0.25},
+  "rigid_roll_radius_gyration_m": {"nominal": 0.31},
+  "effective_roll_radius_gyration_m": {"nominal": 0.36, "lower": 0.33, "upper": 0.40},
+  "rigid_roll_inertia_kg_m2": {"nominal": 9.6},
+  "added_roll_inertia_kg_m2": {"nominal": 3.4},
+  "effective_roll_inertia_kg_m2": {"nominal": 13.0},
+  "restoring_stiffness_Nm_rad": {"nominal": 176.6},
+  "equivalent_damping_ratio": {"nominal": 0.18, "lower": 0.10, "upper": 0.30},
+  "linear_damping_Nm_s_rad": {"nominal": 17.2},
+  "natural_roll_period_s": {"nominal": 1.70, "lower": 1.32, "upper": 2.32},
+  "natural_roll_frequency_hz": {"nominal": 0.587, "lower": 0.432, "upper": 0.755},
+  "natural_roll_frequency_rad_s": {"nominal": 3.69, "lower": 2.71, "upper": 4.75},
+  "resonance_thresholds": {
+    "status": "PRELIMINARY / NEEDS CALIBRATION",
+    "high_risk_below_ratio": 0.10,
+    "warning_below_ratio": 0.20
+  }
+}

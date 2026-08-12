@@ -45,6 +45,20 @@
 
 所有动态产品仅保留 `configs/zhuanghe.yaml` 项目裁剪框内、11 月至次年 3 月的记录。GEBCO 是静态背景，使用动态数据的最早时间戳进入统一模型。
 
+Adapter 在调用 `to_dataframe()` 前先在 xarray Dataset 层执行空间裁剪和冬季月份筛选；GLORYS 还会先选择绝对深度最小的表层。裁剪兼容纬度升序/降序，以及 `0–360`、`-180–180` 两种经度坐标。
+
+## MarineEnvironmentSampler
+
+各产品网格与时间分辨率不同，因此原始记录的简单拼接不是“多源融合”。`MarineEnvironmentSampler` 接收目标 `timestamp/latitude/longitude`，按环境字段分别执行可解释的 nearest-neighbor 采样：
+
+- 默认最大时间偏差 3 小时、最大空间距离 30 km，可显式配置；
+- 水深为静态字段，不应用时间容差；
+- 超过任一容差时对应值为 `null`，不静默使用远距离格点；
+- `provenance_by_field` 为每个字段记录数据源、采样方法、绝对时间偏差、球面空间距离和是否通过容差；
+- `Hs/Tp/wave_direction`、wind、current、depth 可分别来自 WAVERYS、ERA5、GLORYS、GEBCO。
+
+该操作是容差受控的时空采样与字段组装，不是统计学习或项目最终“多源注意力融合”。
+
 安装可选依赖：
 
 ```powershell
@@ -78,4 +92,4 @@ python -m adapters.marine_data.pipeline `
 
 - 用户提供实际下载且可追溯的 ERA5、WAVERYS、GLORYS、GEBCO 文件；
 - 按下载产品的 PUM/QUID 再确认产品 ID、时间分辨率、坐标系、缺测值和许可；
-- Commit 1 之后再考虑时空插值、四源同点合并和数据库存储。
+- 后续再考虑经验证的线性插值、数据库存储和批量任务轨迹采样。

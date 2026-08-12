@@ -10,7 +10,7 @@ from adapters.marine_data.csv_reader import MarineCSVReader, ProviderCSVSchema
 from adapters.marine_data.netcdf import (
     ZHUANGHE_STUDY_REGION, StudyRegion, as_datetime, coordinate_name,
     direction_of_travel, finite_or_none, open_netcdf, require_units,
-    validate_time_and_region, variable_name, vector_speed,
+    select_surface_depth, subset_dataset, validate_time_and_region, variable_name, vector_speed,
 )
 
 
@@ -32,14 +32,14 @@ def records_from_dataset(
     v_name = variable_name(dataset, ("vo", "v0"))
     require_units(dataset[u_name], {"m s-1", "m/s", "m s^-1"}, u_name)
     require_units(dataset[v_name], {"m s-1", "m/s", "m s^-1"}, v_name)
-    depth_names = [name for name in ("depth", "deptht") if name in dataset.coords or name in dataset.dims]
-    if depth_names:
-        depth_name = depth_names[0]
-        surface_index = int(abs(dataset[depth_name]).values.argmin())
-        dataset = dataset.isel({depth_name: surface_index})
+    dataset = select_surface_depth(dataset)
     time_name = coordinate_name(dataset, ("time",))
     lat_name = coordinate_name(dataset, ("latitude", "lat"))
     lon_name = coordinate_name(dataset, ("longitude", "lon"))
+    dataset = subset_dataset(
+        dataset[[u_name, v_name]], region, time_candidates=(time_name,),
+        latitude_candidates=(lat_name,), longitude_candidates=(lon_name,),
+    )
     frame = dataset[[u_name, v_name]].to_dataframe().reset_index()
     records: list[MarineEnvironment] = []
     for row in frame.to_dict("records"):

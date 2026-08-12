@@ -20,6 +20,8 @@
 - 使用浪、风、流、船态及已知船型尺度的可解释规则型风险 baseline；
 - ERA5、Copernicus WAVERYS/GLORYS、GEBCO 真实本地 NetCDF pipeline；
 - 共振物理接口与 Pareto 候选接口；
+- 容差受控的多数据源时空采样与逐字段 provenance；
+- 与真实参数隔离的 ZLUSV-200 横摇动力学 `ENGINEERING_ESTIMATE`；
 - 命令行 Demo 和基础测试。
 
 仍属 planned / requires real data：

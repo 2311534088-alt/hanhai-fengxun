@@ -76,6 +76,47 @@ def variable_name(dataset: Any, candidates: Iterable[str]) -> str:
     raise MarineDataSchemaError(f"missing variable; expected one of {tuple(candidates)}")
 
 
+def subset_dataset(
+    dataset: Any,
+    region: StudyRegion,
+    *,
+    time_candidates: Iterable[str] = ("valid_time", "time"),
+    latitude_candidates: Iterable[str] = ("latitude", "lat"),
+    longitude_candidates: Iterable[str] = ("longitude", "lon"),
+    winter_only: bool = True,
+) -> Any:
+    """Subset coordinates before tabular expansion.
+
+    Boolean coordinate indexing handles ascending/descending latitude and both
+    -180..180 and 0..360 longitude conventions without touching data values.
+    """
+    lat_name = coordinate_name(dataset, latitude_candidates)
+    lon_name = coordinate_name(dataset, longitude_candidates)
+    longitude = dataset[lon_name]
+    uses_360 = bool(float(longitude.max()) > 180.0)
+    lon_min = region.longitude_min % 360.0 if uses_360 else region.longitude_min
+    lon_max = region.longitude_max % 360.0 if uses_360 else region.longitude_max
+    lat_mask = (dataset[lat_name] >= region.latitude_min) & (dataset[lat_name] <= region.latitude_max)
+    if lon_min <= lon_max:
+        lon_mask = (longitude >= lon_min) & (longitude <= lon_max)
+    else:
+        lon_mask = (longitude >= lon_min) | (longitude <= lon_max)
+    subset = dataset.sel({lat_name: dataset[lat_name][lat_mask], lon_name: longitude[lon_mask]})
+    if winter_only:
+        time_name = coordinate_name(subset, time_candidates)
+        time_mask = subset[time_name].dt.month.isin(region.winter_months)
+        subset = subset.sel({time_name: subset[time_name][time_mask]})
+    return subset
+
+
+def select_surface_depth(dataset: Any, candidates: Iterable[str] = ("depth", "deptht")) -> Any:
+    for name in candidates:
+        if name in dataset.coords or name in dataset.dims:
+            surface_index = int(abs(dataset[name]).values.argmin())
+            return dataset.isel({name: surface_index})
+    return dataset
+
+
 def require_units(variable: Any, accepted: set[str], field_name: str) -> None:
     raw = str(variable.attrs.get("units", "")).strip().lower().replace(" ", "")
     normalized = raw.replace("**", "^")

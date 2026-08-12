@@ -10,7 +10,7 @@ from core.marine import MarineEnvironment, MarineQualityFlag
 from adapters.marine_data.csv_reader import MarineCSVReader, ProviderCSVSchema
 from adapters.marine_data.netcdf import (
     ZHUANGHE_STUDY_REGION, StudyRegion, coordinate_name, finite_or_none,
-    open_netcdf, require_units, variable_name,
+    open_netcdf, require_units, subset_dataset, variable_name,
 )
 
 
@@ -32,6 +32,10 @@ def records_from_dataset(
     require_units(dataset[elevation_name], {"m", "meter", "metre"}, elevation_name)
     lat_name = coordinate_name(dataset, ("lat", "latitude"))
     lon_name = coordinate_name(dataset, ("lon", "longitude"))
+    dataset = subset_dataset(
+        dataset[[elevation_name]], region, latitude_candidates=(lat_name,),
+        longitude_candidates=(lon_name,), winter_only=False,
+    )
     frame = dataset[[elevation_name]].to_dataframe().reset_index()
     records: list[MarineEnvironment] = []
     for row in frame.to_dict("records"):
