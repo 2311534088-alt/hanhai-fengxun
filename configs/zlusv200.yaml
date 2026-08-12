@@ -21,8 +21,10 @@ unidentified_parameters:
   roll_natural_period_s: null
   metacentric_height_GM_m: null
   roll_damping_ratio: null
+  roll_moment_of_inertia_kg_m2: null
 notes:
   - "TODO: identify roll natural period through controlled experiments."
   - "TODO: identify GM and roll damping through controlled experiments."
+  - "TODO: identify roll moment of inertia through controlled experiments."
   - "Unknown values must not be inferred from the demo data."
 

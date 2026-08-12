@@ -1,4 +1,4 @@
-"""Minimal V0.1 replay demo. This module never sends vessel commands."""
+"""Minimal V0.2 baseline replay demo. This module never sends vessel commands."""
 
 from __future__ import annotations
 
@@ -16,10 +16,14 @@ DEFAULT_SAMPLE = PROJECT_ROOT / "data" / "samples" / "sample_mission_001.csv"
 
 
 def run_demo(csv_path: Path = DEFAULT_SAMPLE, delay: float = 0.0) -> None:
-    print("寒海风巡 V0.1 — SIMULATED / DEMO ONLY")
+    print("寒海风巡 V0.2 baseline — SIMULATED / DEMO ONLY")
     print("Decision support only; real-vessel control is DISABLED.\n")
     evaluator = BaselineRiskEvaluator()
-    vessel = VesselParameters(model="ZLUSV-200")
+    vessel = VesselParameters(
+        model="ZLUSV-200", length_overall_m=2.02, beam_m=0.88,
+        draft_m=0.25, hull_mass_approx_kg=50,
+        full_load_displacement_min_kg=100,
+    )
     for index, record in enumerate(CSVReplay(csv_path), start=1):
         result = evaluator.evaluate(record, vessel)
         print(
@@ -30,13 +34,14 @@ def run_demo(csv_path: Path = DEFAULT_SAMPLE, delay: float = 0.0) -> None:
         )
         print(f"     主要风险: {result.primary_risk}")
         print(f"     解释: {result.explanation}")
-        print(f"     建议: {result.recommendation} | 置信度={result.confidence:.2f}")
+        print(f"     风险分量: {result.risk_components}")
+        print(f"     建议: {result.recommendation} | 数据质量={result.data_quality:.2f}")
         if delay:
             time.sleep(delay)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="寒海风巡 V0.1 CSV 回放 Demo")
+    parser = argparse.ArgumentParser(description="寒海风巡 V0.2 baseline CSV 回放 Demo")
     parser.add_argument("--csv", type=Path, default=DEFAULT_SAMPLE)
     parser.add_argument("--delay", type=float, default=0.0, help="每条记录间隔秒数")
     args = parser.parse_args()

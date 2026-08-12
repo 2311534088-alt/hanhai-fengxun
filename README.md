@@ -10,36 +10,41 @@
 2. 横摇共振难以及时规避；
 3. 航速决策难以兼顾安全、效率与能耗。
 
-## V0.1 目标
+## 当前版本：V0.2 baseline
 
-第一阶段完成：
+当前已实现：
 
 - 历史/模拟任务回放；
-- 海事化桌面软件界面；
-- 多源海况风险评估基线；
-- 推荐航速决策；
-- 巡检任务过程记录与报告生成。
+- 统一船态与海洋环境数据模型；
+- 本地 CSV 历史/模拟任务回放；
+- 使用浪、风、流、船态及已知船型尺度的可解释规则型风险 baseline；
+- ERA5、Copernicus WAVERYS/GLORYS、GEBCO 本地文件 Adapter 骨架；
+- 共振物理接口与 Pareto 候选接口；
+- 命令行 Demo 和基础测试。
 
-后续逐步接入：
+仍属 planned / requires real data：
 
 - 物理嵌入SAC横摇共振规避；
 - Pareto多目标航速优化；
 - ZLUSV-200 ROS实时数据接口。
 
+当前 baseline 不是最终“多源海况注意力融合算法”，所有经验权重均为 `PRELIMINARY / NEEDS CALIBRATION`。仓库没有下载或内置任何庄河真实公共数据；示例任务全部为 `SIMULATED / DEMO ONLY`。
+
 ## 软件架构
 
 ```text
 hanhai-fengxun/
-├── apps/desktop/              # PySide6桌面软件
+├── apps/desktop/              # 桌面交互入口（当前为 CLI 骨架）
 ├── core/
 │   ├── risk/                  # 多源单船风险评估
-│   ├── resonance/             # 横摇共振与SAC
-│   ├── speed_optimizer/       # Pareto多目标调速
+│   ├── marine/                # 统一环境数据模型
+│   ├── resonance/             # 共振物理接口，尚未训练 SAC
+│   ├── speed_optimizer/       # Pareto 候选接口，非最终优化器
 │   └── mission/               # 巡检任务逻辑
 ├── adapters/
 │   ├── replay/                # 历史数据回放
 │   ├── marine_data/           # ERA5/Copernicus数据
-│   └── ros_zlusv200/          # 无人艇接口
+│   └── ros_zlusv200/          # 只读/禁用的无人艇边界
 ├── configs/
 ├── data/samples/
 ├── tests/
@@ -53,3 +58,10 @@ hanhai-fengxun/
 ## 安全原则
 
 在完成仿真、回放、实验验证和实艇测试前，算法默认只输出决策建议，不直接控制真实无人艇推进器和舵机。
+
+运行：
+
+```powershell
+python -m unittest discover -v
+python -m apps.desktop.main
+```

@@ -12,7 +12,8 @@ from core.mission.state import MissionState
 
 OPTIONAL_NUMERIC_FIELDS = (
     "Hs", "Tp", "wave_direction", "wind_speed", "wind_direction",
-    "SOG", "COG", "HDG", "roll", "pitch", "battery",
+    "surface_current_speed", "surface_current_direction",
+    "SOG", "COG", "HDG", "roll", "pitch", "roll_rate", "battery",
 )
 
 
@@ -26,11 +27,14 @@ class TelemetryRecord:
     wave_direction: float | None
     wind_speed: float | None
     wind_direction: float | None
+    surface_current_speed: float | None
+    surface_current_direction: float | None
     SOG: float | None
     COG: float | None
     HDG: float | None
     roll: float | None
     pitch: float | None
+    roll_rate: float | None
     battery: float | None
     mission_state: MissionState
     data_label: str
@@ -46,14 +50,14 @@ class TelemetryRecord:
             value = getattr(self, name)
             if value is not None and (not isinstance(value, (int, float)) or not isfinite(value)):
                 raise ValueError(f"{name} must be a finite number or null")
-        for name in ("Hs", "Tp", "wind_speed", "SOG"):
+        for name in ("Hs", "Tp", "wind_speed", "surface_current_speed", "SOG"):
             value = getattr(self, name)
             if value is not None and value < 0:
                 raise ValueError(f"{name} cannot be negative")
-        for name in ("wave_direction", "wind_direction", "COG", "HDG"):
+        for name in ("wave_direction", "wind_direction", "surface_current_direction", "COG", "HDG"):
             value = getattr(self, name)
-            if value is not None and not 0 <= value <= 360:
-                raise ValueError(f"{name} must be in [0, 360]")
+            if value is not None and not 0 <= value < 360:
+                raise ValueError(f"{name} must be in [0, 360)")
         if self.roll is not None:
             self._bounded("roll", self.roll, -180.0, 180.0)
         if self.pitch is not None:
