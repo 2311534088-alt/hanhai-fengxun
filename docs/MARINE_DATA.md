@@ -30,7 +30,20 @@
 
 ## 当前数据状态
 
-仓库没有下载、内置或声称拥有任何庄河真实公共数据。`tests/fixtures/era5_simulated.csv` 只用于 Adapter 测试，质量标记为 `SIMULATED / DEMO ONLY`。`configs/zhuanghe.yaml` 只是 `121.5–124.5°E、38.5–40.5°N` 的项目裁剪框，不是庄河行政边界；冬季配置为 11 月至次年 3 月。
+本机 `data/raw/` 已获取 2026-02-20 四源 Smoke Test，以及 2025-11-01 至 2026-03-31 的 ERA5、WAVERYS、GLORYS 和一份静态 GEBCO_2026 区域文件。它们是 `REAL PUBLIC ENVIRONMENT DATA / PUBLIC REANALYSIS OR MODEL DATA`，不是庄河现场实测；原始文件受 `.gitignore` 保护，不进入仓库。可提交的 `data/manifests/` 只记录产品标识、变量、单位、统计、文件大小与 SHA-256，不记录凭据。
+
+`tests/fixtures/era5_simulated.csv` 仍只用于 Adapter 测试，质量标记为 `SIMULATED / DEMO ONLY`。`configs/zhuanghe.yaml` 只是 `121.5–124.5°E、38.5–40.5°N` 的项目裁剪框，不是庄河行政边界；冬季配置为 11 月至次年 3 月。
+
+当前已核验产品：
+
+| 来源 | product/dataset ID | 原生变量与单位 | 方向处理 |
+|---|---|---|---|
+| ERA5 | `reanalysis-era5-single-levels` | `u10`, `v10`; `m s**-1` | 东/北分量计算风吹向 |
+| WAVERYS | `GLOBAL_MULTIYEAR_WAV_001_032` / `cmems_mod_glo_wav_my_0.2deg_PT3H-i` | `VHM0` m, `VTPK` s, `VMDR` degree | `VMDR` 为来向，项目加 180° 转传播去向 |
+| GLORYS | `GLOBAL_MULTIYEAR_PHY_001_030` / `cmems_mod_glo_phy_my_0.083deg_P1D-m` | `uo`, `vo`; `m s-1` | 0.494 m 表层东/北分量计算流去向 |
+| GEBCO | `GEBCO_2026 Grid ice surface elevation` | `elevation`; m | 负 elevation 转正水深，陆地排除 |
+
+运行 `python tools/build_real_public_data_reports.py` 可重复生成 `data/manifests/smoke_test_20260220.json` 与 `data/manifests/winter_environment_20251101_20260331.json`。该工具只读取本地已下载文件，不读取认证文件。
 
 ## V0.3 Commit 1：真实公共产品文件 pipeline
 

@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "artifact_type": "REAL PUBLIC ENVIRONMENT DATA VALIDATION WITH SEPARATE SIMULATED VESSEL STATE",
+  "generated_at_utc": "2026-08-12T21:58:26.268797+00:00",
+  "clipping_box_warning": "PROJECT CLIPPING BOX - NOT ZHUANGHE ADMINISTRATIVE BOUNDARY",
+  "validations": {
+    "ERA5": {
+      "status": "PASSED",
+      "data_classification": "REAL PUBLIC ENVIRONMENT DATA",
+      "observation_status": "PUBLIC REANALYSIS / MODEL DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "product_id": "reanalysis-era5-single-levels",
+      "dataset_id": "reanalysis-era5-single-levels",
+      "dataset_version": null,
+      "dataset_id_evidence": "BOUND_TO_SUCCESSFUL DOWNLOAD REQUEST; DATASET ID IS NOT EMBEDDED IN NETCDF",
+      "variables": {
+        "u10": {
+          "units": "m s**-1",
+          "standard_name": "unknown",
+          "count": 2808,
+          "valid_count": 2808,
+          "missing_percentage": 0.0,
+          "minimum": -7.0303802490234375,
+          "maximum": 3.3170318603515625
+        },
+        "v10": {
+          "units": "m s**-1",
+          "standard_name": "unknown",
+          "count": 2808,
+          "valid_count": 2808,
+          "missing_percentage": 0.0,
+          "minimum": -0.658935546875,
+          "maximum": 10.39794921875
+        }
+      },
+      "direction_convention": "u10 eastward and v10 northward; project stores wind blowing-toward vector direction",
+      "requested_bounding_box": {
+        "longitude": [
+          121.5,
+          124.5
+        ],
+        "latitude": [
+          38.5,
+          40.5
+        ],
+        "warning": "PROJECT CLIPPING BOX - NOT ZHUANGHE ADMINISTRATIVE BOUNDARY"
+      },
+      "actual_coordinate_extent": {
+        "minimum_longitude": 121.5,
+        "maximum_longitude": 124.5,
+        "minimum_latitude": 38.5,
+        "maximum_latitude": 40.5
+      },
+      "longitude_convention": "-180_to_180",
+      "latitude_order": "descending",
+      "actual_time_range": {
+        "start": "2026-02-20T00:00:00Z",
+        "end": "2026-02-20T23:00:00Z"
+      },
+      "surface_depth_m": null,
+      "filename": "era5_smoke_20260220.nc",
+      "filesize_bytes": 48509,
+      "sha256": "7b01fa5cff4e15d752cc67dbd33f0a883f8afb4137ddc104cf0e8c2db1fa5a32",
+      "validated_at_utc": "2026-08-12T21:58:23.268418+00:00",
+      "errors": []
+    },
+    "WAVERYS": {
+      "status": "PASSED",
+      "data_classification": "REAL PUBLIC ENVIRONMENT DATA",
+      "observation_status": "PUBLIC REANALYSIS / MODEL DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "product_id": "GLOBAL_MULTIYEAR_WAV_001_032",
+      "dataset_id": "cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+      "dataset_version": "202411",
+      "dataset_id_evidence": "BOUND_TO_SUCCESSFUL DOWNLOAD REQUEST; DATASET ID IS NOT EMBEDDED IN NETCDF",
+      "variables": {
+        "VHM0": {
+          "units": "m",
+          "standard_name": "sea_surface_wave_significant_height",
+          "count": 1200,
+          "valid_count": 736,
+          "missing_percentage": 38.666666666666664,
+          "minimum": 0.33,
+          "maximum": 1.6600000000000001
+        },
+        "VTPK": {
+          "units": "s",
+          "standard_name": "sea_surface_wave_period_at_variance_spectral_density_maximum",
+          "count": 1200,
+          "valid_count": 736,
+          "missing_percentage": 38.666666666666664,
+          "minimum": 2.8000000000000003,
+          "maximum": 6.1000000000000005
+        },
+        "VMDR": {
+          "units": "degree",
+          "standard_name": "sea_surface_wave_from_direction",
+          "count": 1200,
+          "valid_count": 736,
+          "missing_percentage": 38.666666666666664,
+          "minimum": 161.02,
+          "maximum": 222.5
+        }
+      },
+      "direction_convention": "VMDR is wave-from direction; project stores travel direction as (VMDR + 180) mod 360",
+      "requested_bounding_box": {
+        "longitude": [
+          121.5,
+          124.5
+        ],
+        "latitude": [
+          38.5,
+          40.5
+        ],
+        "warning": "PROJECT CLIPPING BOX - NOT ZHUANGHE ADMINISTRATIVE BOUNDARY"
+      },
+      "actual_coordinate_extent": {
+        "minimum_longitude": 121.5999984741211,
+        "maximum_longitude": 124.4000015258789,
+        "minimum_latitude": 38.599998474121094,
+        "maximum_latitude": 40.400001525878906
+      },
+      "longitude_convention": "-180_to_180",
+      "latitude_order": "ascending",
+      "actual_time_range": {
+        "start": "2026-02-20T00:00:00Z",
+        "end": "2026-02-20T21:00:00Z"
+      },
+      "surface_depth_m": null,
+      "filename": "waverys_smoke_20260220.nc",
+      "filesize_bytes": 41333,
+      "sha256": "513b82c3f7ddf733080e16ae969304cc95bb0ef5b6e3b6edb9ac19d69a245d44",
+      "validated_at_utc": "2026-08-12T21:58:23.302113+00:00",
+      "errors": []
+    },
+    "GLORYS": {
+      "status": "PASSED",
+      "data_classification": "REAL PUBLIC ENVIRONMENT DATA",
+      "observation_status": "PUBLIC REANALYSIS / MODEL DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "product_id": "GLOBAL_MULTIYEAR_PHY_001_030",
+      "dataset_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+      "dataset_version": "202311",
+      "dataset_id_evidence": "BOUND_TO_SUCCESSFUL DOWNLOAD REQUEST; DATASET ID IS NOT EMBEDDED IN NETCDF",
+      "variables": {
+        "uo": {
+          "units": "m s-1",
+          "standard_name": "eastward_sea_water_velocity",
+          "count": 925,
+          "valid_count": 559,
+          "missing_percentage": 39.56756756756757,
+          "minimum": -0.2697836235165596,
+          "maximum": 0.17273476347327232
+        },
+        "vo": {
+          "units": "m s-1",
+          "standard_name": "northward_sea_water_velocity",
+          "count": 925,
+          "valid_count": 559,
+          "missing_percentage": 39.56756756756757,
+          "minimum": -0.13611255213618279,
+          "maximum": 0.21607104688882828
+        }
+      },
+      "direction_convention": "uo eastward and vo northward; project stores vector travel direction",
+      "requested_bounding_box": {
+        "longitude": [
+          121.5,
+          124.5
+        ],
+        "latitude": [
+          38.5,
+          40.5
+        ],
+        "warning": "PROJECT CLIPPING BOX - NOT ZHUANGHE ADMINISTRATIVE BOUNDARY"
+      },
+      "actual_coordinate_extent": {
+        "minimum_longitude": 121.5,
+        "maximum_longitude": 124.5,
+        "minimum_latitude": 38.5,
+        "maximum_latitude": 40.5
+      },
+      "longitude_convention": "-180_to_180",
+      "latitude_order": "ascending",
+      "actual_time_range": {
+        "start": "2026-02-20T00:00:00Z",
+        "end": "2026-02-20T00:00:00Z"
+      },
+      "surface_depth_m": 0.49402499198913574,
+      "filename": "glorys_surface_smoke_20260220.nc",
+      "filesize_bytes": 34906,
+      "sha256": "9076f907fe967411e9864bd9e04316fd2ad922403b26dc156e2a194de840bc73",
+      "validated_at_utc": "2026-08-12T21:58:23.337294+00:00",
+      "errors": []
+    },
+    "GEBCO": {
+      "status": "PASSED",
+      "data_classification": "REAL PUBLIC ENVIRONMENT DATA",
+      "observation_status": "PUBLIC REANALYSIS / MODEL DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "product_id": "GEBCO_2026",
+      "dataset_id": "GEBCO_2026 Grid ice surface elevation",
+      "dataset_version": null,
+      "dataset_id_evidence": "BOUND_TO_SUCCESSFUL DOWNLOAD REQUEST; DATASET ID IS NOT EMBEDDED IN NETCDF",
+      "variables": {
+        "elevation": {
+          "units": "m",
+          "standard_name": "height_above_mean_sea_level",
+          "count": 345600,
+          "valid_count": 345600,
+          "missing_percentage": 0.0,
+          "minimum": -116.0,
+          "maximum": 1028.0
+        }
+      },
+      "direction_convention": "negative elevation below mean sea level is converted to positive water_depth; land excluded",
+      "requested_bounding_box": {
+        "longitude": [
+          121.5,
+          124.5
+        ],
+        "latitude": [
+          38.5,
+          40.5
+        ],
+        "warning": "PROJECT CLIPPING BOX - NOT ZHUANGHE ADMINISTRATIVE BOUNDARY"
+      },
+      "actual_coordinate_extent": {
+        "minimum_longitude": 121.5020833333333,
+        "maximum_longitude": 124.49791666666664,
+        "minimum_latitude": 38.50208333333333,
+        "maximum_latitude": 40.49791666666667
+      },
+      "longitude_convention": "-180_to_180",
+      "latitude_order": "ascending",
+      "actual_time_range": null,
+      "surface_depth_m": null,
+      "filename": "GEBCO_2026_121.5_124.5E_38.5_40.5N.nc",
+      "filesize_bytes": 724676,
+      "sha256": "1a47ad27af3ab3db1db4ac1ec8fe069aa98ed5f91210b69ff8ac34c87b4c15c0",
+      "validated_at_utc": "2026-08-12T21:58:23.357991+00:00",
+      "errors": []
+    }
+  },
+  "adapter_record_counts": {
+    "ERA5": 2808,
+    "WAVERYS": 736,
+    "GLORYS": 559,
+    "GEBCO_ocean_cells": 197766
+  },
+  "smoke_test_all_sources_passed": true,
+  "nearest_neighbour_sampling_note": "Tolerance-controlled field assembly; NOT final multi-source fusion",
+  "marine_environment_samples": [
+    {
+      "timestamp": "2026-02-20T00:00:00+00:00",
+      "latitude": 39.4,
+      "longitude": 122.0,
+      "Hs": 0.47000000000000003,
+      "Tp": 4.69,
+      "wave_direction": 1.3000000000000114,
+      "wind_speed": 2.7797774056461098,
+      "wind_direction": 352.4377162635262,
+      "surface_current_speed": 0.017263875985668583,
+      "surface_current_direction": 188.13010235415598,
+      "water_depth": 3.0,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 28119.832611244696,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 28119.832611244696,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 28119.832611244696,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11119.508023353448,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11119.508023353448,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 21993.506196611852,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 21993.506196611852,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 5196.340686383403,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-20T12:00:00+00:00",
+      "latitude": 39.6,
+      "longitude": 122.5,
+      "Hs": 0.51,
+      "Tp": 4.28,
+      "wave_direction": 345.0,
+      "wind_speed": 2.833025892641166,
+      "wind_direction": 290.56810882706503,
+      "surface_current_speed": 0.0730661811588956,
+      "surface_current_direction": 239.3645824496972,
+      "water_depth": 3.0,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 23836.56176211838,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 23836.56176211838,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 23836.56176211838,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11119.508023353448,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11119.508023353448,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 43200.0,
+          "spatial_distance_m": 13217.279880754128,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 43200.0,
+          "spatial_distance_m": 13217.279880754128,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 12508.467942054054,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-20T21:00:00+00:00",
+      "latitude": 40.0,
+      "longitude": 122.2,
+      "Hs": 0.76,
+      "Tp": 4.01,
+      "wave_direction": 5.759999999999991,
+      "wind_speed": 3.9486520967752274,
+      "wind_direction": 314.83169852520376,
+      "surface_current_speed": 0.08410936638811257,
+      "surface_current_direction": 37.0362129392812,
+      "water_depth": 4.0,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 27999.179696773695,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 27999.179696773695,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 27999.179696773695,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 4259.018609915329,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 4259.018609915329,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 75600.0,
+          "spatial_distance_m": 21023.12380944033,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 75600.0,
+          "spatial_distance_m": 21023.12380944033,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 21967.671307369565,
+          "within_tolerance": true,
+          "decision": "ACCEPTED"
+        }
+      }
+    }
+  ],
+  "resonance_examples": [
+    {
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "selection_method": "fixed SOG 0.0-4.0 m/s grid and relative angles 0/45/90/135/180; real Hs/Tp/direction unchanged",
+      "timestamp": "2026-02-20T21:00:00+00:00",
+      "latitude": 40.0,
+      "longitude": 121.80000305175781,
+      "Hs": 0.52,
+      "Tp": 3.22,
+      "wave_direction": 4.490000000000009,
+      "SOG_m_s": 2.3,
+      "HDG_deg": 139.49,
+      "relative_wave_angle_deg": 135.0,
+      "encounter_frequency_rad_s": 2.5827515126594096,
+      "resonance_margin_ratio": 0.3000673407427074,
+      "resonance_status": "NORMAL",
+      "parameter_source": "ENGINEERING_ESTIMATE",
+      "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED"
+    },
+    {
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "selection_method": "fixed SOG 0.0-4.0 m/s grid and relative angles 0/45/90/135/180; real Hs/Tp/direction unchanged",
+      "timestamp": "2026-02-20T09:00:00+00:00",
+      "latitude": 39.400001525878906,
+      "longitude": 121.5999984741211,
+      "Hs": 0.39,
+      "Tp": 2.99,
+      "wave_direction": 15.789999999999964,
+      "SOG_m_s": 2.3,
+      "HDG_deg": 195.78999999999996,
+      "relative_wave_angle_deg": 180.0,
+      "encounter_frequency_rad_s": 3.137077218605895,
+      "resonance_margin_ratio": 0.14984357219352443,
+      "resonance_status": "WARNING",
+      "parameter_source": "ENGINEERING_ESTIMATE",
+      "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED"
+    },
+    {
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "selection_method": "fixed SOG 0.0-4.0 m/s grid and relative angles 0/45/90/135/180; real Hs/Tp/direction unchanged",
+      "timestamp": "2026-02-20T21:00:00+00:00",
+      "latitude": 40.0,
+      "longitude": 121.80000305175781,
+      "Hs": 0.52,
+      "Tp": 3.22,
+      "wave_direction": 4.490000000000009,
+      "SOG_m_s": 4.0,
+      "HDG_deg": 184.49,
+      "relative_wave_angle_deg": 180.0,
+      "encounter_frequency_rad_s": 3.5043564760878128,
+      "resonance_margin_ratio": 0.05030989807918352,
+      "resonance_status": "HIGH_RISK",
+      "parameter_source": "ENGINEERING_ESTIMATE",
+      "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED"
+    }
+  ],
+  "closest_potential_resonance_sensitive_condition": {
+    "label": "基于工程估计横摇参数筛选的潜在共振敏感工况",
+    "environment_source": "REAL PUBLIC ENVIRONMENT DATA",
+    "vessel_state_source": "SIMULATED VESSEL STATE",
+    "timestamp": "2026-02-20T06:00:00+00:00",
+    "latitude": 39.400001525878906,
+    "longitude": 121.5999984741211,
+    "Hs": 0.41000000000000003,
+    "Tp": 3.0300000000000002,
+    "wave_direction": 18.860000000000014,
+    "SOG_m_s": 3.7,
+    "HDG_deg": 198.86,
+    "relative_wave_angle_deg": 180.0,
+    "encounter_frequency_rad_s": 3.696049516222643,
+    "resonance_margin_ratio": 0.001639435290689233,
+    "resonance_status": "HIGH_RISK",
+    "parameter_source": "ENGINEERING_ESTIMATE",
+    "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED"
+  }
+}

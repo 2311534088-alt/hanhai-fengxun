@@ -15,4 +15,5 @@
 - `data/raw/` 与 `data/processed/` 不进入 Git；派生产物必须配套记录产品 ID 和输入 SHA-256。
 - 不得把 nearest-neighbor 字段组装描述为最终“多源融合”；超出采样容差必须返回空值并保留拒绝 provenance。
 - 工程估计动力学只能标记为 `ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED`，不得称为厂家、实测或水池试验参数。
+- 禁止读取、输出、记录或提交 CDS/Copernicus Marine 的账号、密码、token、API key 或 credential 文件；manifest 只允许记录非敏感产品与文件 provenance。
 

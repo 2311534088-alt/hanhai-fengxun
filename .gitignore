@@ -8,4 +8,10 @@ dist/
 review_packages/
 data/raw/
 data/processed/
+.test-tmp/
+.cdsapirc
+.copernicusmarine-credentials
+.copernicusmarine/
+.netrc
+_netrc
 

@@ -29,8 +29,8 @@ def records_from_dataset(
 ) -> list[MarineEnvironment]:
     u_name = variable_name(dataset, ("u10", "10u"))
     v_name = variable_name(dataset, ("v10", "10v"))
-    require_units(dataset[u_name], {"m s-1", "m/s", "m s^-1"}, u_name)
-    require_units(dataset[v_name], {"m s-1", "m/s", "m s^-1"}, v_name)
+    require_units(dataset[u_name], {"m s-1", "m/s", "m s^-1", "m s**-1"}, u_name)
+    require_units(dataset[v_name], {"m s-1", "m/s", "m s^-1", "m s**-1"}, v_name)
     time_name = coordinate_name(dataset, ("valid_time", "time"))
     lat_name = coordinate_name(dataset, ("latitude", "lat"))
     lon_name = coordinate_name(dataset, ("longitude", "lon"))
