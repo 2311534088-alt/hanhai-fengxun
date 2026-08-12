@@ -1,0 +1,28 @@
+schema_version: 1
+model: ZLUSV-200
+source_status: manufacturer_parameters_provided_by_project
+dimensions:
+  length_overall_m: 2.02
+  beam_m: 0.88
+  draft_m: 0.25
+mass:
+  hull_mass_approx_kg: 50
+  net_payload_min_kg: 50
+  full_load_displacement_min_kg: 100
+endurance_min_h: 4
+propulsion: twin_propeller_twin_rudder
+environment_support:
+  wind_force: 4
+  sea_state: 3
+attitude_sensor:
+  accuracy_approx_deg: 0.5
+  roll_range_deg: [-180, 180]
+unidentified_parameters:
+  roll_natural_period_s: null
+  metacentric_height_GM_m: null
+  roll_damping_ratio: null
+notes:
+  - "TODO: identify roll natural period through controlled experiments."
+  - "TODO: identify GM and roll damping through controlled experiments."
+  - "Unknown values must not be inferred from the demo data."
+
