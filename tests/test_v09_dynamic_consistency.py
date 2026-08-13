@@ -140,30 +140,29 @@ class V09DynamicConsistencyTests(unittest.TestCase):
         )
         self.assertEqual(sum(report.blocker_counts.values()), report.total_scenarios)
 
-    def test_v09_result_has_two_predeclared_cohorts_and_strict_gate(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.9_dynamic_mission_evidence.json"
+    def test_v09_summary_has_two_predeclared_cohorts_and_strict_gate(self):
+        path = Path(__file__).resolve().parents[1] / "data/results/v0.9_summary.json"
         data = json.loads(path.read_text(encoding="utf-8"))
         population = data["cohorts"]["WINTER_POPULATION_COHORT"]
         relevant = data["cohorts"]["DECISION_RELEVANT_COHORT"]
         self.assertEqual(population["N"], 360)
-        self.assertEqual(len(population["scenario_results"]), 360)
-        self.assertGreater(relevant["N"], 0)
-        self.assertEqual(len(relevant["scenario_results"]), relevant["N"])
-        self.assertEqual(sum(population["blocker_report"]["blocker_counts"].values()), 360)
-        self.assertEqual(data["replay_integrity_gate"], "PASS")
-        self.assertEqual(data["business_value_status"], "NOT_ESTABLISHED")
-        self.assertEqual(population["mission_saved_count"], 0)
+        self.assertEqual(relevant["N"], 9)
+        self.assertEqual(data["REPLAY_INTEGRITY_GATE"], "PASS")
+        self.assertEqual(data["BUSINESS_VALUE_STATUS"], "NOT_ESTABLISHED")
+        self.assertTrue(all(
+            value["mission_saved"] == 0 for cohort in data["cohorts"].values()
+            for value in cohort["policies"].values()
+        ))
 
-    def test_v09_stress_return_accumulates_exposure_and_reaches_base(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.9_dynamic_mission_evidence.json"
-        stress = json.loads(path.read_text(encoding="utf-8"))["scenario_2026_02_05"]
-        result = stress["result"]
+    def test_v09_summary_keeps_representative_return_and_truth_labels(self):
+        path = Path(__file__).resolve().parents[1] / "data/results/v0.9_summary.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        stress = data["representative_case_2026_02_05"]
         self.assertEqual(stress["future_action_access_count"], 0)
-        self.assertTrue(stress["return_risk_decisions"])
-        self.assertTrue(result["returned_to_base"])
-        self.assertGreater(result["mission_elapsed_time_s"], 0)
-        self.assertGreater(result["exposure"]["total_evaluated_time_s"], 0)
-        self.assertEqual(result["energy_feasibility_status"], "NOT VERIFIED ENERGY FEASIBILITY")
+        self.assertTrue(stress["action_chain"])
+        self.assertTrue(stress["returned_to_base"])
+        self.assertGreater(stress["high_risk_exposure_s"], 0)
+        self.assertEqual(data["data_sources"]["energy"], "NOT VERIFIED ENERGY FEASIBILITY")
 
 
 if __name__ == "__main__":

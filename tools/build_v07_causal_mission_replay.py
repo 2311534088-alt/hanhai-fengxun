@@ -27,7 +27,7 @@ from core.resonance import load_engineering_estimate
 
 
 RAW_WAVE = ROOT / "data/raw/waverys/waverys_winter_20251101_20260331.nc"
-RESULT = ROOT / "data/results/v0.7_causal_mission_replay.json"
+RESULT = ROOT / "data/generated/v0.7_causal_mission_replay.json"
 REGION = StudyRegion(121.5, 124.5, 38.5, 40.5, (11, 12, 1, 2, 3))
 DATASET_ID = "cmems_mod_glo_wav_my_0.2deg_PT3H-i"
 SELECTION_RULE = (
@@ -80,6 +80,7 @@ def select_cases(records):
 
 
 def main() -> None:
+    RESULT.parent.mkdir(parents=True, exist_ok=True)
     parameters, _ = load_engineering_estimate()
     waves = copernicus_wave.read_local_netcdf(RAW_WAVE, REGION, DATASET_ID)
     store = CausalEnvironmentStore(waves)

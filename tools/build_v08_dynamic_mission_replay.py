@@ -26,8 +26,8 @@ from core.resonance import load_engineering_estimate
 
 
 REGION = StudyRegion(121.5, 124.5, 38.5, 40.5, (11, 12, 1, 2, 3))
-V07 = ROOT / "data/results/v0.7_causal_mission_replay.json"
-RESULT = ROOT / "data/results/v0.8_dynamic_mission_replay.json"
+V07 = ROOT / "data/generated/v0.7_causal_mission_replay.json"
+RESULT = ROOT / "data/generated/v0.8_dynamic_mission_replay.json"
 PATHS = {
     "ERA5": ROOT / "data/raw/era5/era5_winter_20251101_20260331.nc",
     "Copernicus WAVERYS": ROOT / "data/raw/waverys/waverys_winter_20251101_20260331.nc",
@@ -71,6 +71,7 @@ def _json_default(value):
 
 
 def main() -> None:
+    RESULT.parent.mkdir(parents=True, exist_ok=True)
     v07 = json.loads(V07.read_text(encoding="utf-8"))
     timestamps = tuple(datetime.fromisoformat(item["departure_time"]) for item in v07["case_outcomes"])
     if len(timestamps) != 120 or len(set(timestamps)) != 120:

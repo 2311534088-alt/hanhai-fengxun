@@ -157,30 +157,15 @@ class CausalMissionReplayTests(unittest.TestCase):
         self.assertEqual(result.vessel_state_source, "SIMULATED VESSEL STATE")
         self.assertEqual(result.parameter_source, "ENGINEERING_ESTIMATE")
 
-    def test_v07_evidence_has_120_cases_counts_and_causal_gate(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.7_causal_mission_replay.json"
-        data = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual(data["selection"]["total_cases_N"], 120)
-        self.assertEqual(len(data["case_outcomes"]), 120)
-        for policy in data["policy_summaries"].values():
-            self.assertEqual(policy["denominator_N"], 120)
-            self.assertEqual(policy["baseline_status"], "INTERNAL SIMULATION BASELINE")
-        self.assertEqual(data["business_value_gate"]["business_value_evidence"], "DEVELOPMENT_PASS")
-        self.assertEqual(data["replay_integrity_gate"], "PASS")
-        self.assertEqual(data["business_value_status"], "NOT_ESTABLISHED")
-        self.assertIn("DEPRECATED", data["legacy_business_value_evidence_status"])
-        self.assertFalse(data["oracle_experiment"]["used_for_business_metrics"])
+    def test_full_v07_result_is_regenerable_and_git_ignored(self):
+        root = Path(__file__).resolve().parents[1]
+        builder = (root / "tools/build_v07_causal_mission_replay.py").read_text(encoding="utf-8")
+        self.assertIn('data/generated/v0.7_causal_mission_replay.json', builder)
+        self.assertIn("data/generated/", (root / ".gitignore").read_text(encoding="utf-8"))
 
-    def test_v07_stress_case_is_complete_but_endurance_unverified(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.7_causal_mission_replay.json"
-        result = json.loads(path.read_text(encoding="utf-8"))["scenario_2026_02_05"]
-        self.assertIn("STRESS-TEST SIMULATED ROUTE", result["route_status"])
-        self.assertTrue(result["result"]["mission_completed"])
-        self.assertEqual(
-            result["result"]["endurance"]["mission_time_feasibility_status"],
-            "ENDURANCE_FEASIBILITY_UNVERIFIED",
-        )
-        self.assertEqual(result["causal_access_audit"]["future_action_access_count"], 0)
+    def test_stress_case_endurance_contract_stays_unverified(self):
+        assessment = assess_endurance(5 * 3600)
+        self.assertEqual(assessment.mission_time_feasibility_status, "ENDURANCE_FEASIBILITY_UNVERIFIED")
 
 
 if __name__ == "__main__":

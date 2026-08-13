@@ -181,28 +181,20 @@ class DynamicReplayTests(unittest.TestCase):
         self.assertEqual(result.result_status, "MODEL-BASED HISTORICAL REPLAY")
         self.assertIn("DISABLED", result.control_status)
 
-    def test_v08_evidence_has_360_scenarios_and_dual_gate(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.8_dynamic_mission_replay.json"
-        data = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual(data["selection"]["total_scenario_N"], 360)
-        self.assertEqual(len(data["scenario_results"]), 360)
-        self.assertIn("NOT INDEPENDENT REAL MISSIONS", data["selection"]["scenario_wording"])
-        self.assertEqual(data["replay_integrity_gate"], "PASS")
-        self.assertEqual(data["business_value_status"], "NOT_ESTABLISHED")
-        for summary in data["policy_summaries"].values():
-            self.assertEqual(summary["denominator_N"], 360)
-            self.assertIn("p95_s", summary["time_penalty"])
+    def test_full_v08_result_is_regenerable_and_git_ignored(self):
+        root = Path(__file__).resolve().parents[1]
+        builder = (root / "tools/build_v08_dynamic_mission_replay.py").read_text(encoding="utf-8")
+        self.assertIn('data/generated/v0.8_dynamic_mission_replay.json', builder)
+        self.assertIn("data/generated/", (root / ".gitignore").read_text(encoding="utf-8"))
 
-    def test_v08_stress_case_rejects_unsafe_hold_and_returns_to_base(self):
-        path = Path(__file__).resolve().parents[1] / "data/results/v0.8_dynamic_mission_replay.json"
-        stress = json.loads(path.read_text(encoding="utf-8"))["scenario_2026_02_05"]
-        result = stress["result"]
-        self.assertEqual(stress["future_action_access_count"], 0)
-        self.assertEqual(result["actions"][0]["hold_feasibility"]["status"], "HOLD_POSITION_UNSAFE")
-        self.assertFalse(any(item["action"] == "SAFE_HOLD" for item in result["actions"]))
-        self.assertTrue(result["returned_to_base"])
-        self.assertFalse(result["technical_completed"])
-        self.assertFalse(result["evidence_qualified_completion"])
+    def test_unsafe_stress_hold_remains_rejected_by_core(self):
+        environment = MarineEnvironment(
+            T0, 39.2, 122.2, Hs=3, Tp=1.7, wave_direction=90,
+            source="WAVERYS:test", quality_flag=MarineQualityFlag.PUBLIC_PRODUCT_FILE,
+        )
+        assessment = assess_hold_feasibility(environment, self.parameters)
+        self.assertFalse(assessment.hold_allowed)
+        self.assertEqual(assessment.status, HOLD_POSITION_UNSAFE)
 
     @staticmethod
     def _result(case_id, technical=True, qualified=True, elapsed=1000, nominal=1000, high=0):

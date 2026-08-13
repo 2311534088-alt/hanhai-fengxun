@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import argparse
 import sys
 from dataclasses import asdict
 from datetime import datetime
@@ -25,8 +26,9 @@ from core.resonance import load_engineering_estimate
 
 
 REGION = StudyRegion(121.5, 124.5, 38.5, 40.5, (11, 12, 1, 2, 3))
-V07 = ROOT / "data/results/v0.7_causal_mission_replay.json"
-RESULT = ROOT / "data/results/v0.9_dynamic_mission_evidence.json"
+V07 = ROOT / "data/generated/v0.7_causal_mission_replay.json"
+RESULT = ROOT / "data/generated/v0.9_dynamic_mission_evidence.json"
+SUMMARY = ROOT / "data/results/v0.9_summary.json"
 PATHS = {
     "ERA5": ROOT / "data/raw/era5/era5_winter_20251101_20260331.nc",
     "Copernicus WAVERYS": ROOT / "data/raw/waverys/waverys_winter_20251101_20260331.nc",
@@ -97,6 +99,78 @@ def _compact(result):
     }
 
 
+def _summary_policy(summary: dict, mission_saved_count: int) -> dict:
+    return {
+        "technical_completion": summary["technical_completed_count"],
+        "duration_reference_compatible_completion": summary[
+            "duration_reference_compatible_completed_count"
+        ],
+        "predeparture_delay": summary["predeparture_delay_count"],
+        "unplanned_return": summary["unplanned_return_count"],
+        "high_risk_exposure_s": summary["high_risk_exposure_time_s"],
+        "maximum_continuous_high_risk_exposure_s": summary[
+            "maximum_continuous_high_risk_time_s"
+        ],
+        "risk_burden_level_seconds": summary["risk_burden_level_seconds"],
+        "signed_mission_time_delta_s": summary["signed_mission_time_delta_s"],
+        "extra_distance_m": summary["extra_distance_m"],
+        "mission_saved": mission_saved_count,
+    }
+
+
+def build_compact_summary(result: dict) -> dict:
+    cohorts = {}
+    for name, cohort in result["cohorts"].items():
+        cohorts[name] = {
+            "N": cohort["N"],
+            "selection_rule": cohort["selection_rule"],
+            "policies": {
+                policy: _summary_policy(summary, cohort["mission_saved_count"])
+                for policy, summary in cohort["policy_summaries"].items()
+            },
+        }
+    stress = result["scenario_2026_02_05"]
+    stress_result = stress["result"]
+    return {
+        "schema_version": 1,
+        "freeze_version": "V0.9",
+        "source_commit": "772ec55982eac96eec26b85d5d9a335f4d1127c2",
+        "cohorts": cohorts,
+        "representative_case_2026_02_05": {
+            "action_chain": stress["action_chain"],
+            "returned_to_base": stress_result["returned_to_base"],
+            "high_risk_exposure_s": stress_result["exposure"]["high_risk_exposure_time_s"],
+            "maximum_continuous_high_risk_exposure_s": stress_result["exposure"][
+                "maximum_continuous_high_risk_time_s"
+            ],
+            "future_action_access_count": stress["future_action_access_count"],
+        },
+        "data_sources": {
+            "environment": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+            "vessel_state": "SIMULATED VESSEL STATE",
+            "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+            "energy": "NOT VERIFIED ENERGY FEASIBILITY",
+            "input_provenance": result["data_sources"]["input_provenance"],
+        },
+        "reproduction": {
+            "command": "python tools/build_v09_dynamic_evidence.py",
+            "full_result": "data/generated/v0.9_dynamic_mission_evidence.json (Git ignored)",
+        },
+        "REPLAY_INTEGRITY_GATE": result["replay_integrity_gate"],
+        "BUSINESS_VALUE_STATUS": result["business_value_status"],
+        "algorithm_status": "DETERMINISTIC DECISION CORE / NOT SAC / NOT REINFORCEMENT LEARNING",
+        "control_status": "REAL VESSEL CONTROL DISABLED",
+    }
+
+
+def write_compact_summary(result: dict) -> None:
+    SUMMARY.parent.mkdir(parents=True, exist_ok=True)
+    SUMMARY.write_text(
+        json.dumps(build_compact_summary(result), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def evaluate_cohort(cases, records, parameters):
     policies = tuple(DynamicPolicy)
     by_policy = {policy: [] for policy in policies}
@@ -135,6 +209,17 @@ def evaluate_cohort(cases, records, parameters):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--compact-only", action="store_true",
+        help="Rebuild the tracked compact summary from an existing ignored full result.",
+    )
+    args = parser.parse_args()
+    if args.compact_only:
+        write_compact_summary(json.loads(RESULT.read_text(encoding="utf-8")))
+        print(SUMMARY)
+        return
+    RESULT.parent.mkdir(parents=True, exist_ok=True)
     source = json.loads(V07.read_text(encoding="utf-8"))
     timestamps = tuple(datetime.fromisoformat(item["departure_time"]) for item in source["case_outcomes"])
     if len(timestamps) != 120 or len(set(timestamps)) != 120:
@@ -210,6 +295,7 @@ def main():
         raise AssertionError("invalid business value status")
     RESULT.write_text(json.dumps(result, ensure_ascii=False, indent=2, default=_json_default) + "\n",
                       encoding="utf-8")
+    write_compact_summary(result)
     print(json.dumps({
         "result": str(RESULT), "population_N": len(population), "decision_relevant_N": len(relevant),
         "population_saved": population_result["mission_saved_count"],

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "freeze_version": "V0.9",
+  "source_commit": "772ec55982eac96eec26b85d5d9a335f4d1127c2",
+  "cohorts": {
+    "WINTER_POPULATION_COHORT": {
+      "N": 360,
+      "selection_rule": "All 120 predeclared V0.7 winter timestamps crossed with three predeclared simulated geometries; policy outcomes never used. 360 historical replay scenarios, not real missions.",
+      "policies": {
+        "BASELINE_CONSERVATIVE": {
+          "technical_completion": 346,
+          "duration_reference_compatible_completion": 234,
+          "predeparture_delay": 7,
+          "unplanned_return": 7,
+          "high_risk_exposure_s": 58099.660752,
+          "maximum_continuous_high_risk_exposure_s": 10794.906891,
+          "risk_burden_level_seconds": 5650758.357458,
+          "signed_mission_time_delta_s": -35564.07242663131,
+          "extra_distance_m": 0.0,
+          "mission_saved": 0
+        },
+        "LOCAL_ADJUST_ONLY": {
+          "technical_completion": 346,
+          "duration_reference_compatible_completion": 234,
+          "predeparture_delay": 7,
+          "unplanned_return": 7,
+          "high_risk_exposure_s": 50374.91022,
+          "maximum_continuous_high_risk_exposure_s": 10794.906891,
+          "risk_burden_level_seconds": 5646418.904624,
+          "signed_mission_time_delta_s": -33793.76556289115,
+          "extra_distance_m": 640.1302077828241,
+          "mission_saved": 0
+        },
+        "HANHAI_MISSION_CONTINUITY": {
+          "technical_completion": 347,
+          "duration_reference_compatible_completion": 234,
+          "predeparture_delay": 7,
+          "unplanned_return": 6,
+          "high_risk_exposure_s": 23944.747203,
+          "maximum_continuous_high_risk_exposure_s": 10800.0,
+          "risk_burden_level_seconds": 5750728.066498,
+          "signed_mission_time_delta_s": 32984.774349845495,
+          "extra_distance_m": 1608.173110722315,
+          "mission_saved": 0
+        }
+      }
+    },
+    "DECISION_RELEVANT_COHORT": {
+      "N": 9,
+      "selection_rule": "Before any policy replay: initial residual-high OR direct-route current-snapshot high-risk; fixed direct route, fixed nominal vessel state, real public environment only.",
+      "policies": {
+        "BASELINE_CONSERVATIVE": {
+          "technical_completion": 1,
+          "duration_reference_compatible_completion": 0,
+          "predeparture_delay": 7,
+          "unplanned_return": 1,
+          "high_risk_exposure_s": 0.0,
+          "maximum_continuous_high_risk_exposure_s": 0.0,
+          "risk_burden_level_seconds": 61873.670121,
+          "signed_mission_time_delta_s": -15082.139169984053,
+          "extra_distance_m": 0.0,
+          "mission_saved": 0
+        },
+        "LOCAL_ADJUST_ONLY": {
+          "technical_completion": 1,
+          "duration_reference_compatible_completion": 0,
+          "predeparture_delay": 7,
+          "unplanned_return": 1,
+          "high_risk_exposure_s": 0.0,
+          "maximum_continuous_high_risk_exposure_s": 0.0,
+          "risk_burden_level_seconds": 61873.670121,
+          "signed_mission_time_delta_s": -15082.139169984053,
+          "extra_distance_m": 0.0,
+          "mission_saved": 0
+        },
+        "HANHAI_MISSION_CONTINUITY": {
+          "technical_completion": 1,
+          "duration_reference_compatible_completion": 0,
+          "predeparture_delay": 7,
+          "unplanned_return": 1,
+          "high_risk_exposure_s": 0.0,
+          "maximum_continuous_high_risk_exposure_s": 0.0,
+          "risk_burden_level_seconds": 61873.670121,
+          "signed_mission_time_delta_s": -15082.139169984053,
+          "extra_distance_m": 0.0,
+          "mission_saved": 0
+        }
+      }
+    }
+  },
+  "representative_case_2026_02_05": {
+    "action_chain": [
+      "RETURN_ASSESSMENT",
+      "CONTINUE_RETURN",
+      "CONTINUE_RETURN",
+      "CONTINUE_RETURN",
+      "CONTINUE_RETURN",
+      "CONTINUE_RETURN"
+    ],
+    "returned_to_base": true,
+    "high_risk_exposure_s": 7816.580194,
+    "maximum_continuous_high_risk_exposure_s": 7816.580194,
+    "future_action_access_count": 0
+  },
+  "data_sources": {
+    "environment": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+    "vessel_state": "SIMULATED VESSEL STATE",
+    "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+    "energy": "NOT VERIFIED ENERGY FEASIBILITY",
+    "input_provenance": {
+      "ERA5": {
+        "product_id": "reanalysis-era5-single-levels",
+        "filename": "era5_winter_20251101_20260331.nc",
+        "filesize_bytes": 2530413,
+        "sha256": "9a92023c2808bbbbf6d3bbc003dd1929cf26497b5b52cf940a68d3e0e6c13d46"
+      },
+      "Copernicus WAVERYS": {
+        "product_id": "cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "filename": "waverys_winter_20251101_20260331.nc",
+        "filesize_bytes": 523756,
+        "sha256": "f399c674f2244363c585e794ee1eb802379a45483f01e639d6bd404f4c0ce9a0"
+      },
+      "Copernicus GLORYS": {
+        "product_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "filename": "glorys_surface_winter_20251101_20260331.nc",
+        "filesize_bytes": 259955,
+        "sha256": "85c2a0e73990b80e0ffa53eef417e6042b7ce5cbd1ea55df174e7caf80ab0b30"
+      },
+      "GEBCO": {
+        "product_id": "GEBCO_2026",
+        "filename": "GEBCO_2026_121.5_124.5E_38.5_40.5N.nc",
+        "filesize_bytes": 724676,
+        "sha256": "1a47ad27af3ab3db1db4ac1ec8fe069aa98ed5f91210b69ff8ac34c87b4c15c0"
+      }
+    }
+  },
+  "reproduction": {
+    "command": "python tools/build_v09_dynamic_evidence.py",
+    "full_result": "data/generated/v0.9_dynamic_mission_evidence.json (Git ignored)"
+  },
+  "REPLAY_INTEGRITY_GATE": "PASS",
+  "BUSINESS_VALUE_STATUS": "NOT_ESTABLISHED",
+  "algorithm_status": "DETERMINISTIC DECISION CORE / NOT SAC / NOT REINFORCEMENT LEARNING",
+  "control_status": "REAL VESSEL CONTROL DISABLED"
+}

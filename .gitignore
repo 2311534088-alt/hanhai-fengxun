@@ -8,6 +8,7 @@ dist/
 review_packages/
 data/raw/
 data/processed/
+data/generated/
 .test-tmp/
 .cdsapirc
 .copernicusmarine-credentials

@@ -1,6 +1,6 @@
 # 寒海风巡任务连续性与商业价值逻辑
 
-> V0.7 修正说明：V0.6 的四任务比较仅为使用 oracle 历史后视信息的 development smoke test，不能形成商业百分比。正式开发证据以 `V0.7_CAUSAL_MISSION_REPLAY.md` 和 `data/results/v0.7_causal_mission_replay.json` 为准。
+> V0.7 修正说明：V0.6 的四任务比较仅为使用 oracle 历史后视信息的 development smoke test，不能形成商业百分比。V0.7 完整证据现由 `tools/build_v07_causal_mission_replay.py` 确定性生成到 Git 忽略的 `data/generated/`；当前冻结结论以 `data/results/v0.9_summary.json` 为准。
 
 > V0.8 进一步将完整模拟任务与证据合格完成分开，并把 gate 拆为 `REPLAY_INTEGRITY_GATE` 与 `BUSINESS_VALUE_STATUS`。当前动态多源回放的完整证据见 `V0.8_DYNAMIC_MISSION_REPLAY.md`；`REPLAY_INTEGRITY_GATE=PASS` 不得解释为商业价值已成立。
 
