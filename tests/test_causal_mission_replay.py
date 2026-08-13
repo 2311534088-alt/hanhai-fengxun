@@ -166,6 +166,9 @@ class CausalMissionReplayTests(unittest.TestCase):
             self.assertEqual(policy["denominator_N"], 120)
             self.assertEqual(policy["baseline_status"], "INTERNAL SIMULATION BASELINE")
         self.assertEqual(data["business_value_gate"]["business_value_evidence"], "DEVELOPMENT_PASS")
+        self.assertEqual(data["replay_integrity_gate"], "PASS")
+        self.assertEqual(data["business_value_status"], "NOT_ESTABLISHED")
+        self.assertIn("DEPRECATED", data["legacy_business_value_evidence_status"])
         self.assertFalse(data["oracle_experiment"]["used_for_business_metrics"])
 
     def test_v07_stress_case_is_complete_but_endurance_unverified(self):

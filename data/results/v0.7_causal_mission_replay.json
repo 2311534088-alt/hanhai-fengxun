@@ -5150,6 +5150,9 @@
     "business_value_evidence": "DEVELOPMENT_PASS",
     "interpretation": "DEVELOPMENT PASS DOES NOT ESTABLISH EMPIRICAL BUSINESS VALUE"
   },
+  "replay_integrity_gate": "PASS",
+  "business_value_status": "NOT_ESTABLISHED",
+  "legacy_business_value_evidence_status": "DEPRECATED - USE REPLAY_INTEGRITY_GATE AND BUSINESS_VALUE_STATUS",
   "result_status": "MODEL-BASED HISTORICAL REPLAY",
   "performance_status": "NOT REAL OPERATIONAL PERFORMANCE",
   "algorithm_status": "NOT SAC / NOT REINFORCEMENT LEARNING",

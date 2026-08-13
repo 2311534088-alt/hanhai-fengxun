@@ -20,4 +20,8 @@
 - 任务动作不等于任务结果；只有包含出航、到站、模拟巡检服务、返航并最终进入 `MissionState.COMPLETED` 的完整时间线才可计为完成。
 - 厂家 `>=4 h` 只能描述为最低公开工作时间参考，不是最大续航。超过该参考的模拟任务必须标记续航可行性未验证。
 - 商业指标必须由确定性完整任务回放计算 counts 和 rates；不得用开发 smoke test、硬编码风险暴露或未完成的 HOLD 任务声称任务已保住。
+- 动态回放的局部航向建议只有形成并执行 `SIMULATED MISSION MANEUVER` 轨迹后才能计入结果；否则必须保持 `ADVISORY_ONLY`。
+- 原地 HOLD 必须先做未知艏向敏感性安全评估；等待位置 residual high 时禁止 HOLD，不能假设等待自动降低风险。
+- 技术模拟完成与证据合格完成必须分开统计；`ENDURANCE_FEASIBILITY_UNVERIFIED` 不得进入 evidence-qualified completion 或 MISSION_SAVED。
+- `REPLAY_INTEGRITY_GATE=PASS` 不等于商业价值成立；当没有安全非劣的证据合格完成增益时，`BUSINESS_VALUE_STATUS` 必须保持 `NOT_ESTABLISHED`。
 
