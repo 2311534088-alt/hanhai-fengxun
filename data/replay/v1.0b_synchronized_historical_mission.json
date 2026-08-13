@@ -1,0 +1,974 @@
+{
+  "schema_version": 1,
+  "replay_mode": "SYNCHRONIZED_HISTORICAL_MISSION_REPLAY",
+  "environment_source": "REAL PUBLIC HISTORICAL ENVIRONMENT",
+  "environment_observation_status": "NOT IN-SITU OBSERVATION",
+  "forecast_status": "NOT REAL-TIME FORECAST",
+  "vessel_state_source": "SIMULATED VESSEL STATE",
+  "selection_rule": "At the fixed declared reference point 39.6N, 122.5E, evaluate every complete 11-step/30-hour window on the native 3-hour WAVERYS clock. Select the earliest window maximizing normalized Hs range plus normalized wind-speed range, using winter-wide ranges as denominators. This environment-only rule does not read policy recommendations, mission_saved, completion, or business outcomes.",
+  "selection_independence": "POLICY AND OUTCOME INDEPENDENT",
+  "reference_point": {
+    "latitude": 39.6,
+    "longitude": 122.5
+  },
+  "time_range": [
+    "2026-02-21T18:00:00+00:00",
+    "2026-02-23T00:00:00+00:00"
+  ],
+  "step_seconds": 10800,
+  "environment_change": {
+    "Hs_min_m": 0.14,
+    "Hs_max_m": 1.22,
+    "wind_speed_min_m_s": 0.36686629623816686,
+    "wind_speed_max_m_s": 10.78529101913487
+  },
+  "source_manifest": "data/manifests/winter_environment_20251101_20260331.json",
+  "input_sha256": {
+    "ERA5": "9a92023c2808bbbbf6d3bbc003dd1929cf26497b5b52cf940a68d3e0e6c13d46",
+    "WAVERYS": "f399c674f2244363c585e794ee1eb802379a45483f01e639d6bd404f4c0ce9a0",
+    "GLORYS": "85c2a0e73990b80e0ffa53eef417e6042b7ce5cbd1ea55df174e7caf80ab0b30",
+    "GEBCO": "1a47ad27af3ab3db1db4ac1ec8fe069aa98ed5f91210b69ff8ac34c87b4c15c0"
+  },
+  "sampling": {
+    "method": "MarineEnvironmentSampler nearest field assembly; NOT final multi-source fusion",
+    "max_time_offset_seconds": 10800,
+    "max_spatial_distance_m": 30000
+  },
+  "records": [
+    {
+      "timestamp": "2026-02-21T18:00:00+00:00",
+      "latitude": 39.6,
+      "longitude": 122.5,
+      "mission_state": "PRE_DEPARTURE",
+      "environment": {
+        "Hs": 1.22,
+        "Tp": 6.71,
+        "wave_direction": 53.329999999999984,
+        "wind_speed": 10.78529101913487,
+        "wind_direction": 149.75975463802,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11119.508023353448,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11119.508023353448,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13217.279880754128,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13217.279880754128,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12508.467942054054,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 0.0,
+        "COG": 90.0,
+        "HDG": 90.0,
+        "roll": 0.5,
+        "pitch": 0.2,
+        "roll_rate": 0.4,
+        "battery": 100.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-21T21:00:00+00:00",
+      "latitude": 39.601,
+      "longitude": 122.503,
+      "mission_state": "OUTBOUND",
+      "environment": {
+        "Hs": 1.01,
+        "Tp": 4.26,
+        "wave_direction": 138.93,
+        "wind_speed": 8.405098297769335,
+        "wind_direction": 147.7660320415511,
+        "surface_current_speed": 0.045451067656590564,
+        "surface_current_direction": 75.21727395738435,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23849.276896752537,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23849.276896752537,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23849.276896752537,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11233.648202526241,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11233.648202526241,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13174.653371286793,
+            "accepted": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13174.653371286793,
+            "accepted": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12532.11291522091,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 2.0,
+        "COG": 70.0,
+        "HDG": 72.0,
+        "roll": 2.0,
+        "pitch": 0.8,
+        "roll_rate": 1.5,
+        "battery": 96.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T00:00:00+00:00",
+      "latitude": 39.603,
+      "longitude": 122.507,
+      "mission_state": "OUTBOUND",
+      "environment": {
+        "Hs": 0.81,
+        "Tp": 4.13,
+        "wave_direction": 136.14,
+        "wind_speed": 7.446270988082837,
+        "wind_direction": 131.3950842763898,
+        "surface_current_speed": 0.045451067656590564,
+        "surface_current_direction": 75.21727395738435,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23941.213819457334,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23941.213819457334,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23941.213819457334,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11468.807171361272,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11468.807171361272,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 13191.212280370642,
+            "accepted": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 13191.212280370642,
+            "accepted": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12644.491379465751,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 2.4,
+        "COG": 68.0,
+        "HDG": 70.0,
+        "roll": 4.5,
+        "pitch": 1.5,
+        "roll_rate": 3.0,
+        "battery": 91.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T03:00:00+00:00",
+      "latitude": 39.605,
+      "longitude": 122.511,
+      "mission_state": "OUTBOUND",
+      "environment": {
+        "Hs": 0.81,
+        "Tp": 3.86,
+        "wave_direction": 130.51999999999998,
+        "wind_speed": 8.8460946854744,
+        "wind_direction": 129.30488578047147,
+        "surface_current_speed": 0.045451067656590564,
+        "surface_current_direction": 75.21727395738435,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24039.76344619869,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24039.76344619869,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24039.76344619869,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11713.511120424153,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11713.511120424153,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13220.403661858783,
+            "accepted": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13220.403661858783,
+            "accepted": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12768.976975116017,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 2.2,
+        "COG": 65.0,
+        "HDG": 68.0,
+        "roll": 10.0,
+        "pitch": 3.5,
+        "roll_rate": 7.0,
+        "battery": 86.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T06:00:00+00:00",
+      "latitude": 39.606,
+      "longitude": 122.513,
+      "mission_state": "OUTBOUND",
+      "environment": {
+        "Hs": 0.77,
+        "Tp": 4.01,
+        "wave_direction": 129.06,
+        "wind_speed": 8.070328248434798,
+        "wind_direction": 129.93703413211495,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24091.492744716405,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24091.492744716405,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24091.492744716405,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11839.258143356961,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11839.258143356961,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13239.711590391977,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13239.711590391977,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12835.650956808664,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 1.8,
+        "COG": 60.0,
+        "HDG": 65.0,
+        "roll": 17.0,
+        "pitch": 6.0,
+        "roll_rate": 12.0,
+        "battery": 81.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T09:00:00+00:00",
+      "latitude": 39.607,
+      "longitude": 122.514,
+      "mission_state": "OUTBOUND",
+      "environment": {
+        "Hs": 0.51,
+        "Tp": 3.98,
+        "wave_direction": 125.75999999999999,
+        "wind_speed": 4.381954096356605,
+        "wind_direction": 115.59788808058914,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24170.896183570527,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24170.896183570527,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24170.896183570527,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11958.264219997498,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11958.264219997498,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 13300.240388511482,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 13300.240388511482,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12924.239434770207,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 1.0,
+        "COG": 150.0,
+        "HDG": 148.0,
+        "roll": 8.0,
+        "pitch": 3.0,
+        "roll_rate": 5.0,
+        "battery": 78.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T12:00:00+00:00",
+      "latitude": 39.609,
+      "longitude": 122.516,
+      "mission_state": "ON_STATION",
+      "environment": {
+        "Hs": 0.28,
+        "Tp": 3.49,
+        "wave_direction": 115.60000000000002,
+        "wind_speed": 2.5248527070590296,
+        "wind_direction": 80.89972549617306,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 12197.641287760844,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 12197.641287760844,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 43200.0,
+            "spatial_distance_m": 13424.888585008952,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 43200.0,
+            "spatial_distance_m": 13424.888585008952,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 13104.135193871201,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 1.3,
+        "COG": 145.0,
+        "HDG": 147.0,
+        "roll": 5.0,
+        "pitch": 2.0,
+        "roll_rate": 3.0,
+        "battery": 74.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T15:00:00+00:00",
+      "latitude": 39.609,
+      "longitude": 122.516,
+      "mission_state": "ON_STATION",
+      "environment": {
+        "Hs": 0.32,
+        "Tp": 2.32,
+        "wave_direction": 131.7,
+        "wind_speed": 5.678050009809667,
+        "wind_direction": 153.1805152852587,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24331.360066305864,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 12197.641287760844,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 12197.641287760844,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 13424.888585008952,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 13424.888585008952,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 13104.135193871201,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 0.3,
+        "COG": 195.0,
+        "HDG": 198.0,
+        "roll": 3.0,
+        "pitch": 1.0,
+        "roll_rate": 2.0,
+        "battery": 69.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T18:00:00+00:00",
+      "latitude": 39.607,
+      "longitude": 122.512,
+      "mission_state": "RETURNING",
+      "environment": {
+        "Hs": 0.32,
+        "Tp": 2.7600000000000002,
+        "wave_direction": 147.97000000000003,
+        "wind_speed": 4.38968601743781,
+        "wind_direction": 168.89618300181246,
+        "surface_current_speed": null,
+        "surface_current_direction": null,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24223.82736841742,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24223.82736841742,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 24223.82736841742,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11942.271977798799,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11942.271977798799,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13377.75744592962,
+            "accepted": false
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 21600.0,
+            "spatial_distance_m": 13377.75744592962,
+            "accepted": false
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12963.89870138616,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 1.6,
+        "COG": 240.0,
+        "HDG": 238.0,
+        "roll": 3.0,
+        "pitch": 1.0,
+        "roll_rate": 1.8,
+        "battery": 64.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-22T21:00:00+00:00",
+      "latitude": 39.603,
+      "longitude": 122.505,
+      "mission_state": "RETURNING",
+      "environment": {
+        "Hs": 0.23,
+        "Tp": 2.7600000000000002,
+        "wave_direction": 160.17000000000007,
+        "wind_speed": 2.7435777739421634,
+        "wind_direction": 135.00495716197162,
+        "surface_current_speed": 0.11511588236265838,
+        "surface_current_direction": 36.809138623536626,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23998.94950506343,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23998.94950506343,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23998.94950506343,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11461.113255675651,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11461.113255675651,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13277.124122821715,
+            "accepted": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 10800.0,
+            "spatial_distance_m": 13277.124122821715,
+            "accepted": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12693.138655826113,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 1.6,
+        "COG": 245.0,
+        "HDG": 243.0,
+        "roll": 2.0,
+        "pitch": 0.8,
+        "roll_rate": 1.2,
+        "battery": 57.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "timestamp": "2026-02-23T00:00:00+00:00",
+      "latitude": 39.6,
+      "longitude": 122.5,
+      "mission_state": "COMPLETED",
+      "environment": {
+        "Hs": 0.14,
+        "Tp": 5.96,
+        "wave_direction": 164.89,
+        "wind_speed": 0.36686629623816686,
+        "wind_direction": 48.85330622895276,
+        "surface_current_speed": 0.11511588236265838,
+        "surface_current_direction": 36.809138623536626,
+        "water_depth": 3.0,
+        "quality_flag": "PUBLIC_PRODUCT_FILE",
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 23836.56176211838,
+            "accepted": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11119.508023353448,
+            "accepted": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11119.508023353448,
+            "accepted": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 13217.279880754128,
+            "accepted": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 13217.279880754128,
+            "accepted": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 12508.467942054054,
+            "accepted": true
+          }
+        }
+      },
+      "simulated_vessel_state": {
+        "SOG": 0.0,
+        "COG": 250.0,
+        "HDG": 250.0,
+        "roll": 0.5,
+        "pitch": 0.2,
+        "roll_rate": 0.4,
+        "battery": 53.0,
+        "source": "SIMULATED VESSEL STATE"
+      }
+    }
+  ]
+}

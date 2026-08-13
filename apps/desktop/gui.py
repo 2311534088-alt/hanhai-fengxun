@@ -8,12 +8,13 @@ from tkinter import ttk
 
 from apps.desktop.product_model import (
     CONTROL_DISABLED, ENGINEERING_ESTIMATE, HISTORICAL_REPLAY, PUBLIC_GEOSPATIAL,
-    REAL_ENVIRONMENT, SIMULATED_VESSEL, UNAVAILABLE, ProductReplay, ProductSnapshot,
+    REAL_ENVIRONMENT, SIMULATED_GEOMETRY, SIMULATED_TURBINES, SIMULATED_VESSEL,
+    UNAVAILABLE, ProductReplay, ProductSnapshot,
 )
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_REPLAY = ROOT / "data/samples/sample_mission_001.csv"
+DEFAULT_REPLAY = ROOT / "data/replay/v1.0b_synchronized_historical_mission.json"
 
 NAVY = "#071A2B"
 PANEL = "#0D2A3D"
@@ -104,12 +105,15 @@ class HanhaiDesktop(tk.Tk):
         )}
         ttk.Separator(self.left).pack(fill="x", pady=12)
         self._section(self.left, "预留能力")
-        tk.Label(self.left, text="SEA ICE / ICE RISK\nUNAVAILABLE / REQUIRES VALIDATION",
+        tk.Label(self.left, text="SEA ICE / ICE RISK\nUNAVAILABLE / FUTURE EXTENSION",
                  bg=PANEL_2, fg=MUTED, justify="left", anchor="w", padx=9, pady=9,
                  font=("Microsoft YaHei UI", 9)).pack(fill="x")
         ttk.Separator(self.left).pack(fill="x", pady=12)
         self._section(self.left, "来源标签")
-        for text in (REAL_ENVIRONMENT, PUBLIC_GEOSPATIAL, SIMULATED_VESSEL, ENGINEERING_ESTIMATE, UNAVAILABLE):
+        for text in (
+            REAL_ENVIRONMENT, PUBLIC_GEOSPATIAL, SIMULATED_GEOMETRY,
+            SIMULATED_TURBINES, SIMULATED_VESSEL, ENGINEERING_ESTIMATE, UNAVAILABLE,
+        ):
             ttk.Label(self.left, text="• " + text, style="Muted.TLabel", wraplength=240).pack(anchor="w", pady=2)
 
     def _build_map(self) -> None:
@@ -123,7 +127,7 @@ class HanhaiDesktop(tk.Tk):
         self.canvas.bind("<Configure>", lambda _event: self._draw_map())
 
     def _build_decision(self) -> None:
-        self._section(self.right, "决策与解释 / DECISION")
+        self._section(self.right, "WHAT HAPPENED / 当前状态")
         self.risk_score = tk.StringVar()
         self.risk_level = tk.StringVar()
         score = tk.Label(self.right, textvariable=self.risk_score, bg=PANEL, fg=CYAN,
@@ -132,9 +136,8 @@ class HanhaiDesktop(tk.Tk):
         tk.Label(self.right, textvariable=self.risk_level, bg=PANEL, fg=TEXT,
                  font=("Microsoft YaHei UI", 11, "bold")).pack(anchor="w", pady=(0, 10))
         self.decision = {name: self._metric(self.right, label) for name, label in (
-            ("resonance", "共振接近度"), ("margin", "共振裕度比"),
-            ("encounter", "遭遇频率"), ("roll", "Roll-response proxy"),
-            ("roll_risk", "横摇响应风险"), ("primary", "主要单船风险"),
+            ("primary", "WHY / 主要风险"), ("resonance", "共振接近度"),
+            ("q90", "Current GRID_Q90 proxy"), ("robust", "Current robust status"),
         )}
         ttk.Separator(self.right).pack(fill="x", pady=12)
         self.action = tk.StringVar()
@@ -145,11 +148,12 @@ class HanhaiDesktop(tk.Tk):
         tk.Label(self.right, textvariable=self.reason, bg=PANEL, fg=TEXT, wraplength=330,
                  justify="left", anchor="nw", font=("Microsoft YaHei UI", 9)).pack(fill="x", pady=10)
         ttk.Separator(self.right).pack(fill="x", pady=5)
-        self._section(self.right, "候选方案比较")
+        self._section(self.right, "WHAT TO DO / 稳健主建议")
         self.candidates = {}
         for key, label in (
-            ("current", "当前航行"), ("speed_only", "只调速"),
-            ("heading_only", "只改航"), ("joint", "调速 + 改航"),
+            ("current", "当前 SOG / HDG"), ("constrained", "约束建议 SOG / HDG"),
+            ("unrestricted", "仿真敏感性最优"), ("change", "WHAT CHANGES"),
+            ("maneuver", "调整 / 边界"), ("parameters", "参数来源 / 状态"),
         ):
             row = ttk.Frame(self.right, style="Panel.TFrame")
             row.pack(fill="x", pady=3)
@@ -158,7 +162,8 @@ class HanhaiDesktop(tk.Tk):
             ttk.Label(row, textvariable=value, style="Value.TLabel").pack(side="right")
             self.candidates[key] = value
         ttk.Label(
-            self.right, text="REROUTE: UNAVAILABLE / REQUIRES ROUTE MODEL",
+            self.right,
+            text="0.5–3.0 m/s = SIMULATION_SEARCH_BOUND\n±20% = PRELIMINARY / NEEDS REAL VESSEL VALIDATION",
             style="Muted.TLabel",
         ).pack(anchor="w", pady=(8, 0))
 
@@ -206,10 +211,7 @@ class HanhaiDesktop(tk.Tk):
 
     def render(self, s: ProductSnapshot) -> None:
         self.time_label.set(f"MISSION {s.timestamp}  ·  {s.mission_state}")
-        self.env_source.set(
-            f"{HISTORICAL_REPLAY}\nENV {s.environment_timestamp}\n{s.environment_scenario}"
-            f"\nSAMPLE {s.environment_latitude:.3f}°N, {s.environment_longitude:.3f}°E"
-        )
+        self.env_source.set(f"{HISTORICAL_REPLAY}\nCLOCK {s.timestamp}\nSAMPLE {s.latitude:.3f}°N, {s.longitude:.3f}°E")
         self.env["Hs"].set(self._fmt(s.Hs, " m", 2))
         self.env["Tp"].set(self._fmt(s.Tp, " s", 2))
         self.env["wave"].set(self._fmt(s.wave_direction, "°"))
@@ -218,18 +220,33 @@ class HanhaiDesktop(tk.Tk):
         self.env["depth"].set(self._fmt(s.water_depth, " m", 1))
         self.risk_score.set(f"{s.risk_score:.1f} / 10")
         self.risk_level.set(f"单船风险 · {s.risk_level}")
-        self.decision["resonance"].set(s.resonance_status)
-        self.decision["margin"].set(self._fmt(s.resonance_margin_ratio, "", 3))
-        self.decision["encounter"].set(self._fmt(s.encounter_frequency, " rad/s", 2))
-        self.decision["roll"].set(self._fmt(s.roll_response_proxy_deg, "° eq.", 2))
-        self.decision["roll_risk"].set(s.roll_response_risk)
         self.decision["primary"].set(s.primary_risk)
+        self.decision["resonance"].set(s.resonance_status)
+        self.decision["q90"].set(self._fmt(s.current_grid_q90, "° eq.", 2))
+        self.decision["robust"].set(s.current_robust_status)
         self.action.set(s.decision_action)
-        color = RED if s.decision_action == "RETURN" else AMBER if s.decision_action == "ADJUST" else GREEN
+        color = RED if "RETURN ASSESSMENT" in s.decision_action else AMBER if "REVIEW" in s.decision_action or "ADJUSTMENT" in s.decision_action else GREEN
         self.action_label.configure(bg=color)
-        self.reason.set(s.decision_reason + "\n\nOperator retains authority. No actuator command is produced.")
-        for key, value in s.candidate_summaries.items():
-            self.candidates[key].set(value)
+        self.reason.set(
+            f"MISSION / {s.decision_reason}\nSOURCE: {s.decision_source}\n\n"
+            f"OPERATOR ADVICE: {s.operator_advice}\n"
+            f"ROBUST SOURCE: {s.robust_advice_source}\n\n"
+            "DECISION ADVICE ONLY · OPERATOR RETAINS AUTHORITY"
+        )
+        self.candidates["current"].set(f"{self._fmt(s.SOG, ' m/s')} / {self._fmt(s.HDG, '°')}")
+        self.candidates["constrained"].set(
+            f"{self._fmt(s.recommended_SOG, ' m/s')} / {self._fmt(s.recommended_HDG, '°')}"
+        )
+        self.candidates["unrestricted"].set(
+            f"{self._fmt(s.unrestricted_SOG, ' m/s')} / {self._fmt(s.unrestricted_HDG, '°')}"
+        )
+        self.candidates["change"].set(
+            f"Q90 {self._fmt(s.current_grid_q90, '', 1)} → {self._fmt(s.recommended_grid_q90, '', 1)} · {s.recommended_robust_status}"
+        )
+        self.candidates["maneuver"].set(
+            f"Δv {self._fmt(s.speed_change_percent, '%')} · Δψ {self._fmt(s.heading_change_deg, '°')} · boundary {s.boundary_hit}"
+        )
+        self.candidates["parameters"].set(f"{s.parameter_source} / {s.parameter_status}")
         self.progress.set(f"{s.index + 1:02d}/{s.total:02d}  {s.mission_state}")
         self._draw_map()
         self._draw_timeline()
@@ -262,21 +279,29 @@ class HanhaiDesktop(tk.Tk):
         completed = points[: self.replay.index + 1]
         if len(completed) > 1:
             c.create_line(*[v for p in completed for v in p], fill=CYAN, width=5, smooth=True)
+        # Public context is a coarse reference area only. Turbine points are simulated.
+        c.create_rectangle(w * 0.52, h * 0.08, w * 0.94, h * 0.56, outline="#31677C", dash=(7, 5), width=2)
+        c.create_text(w * 0.73, h * 0.11, text="WINDFARM REFERENCE AREA · SIMULATED EXTENT", fill=MUTED, font=("Segoe UI", 8))
         for idx in (3, 6, 8):
             if idx < len(points):
                 x, y = points[idx]
                 c.create_oval(x-7, y-7, x+7, y+7, outline=AMBER, width=2)
                 c.create_line(x, y-7, x, y-24, fill=AMBER, width=2)
-                c.create_text(x, y-34, text=f"WT-{idx:02d}", fill=TEXT, font=("Segoe UI", 8, "bold"))
+                label = f"WT-{idx:02d}" + (" · TARGET" if idx == 6 else "")
+                c.create_text(x, y-34, text=label, fill=TEXT, font=("Segoe UI", 8, "bold"))
         sx, sy = points[0]
         c.create_rectangle(sx-8, sy-8, sx+8, sy+8, fill=GREEN, outline="")
         c.create_text(sx+28, sy, text="BASE", fill=GREEN, font=("Segoe UI", 8, "bold"))
         x, y = points[self.replay.index]
         c.create_polygon(x, y-13, x-9, y+10, x+9, y+10, fill=RED, outline=TEXT)
         c.create_oval(x-42, y-42, x+42, y+42, outline=RED, dash=(4, 4))
+        if self.replay.snapshot().recommended_HDG is not None:
+            import math
+            angle = math.radians(self.replay.snapshot().recommended_HDG - 90)
+            c.create_line(x, y, x + 65 * math.cos(angle), y + 65 * math.sin(angle), fill=AMBER, width=3, arrow="last")
         c.create_text(
             16, h-18, anchor="w",
-            text="SIMULATED TASK GEOMETRY · NOT A NAVIGATION CHART",
+            text="PUBLIC GEOSPATIAL REFERENCE NOT LOADED · SIMULATED TURBINE LAYOUT / TRACK · NOT A NAVIGATION CHART",
             fill=MUTED, font=("Segoe UI", 8),
         )
 

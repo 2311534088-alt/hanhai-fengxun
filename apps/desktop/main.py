@@ -13,6 +13,7 @@ from core.risk.models import VesselParameters
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SAMPLE = PROJECT_ROOT / "data" / "samples" / "sample_mission_001.csv"
+DEFAULT_PRODUCT_REPLAY = PROJECT_ROOT / "data" / "replay" / "v1.0b_synchronized_historical_mission.json"
 
 
 def run_demo(csv_path: Path = DEFAULT_SAMPLE, delay: float = 0.0) -> None:
@@ -42,7 +43,8 @@ def run_demo(csv_path: Path = DEFAULT_SAMPLE, delay: float = 0.0) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="寒海风巡 V1.0 产品原型")
-    parser.add_argument("--csv", type=Path, default=DEFAULT_SAMPLE)
+    parser.add_argument("--csv", type=Path, default=DEFAULT_SAMPLE, help="console 模拟 CSV")
+    parser.add_argument("--replay", type=Path, default=DEFAULT_PRODUCT_REPLAY, help="GUI 同步历史回放 JSON")
     parser.add_argument("--console", action="store_true", help="运行兼容的命令行回放")
     parser.add_argument("--delay", type=float, default=0.0, help="每条记录间隔秒数")
     args = parser.parse_args()
@@ -52,7 +54,7 @@ def main() -> None:
         run_demo(args.csv, args.delay)
     else:
         from apps.desktop.gui import run_gui
-        run_gui(args.csv)
+        run_gui(args.replay)
 
 
 if __name__ == "__main__":
