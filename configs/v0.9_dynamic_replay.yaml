@@ -1,0 +1,20 @@
+version: "V0.9"
+status: "PRELIMINARY MISSION POLICY PARAMETERS"
+decision_interval_s: 1800
+candidate_rollout_horizon_s: 1800
+maneuver_duration_s: 600
+safe_hold_duration_s: 1800
+route_screen:
+  mode: "CAUSAL_CURRENT_SNAPSHOT_ROUTE_SCREEN"
+  candidates: ["DIRECT", "DETOUR_LEFT", "DETOUR_RIGHT"]
+  persistence_status: "CURRENT-SNAPSHOT PERSISTENCE SCREEN - NOT A WEATHER FORECAST"
+  maximum_reroute_time_penalty_percent: 35.0
+duration_reference:
+  compatible_status: "WITHIN_PUBLISHED_MINIMUM_WORK_TIME_REFERENCE"
+  energy_status: "NOT VERIFIED ENERGY FEASIBILITY"
+safety_and_truthfulness:
+  environment: "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION"
+  vessel_state: "SIMULATED VESSEL STATE"
+  parameters: "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED"
+  algorithm: "NOT SAC / NOT REINFORCEMENT LEARNING"
+  control: "REAL VESSEL CONTROL DISABLED"
