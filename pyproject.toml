@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hanhai-fengxun"
-version = "0.3.0"
-description = "寒海风巡 V0.3 公共海洋数据与可解释无人艇抗浪决策原型"
+version = "1.0.0"
+description = "寒海风巡 V1.0 真实公共环境驱动的可解释无人艇决策软件原型"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []

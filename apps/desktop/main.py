@@ -1,4 +1,4 @@
-"""Minimal V0.2 baseline replay demo. This module never sends vessel commands."""
+"""V1.0 entry point with GUI and backward-compatible console replay."""
 
 from __future__ import annotations
 
@@ -41,13 +41,18 @@ def run_demo(csv_path: Path = DEFAULT_SAMPLE, delay: float = 0.0) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="寒海风巡 V0.2 baseline CSV 回放 Demo")
+    parser = argparse.ArgumentParser(description="寒海风巡 V1.0 产品原型")
     parser.add_argument("--csv", type=Path, default=DEFAULT_SAMPLE)
+    parser.add_argument("--console", action="store_true", help="运行兼容的命令行回放")
     parser.add_argument("--delay", type=float, default=0.0, help="每条记录间隔秒数")
     args = parser.parse_args()
     if args.delay < 0:
         parser.error("--delay 不得为负数")
-    run_demo(args.csv, args.delay)
+    if args.console or args.delay:
+        run_demo(args.csv, args.delay)
+    else:
+        from apps.desktop.gui import run_gui
+        run_gui(args.csv)
 
 
 if __name__ == "__main__":
