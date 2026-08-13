@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
+  "validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+  "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
+  "risk_thresholds_deg": {
+    "moderate_at_or_above": 8.0,
+    "high_at_or_above": 15.0
+  },
+  "candidate_improvement": {
+    "minimum_relative_roll_reduction": 0.02
+  },
+  "uncertainty_scan": {
+    "natural_period_samples": 11,
+    "damping_ratio_samples": 5
+  }
+}

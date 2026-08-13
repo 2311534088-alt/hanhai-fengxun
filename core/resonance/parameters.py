@@ -31,6 +31,11 @@ class RollDynamicsParameters:
     natural_roll_frequency_rad_s: float | None
     parameter_source: ParameterSource
     parameter_status: str
+    natural_roll_period_lower_s: float | None = None
+    natural_roll_period_upper_s: float | None = None
+    equivalent_damping_ratio: float | None = None
+    equivalent_damping_ratio_lower: float | None = None
+    equivalent_damping_ratio_upper: float | None = None
 
     def __post_init__(self) -> None:
         for name in ("natural_roll_period_s", "natural_roll_frequency_rad_s"):
@@ -39,6 +44,27 @@ class RollDynamicsParameters:
                 raise ValueError(f"{name} must be positive or null")
         if (self.natural_roll_period_s is None) != (self.natural_roll_frequency_rad_s is None):
             raise ValueError("period and frequency must both be available or unavailable")
+        for name in ("natural_roll_period_lower_s", "natural_roll_period_upper_s"):
+            value = getattr(self, name)
+            if value is not None and value <= 0:
+                raise ValueError(f"{name} must be positive or null")
+        for name in (
+            "equivalent_damping_ratio", "equivalent_damping_ratio_lower",
+            "equivalent_damping_ratio_upper",
+        ):
+            value = getattr(self, name)
+            if value is not None and not 0 < value < 1:
+                raise ValueError(f"{name} must be between zero and one or null")
+        if (self.natural_roll_period_lower_s is None) != (self.natural_roll_period_upper_s is None):
+            raise ValueError("natural roll period uncertainty bounds must both be available or unavailable")
+        if (self.equivalent_damping_ratio_lower is None) != (self.equivalent_damping_ratio_upper is None):
+            raise ValueError("damping uncertainty bounds must both be available or unavailable")
+        if self.natural_roll_period_s is not None and self.natural_roll_period_lower_s is not None:
+            if not self.natural_roll_period_lower_s <= self.natural_roll_period_s <= self.natural_roll_period_upper_s:
+                raise ValueError("natural roll period bounds must contain nominal")
+        if self.equivalent_damping_ratio is not None and self.equivalent_damping_ratio_lower is not None:
+            if not self.equivalent_damping_ratio_lower <= self.equivalent_damping_ratio <= self.equivalent_damping_ratio_upper:
+                raise ValueError("damping ratio bounds must contain nominal")
 
 
 @dataclass(frozen=True, slots=True)
@@ -66,6 +92,11 @@ def load_roll_dynamics(path: str | Path) -> tuple[RollDynamicsParameters, Resona
         natural_roll_frequency_rad_s=float(data["natural_roll_frequency_rad_s"]["nominal"]),
         parameter_source=source,
         parameter_status=str(data["parameter_status"]),
+        natural_roll_period_lower_s=float(data["natural_roll_period_s"]["lower"]),
+        natural_roll_period_upper_s=float(data["natural_roll_period_s"]["upper"]),
+        equivalent_damping_ratio=float(data["equivalent_damping_ratio"]["nominal"]),
+        equivalent_damping_ratio_lower=float(data["equivalent_damping_ratio"]["lower"]),
+        equivalent_damping_ratio_upper=float(data["equivalent_damping_ratio"]["upper"]),
     )
     thresholds_data = data["resonance_thresholds"]
     thresholds = ResonanceThresholds(
