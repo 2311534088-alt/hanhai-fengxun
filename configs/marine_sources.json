@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "PUBLIC_PRODUCT_SCHEMA - LOCAL FILES REQUIRED",
+  "sources": {
+    "ERA5": {
+      "product_id": "reanalysis-era5-single-levels",
+      "dataset_id": "reanalysis-era5-single-levels",
+      "variables": ["u10", "v10"],
+      "meaning": "10 m eastward and northward wind components",
+      "units": "m s-1",
+      "direction_output": "vector direction of travel / wind blowing toward; 0=N, 90=E",
+      "official_documentation": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels"
+    },
+    "Copernicus WAVERYS": {
+      "product_id": "GLOBAL_MULTIYEAR_WAV_001_032",
+      "dataset_id": "cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+      "variables": ["VHM0", "VTPK", "VMDR"],
+      "units": {"VHM0": "m", "VTPK": "s", "VMDR": "degree"},
+      "direction_input": "wave from direction",
+      "direction_output": "direction of travel = (VMDR + 180) mod 360",
+      "official_documentation": "https://help.marine.copernicus.eu/en/articles/6175153-how-to-describe-wave-height-period-and-direction-parameters"
+    },
+    "Copernicus GLORYS": {
+      "product_id": "GLOBAL_MULTIYEAR_PHY_001_030",
+      "dataset_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+      "variables": ["uo", "vo"],
+      "units": "m s-1",
+      "meaning": "surface eastward and northward current components",
+      "surface_depth_m": 0.49402499198913574,
+      "direction_output": "vector direction of travel; 0=N, 90=E",
+      "official_documentation": "https://help.marine.copernicus.eu/en/articles/5046685-which-is-the-direction-conventions-of-currents-wave-and-wind-for-copernicus-marine-products"
+    },
+    "GEBCO": {
+      "product_id": "GEBCO_2026",
+      "dataset_id": "GEBCO_2026 Grid ice surface elevation",
+      "variables": ["elevation"],
+      "units": "m",
+      "conversion": "negative elevation becomes positive water_depth; land is excluded",
+      "official_documentation": "https://www.gebco.net/data_and_products/gridded_bathymetry_data/"
+    }
+  }
+}

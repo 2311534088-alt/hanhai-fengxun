@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "scenario_id": "WARNING",
+  "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+  "vessel_state_source": "SIMULATED VESSEL STATE",
+  "attitude_response_source": "UNAVAILABLE - NO REAL OR SIMULATED ATTITUDE RESPONSE USED",
+  "parameter_source": "ENGINEERING_ESTIMATE",
+  "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
+  "source_manifest": "data/manifests/winter_environment_20251101_20260331.json",
+  "source_file_sha256": {
+    "ERA5": "9a92023c2808bbbbf6d3bbc003dd1929cf26497b5b52cf940a68d3e0e6c13d46",
+    "WAVERYS": "f399c674f2244363c585e794ee1eb802379a45483f01e639d6bd404f4c0ce9a0",
+    "GLORYS": "85c2a0e73990b80e0ffa53eef417e6042b7ce5cbd1ea55df174e7caf80ab0b30",
+    "GEBCO": "1a47ad27af3ab3db1db4ac1ec8fe069aa98ed5f91210b69ff8ac34c87b4c15c0"
+  },
+  "environment": {
+    "timestamp": "2025-11-03T03:00:00+00:00",
+    "latitude": 40.20000076293945,
+    "longitude": 122.0,
+    "Hs": 0.39,
+    "Tp": 2.75,
+    "wave_direction": 25.939999999999998,
+    "wind_speed": 7.0918899709181,
+    "wind_direction": 9.22876982492619,
+    "surface_current_speed": 0.043507878952849646,
+    "surface_current_direction": 34.13594007791227,
+    "water_depth": 9.0,
+    "provenance_by_field": {
+      "Hs": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.0,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "Tp": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.0,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wave_direction": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.0,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_speed": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 5559.669176562941,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_direction": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 5559.669176562941,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_speed": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 10800.0,
+        "spatial_distance_m": 3706.446117708628,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_direction": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 10800.0,
+        "spatial_distance_m": 3706.446117708628,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "water_depth": {
+        "source": "GEBCO:GEBCO_2026",
+        "sampling_method": "nearest",
+        "time_offset_seconds": null,
+        "spatial_distance_m": 291.4302319069224,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      }
+    }
+  },
+  "simulated_vessel_state": {
+    "SOG": 1.6,
+    "HDG": 205.94,
+    "roll": null,
+    "pitch": null,
+    "roll_rate": null,
+    "label": "SIMULATED VESSEL STATE"
+  },
+  "before": {
+    "SOG": 1.6,
+    "HDG": 205.94,
+    "relative_wave_angle": 180.0,
+    "encounter_frequency": 3.1365084024812044,
+    "resonance_margin_ratio": 0.14999772290482263,
+    "resonance_status": "WARNING",
+    "parameter_source": "ENGINEERING_ESTIMATE",
+    "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+    "speed_change_percent": 0.0,
+    "heading_change_deg": 0.0,
+    "risk_score": 1.68,
+    "risk_level": "LOW",
+    "risk_components": {
+      "wave_risk": 1.75,
+      "wind_risk": 3.21,
+      "motion_risk": 0.0,
+      "navigation_risk": 2.81
+    },
+    "primary_risk": "wind_risk",
+    "data_quality": 0.67,
+    "attitude_response_source": "UNAVAILABLE - NO REAL OR SIMULATED ATTITUDE RESPONSE USED"
+  },
+  "plans": {
+    "speed_only": {
+      "mode": "SPEED_ONLY",
+      "decision_status": "RECOMMENDED",
+      "recommended": {
+        "SOG": 1.2,
+        "HDG": 205.94,
+        "relative_wave_angle": 180.0,
+        "encounter_frequency": 2.9235799661499566,
+        "resonance_margin_ratio": 0.20770190619242365,
+        "resonance_status": "NORMAL",
+        "parameter_source": "ENGINEERING_ESTIMATE",
+        "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+        "speed_change_percent": -25.000000000000007,
+        "heading_change_deg": 0.0,
+        "risk_score": 1.56,
+        "risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 1.7,
+          "wind_risk": 3.21,
+          "motion_risk": 0.0,
+          "navigation_risk": 2.15
+        },
+        "primary_risk": "wind_risk",
+        "data_quality": 0.67,
+        "attitude_response_source": "UNAVAILABLE - NO REAL OR SIMULATED ATTITUDE RESPONSE USED"
+      },
+      "speed_loss_percent": 25.000000000000007,
+      "estimated_travel_time_change_percent": 33.33333333333335,
+      "energy_cost": null,
+      "energy_model_status": "REQUIRES REAL SPEED-POWER DATA",
+      "control_output_status": "DECISION ADVICE ONLY - NO REAL ACTUATOR COMMAND",
+      "decision_reason": "Improve resonance status from WARNING to NORMAL; satisfy status improvement, then minimize adjustment."
+    },
+    "heading_only": {
+      "mode": "HEADING_ONLY",
+      "decision_status": "NO_SAFE_CANDIDATE_WITHIN_SEARCH_LIMITS",
+      "recommended": null,
+      "speed_loss_percent": null,
+      "estimated_travel_time_change_percent": null,
+      "energy_cost": null,
+      "energy_model_status": "REQUIRES REAL SPEED-POWER DATA",
+      "control_output_status": "DECISION ADVICE ONLY - NO REAL ACTUATOR COMMAND",
+      "decision_reason": "NO_SAFE_CANDIDATE_WITHIN_SEARCH_LIMITS; PAUSE / RETURN ASSESSMENT recommended."
+    },
+    "joint_speed_heading": {
+      "mode": "JOINT_SPEED_HEADING",
+      "decision_status": "RECOMMENDED",
+      "recommended": {
+        "SOG": 1.2,
+        "HDG": 200.94,
+        "relative_wave_angle": 175.0,
+        "encounter_frequency": 2.921149195194678,
+        "resonance_margin_ratio": 0.20836065170875934,
+        "resonance_status": "NORMAL",
+        "parameter_source": "ENGINEERING_ESTIMATE",
+        "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+        "speed_change_percent": -25.000000000000007,
+        "heading_change_deg": -5.0,
+        "risk_score": 1.55,
+        "risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 1.7,
+          "wind_risk": 3.14,
+          "motion_risk": 0.0,
+          "navigation_risk": 2.15
+        },
+        "primary_risk": "wind_risk",
+        "data_quality": 0.67,
+        "attitude_response_source": "UNAVAILABLE - NO REAL OR SIMULATED ATTITUDE RESPONSE USED"
+      },
+      "speed_loss_percent": 25.000000000000007,
+      "estimated_travel_time_change_percent": 33.33333333333335,
+      "energy_cost": null,
+      "energy_model_status": "REQUIRES REAL SPEED-POWER DATA",
+      "control_output_status": "DECISION ADVICE ONLY - NO REAL ACTUATOR COMMAND",
+      "decision_reason": "Improve resonance status from WARNING to NORMAL; satisfy status improvement, then minimize adjustment."
+    }
+  },
+  "after": {
+    "SOG": 1.2,
+    "HDG": 205.94,
+    "relative_wave_angle": 180.0,
+    "encounter_frequency": 2.9235799661499566,
+    "resonance_margin_ratio": 0.20770190619242365,
+    "resonance_status": "NORMAL",
+    "parameter_source": "ENGINEERING_ESTIMATE",
+    "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+    "speed_change_percent": -25.000000000000007,
+    "heading_change_deg": 0.0,
+    "risk_score": 1.56,
+    "risk_level": "LOW",
+    "risk_components": {
+      "wave_risk": 1.7,
+      "wind_risk": 3.21,
+      "motion_risk": 0.0,
+      "navigation_risk": 2.15
+    },
+    "primary_risk": "wind_risk",
+    "data_quality": 0.67,
+    "attitude_response_source": "UNAVAILABLE - NO REAL OR SIMULATED ATTITUDE RESPONSE USED",
+    "recommended_SOG": 1.2,
+    "recommended_HDG": 205.94
+  },
+  "selected_mode": "SPEED_ONLY",
+  "decision_status": "RECOMMENDED",
+  "decision_reason": "Improve resonance status from WARNING to NORMAL; satisfy status improvement, then minimize adjustment.",
+  "speed_loss_percent": 25.000000000000007,
+  "estimated_travel_time_change_percent": 33.33333333333335,
+  "energy_cost": null,
+  "energy_model_status": "REQUIRES REAL SPEED-POWER DATA",
+  "control_output_status": "DECISION ADVICE ONLY - NO REAL ACTUATOR COMMAND"
+}

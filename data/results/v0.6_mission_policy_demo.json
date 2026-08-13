@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "demo_name": "V0.6 MISSION-CONTINUITY DECISION POLICY",
+  "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+  "vessel_state_source": "SIMULATED VESSEL STATE",
+  "parameter_source": "ENGINEERING_ESTIMATE",
+  "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "response_model_status": "LOW_FIDELITY_RESPONSE_PROXY",
+  "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION",
+  "roll_transfer_gain": null,
+  "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+  "actual_roll_response_deg": null,
+  "historical_replay_status": "ORACLE_HISTORICAL_LOOKAHEAD - ORACLE UPPER BOUND - NOT OPERATIONALLY AVAILABLE",
+  "used_for_business_metrics": false,
+  "current_environment": {
+    "timestamp": "2026-02-05T00:00:00+00:00",
+    "latitude": 39.2,
+    "longitude": 122.2,
+    "Hs": 0.38,
+    "Tp": 2.02,
+    "wave_direction": 109.65999999999997,
+    "wind_speed": 7.7325681046176165,
+    "wind_direction": 151.0381136744616,
+    "surface_current_speed": 0.17069534612622939,
+    "surface_current_direction": 193.439951593748,
+    "water_depth": 7.0,
+    "provenance_by_field": {
+      "Hs": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "Tp": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wave_direction": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_speed": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 7032.839120497674,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_direction": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 7032.839120497674,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_speed": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 4689.625629524974,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_direction": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 4689.625629524974,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "water_depth": {
+        "source": "GEBCO:GEBCO_2026",
+        "sampling_method": "nearest",
+        "time_offset_seconds": null,
+        "spatial_distance_m": 293.0724831626054,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      }
+    }
+  },
+  "current_simulated_vessel_state": {
+    "SOG": 1.8,
+    "HDG": 214.66,
+    "roll": null,
+    "pitch": null,
+    "roll_rate": null,
+    "label": "SIMULATED VESSEL STATE"
+  },
+  "historical_windows": [
+    {
+      "offset_hours": 3,
+      "Hs_m": 0.6900000000000001,
+      "Tp_s": 3.35,
+      "wave_direction_deg": 176.80999999999995,
+      "grid_q90_roll_response_proxy": 5.516313935927235,
+      "robust_status": "ROBUST_NORMAL",
+      "acceptable": true,
+      "source_status": "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST"
+    },
+    {
+      "offset_hours": 6,
+      "Hs_m": 0.8,
+      "Tp_s": 3.8200000000000003,
+      "wave_direction_deg": 180.22,
+      "grid_q90_roll_response_proxy": 4.33034956322545,
+      "robust_status": "ROBUST_NORMAL",
+      "acceptable": true,
+      "source_status": "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST"
+    }
+  ],
+  "route_evaluations": [
+    {
+      "route_id": "DIRECT",
+      "waypoints": [
+        [
+          39.2,
+          122.2
+        ],
+        [
+          39.0,
+          122.0
+        ]
+      ],
+      "integrated_roll_response_proxy_risk": 32.234440123120315,
+      "high_risk_exposure_steps": 1,
+      "estimated_travel_distance_m": 28150.075298175107,
+      "estimated_travel_time_s": 15638.930721208391,
+      "estimated_time_penalty_percent": 0.0,
+      "acceptable": false,
+      "source_status": "SIMULATED MISSION ROUTE"
+    },
+    {
+      "route_id": "DETOUR_SOUTH",
+      "waypoints": [
+        [
+          39.2,
+          122.2
+        ],
+        [
+          39.0,
+          122.4
+        ],
+        [
+          39.0,
+          122.0
+        ]
+      ],
+      "integrated_roll_response_proxy_risk": 22.00651329680682,
+      "high_risk_exposure_steps": 0,
+      "estimated_travel_distance_m": 62715.92276799936,
+      "estimated_travel_time_s": 34842.1793155552,
+      "estimated_time_penalty_percent": 122.79131442346466,
+      "acceptable": false,
+      "source_status": "SIMULATED MISSION ROUTE"
+    }
+  ],
+  "mission_decision": {
+    "mission_state": "OUTBOUND",
+    "technical_outcome": {
+      "preferred_mission_action": "HOLD_AND_REASSESS",
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "decision_reason": "Historical replay shows an acceptable window after 3 h; hold before return assessment.",
+      "local_adjustment_checked": true,
+      "reroute_checked": true,
+      "historical_windows_checked": true,
+      "return_last_resort": false,
+      "control_status": "DECISION ADVICE ONLY - REAL VESSEL CONTROL DISABLED"
+    },
+    "business_outcome": {
+      "mission_completed": false,
+      "mission_interrupted": false,
+      "unplanned_return": false,
+      "mission_delayed": true,
+      "reroute_used": false,
+      "hold_used": true,
+      "estimated_extra_travel_time_s": 10800.0,
+      "high_risk_exposure_duration_or_steps": 0,
+      "mission_outcome_status": "PENDING_REASSESSMENT",
+      "result_status": "DEVELOPMENT SMOKE TEST / ORACLE LOOKAHEAD - NOT BUSINESS EVIDENCE",
+      "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
+    },
+    "manufacturer_operating_context": {
+      "wind_force": 4,
+      "sea_state": 3,
+      "source": "MANUFACTURER CAPABILITY CONTEXT PROVIDED BY PROJECT",
+      "interpretation_limit": "CONTEXT ONLY - NOT PROOF THAT EVERY CONDITION IN THIS CATEGORY IS SAFE; AN UNCALIBRATED RESPONSE PROXY MUST NOT OVERRIDE MANUFACTURER CAPABILITY BY ITSELF"
+    },
+    "model_calibration_warning": "MODEL_CALIBRATION_WARNING: LOW-FIDELITY RESPONSE MODEL MAY BE CONSERVATIVE / REQUIRES REAL ROLL VALIDATION"
+  },
+  "policy_replay_comparison": [
+    {
+      "policy_name": "BASELINE_CONSERVATIVE_POLICY",
+      "policy_definition": "INTERNAL SIMULATION BASELINE: persistent residual high risk -> RETURN / ABORT",
+      "simulated_mission_count": 4,
+      "simulated_mission_completion_rate": 0.25,
+      "simulated_interruption_rate": 0.75,
+      "simulated_unplanned_return_rate": 0.75,
+      "simulated_delay_rate": 0.0,
+      "average_time_penalty_s": 0.0,
+      "risk_exposure_metric_steps": 3,
+      "result_status": "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY",
+      "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
+    },
+    {
+      "policy_name": "HANHAI_MISSION_CONTINUITY_POLICY",
+      "policy_definition": "adjust -> reroute -> hold -> return last; safety remains dominant",
+      "simulated_mission_count": 4,
+      "simulated_mission_completion_rate": 0.75,
+      "simulated_interruption_rate": 0.25,
+      "simulated_unplanned_return_rate": 0.25,
+      "simulated_delay_rate": 0.25,
+      "average_time_penalty_s": 3950.0,
+      "risk_exposure_metric_steps": 1,
+      "result_status": "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY",
+      "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
+    }
+  ],
+  "policy_replay_input": {
+    "representative_simulated_mission_count": 4,
+    "source_mix": "REAL PUBLIC ENVIRONMENT + SIMULATED MISSION/VESSEL STATE + ENGINEERING ESTIMATE PARAMETERS",
+    "status": "DEVELOPMENT SMOKE TEST / ORACLE LOOKAHEAD - NOT BUSINESS EVIDENCE",
+    "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
+  },
+  "algorithm_status": "NOT SAC / NOT REINFORCEMENT LEARNING",
+  "control_status": "REAL VESSEL CONTROL DISABLED"
+}

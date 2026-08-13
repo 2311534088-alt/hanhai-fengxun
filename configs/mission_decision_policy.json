@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "PRELIMINARY MISSION POLICY PARAMETER",
+  "historical_environment_replay": {
+    "reassessment_horizon_h": 6,
+    "evaluation_interval_h": 3,
+    "status": "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST"
+  },
+  "route_advisory": {
+    "maximum_time_penalty_percent": 35.0,
+    "minimum_high_risk_exposure_reduction_percent": 20.0,
+    "status": "SIMULATED MISSION ROUTE / PRELIMINARY"
+  },
+  "model_calibration_warning": {
+    "environment_not_extreme_hs_upper_m": 1.25,
+    "proxy_warning_at_or_above": 15.0,
+    "status": "PRELIMINARY / NEEDS CALIBRATION"
+  }
+}

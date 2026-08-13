@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "replay_mode": "CAUSAL_HISTORICAL_REPLAY",
+  "hold_reassessment_interval_s": 10800,
+  "route_sampling_interval_s": 1800,
+  "inspection_service_time_s": 1800,
+  "inspection_service_time_status": "SIMULATED MISSION PARAMETER",
+  "manufacturer_guaranteed_work_time_reference_h": 4.0,
+  "manufacturer_work_time_reference_status": "MINIMUM PUBLISHED WORK-TIME REFERENCE - NOT MAXIMUM ENDURANCE",
+  "hold_energy": null,
+  "hold_energy_status": "REQUIRES REAL POWER DATA",
+  "business_metrics_source": "CAUSAL POLICY ONLY",
+  "oracle_status": "ORACLE UPPER BOUND - NOT OPERATIONALLY AVAILABLE",
+  "result_status": "MODEL-BASED HISTORICAL REPLAY",
+  "performance_status": "NOT REAL OPERATIONAL PERFORMANCE"
+}

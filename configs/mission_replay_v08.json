@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "replay_mode": "DYNAMIC_CAUSAL_MISSION_REPLAY",
+  "decision_interval_s": 1800,
+  "decision_interval_status": "PRELIMINARY MISSION POLICY PARAMETER",
+  "maneuver_duration_s": 600,
+  "maneuver_status": "SIMULATED MISSION MANEUVER",
+  "safe_hold_duration_s": 1800,
+  "holding_heading_status": "UNKNOWN_WITHOUT_STATION_KEEPING_MODEL",
+  "holding_heading_sensitivity_deg": [0, 45, 90, 135, 180, 225, 270, 315],
+  "maximum_reroute_time_penalty_percent": 35.0,
+  "manufacturer_guaranteed_work_time_reference_h": 4.0,
+  "manufacturer_work_time_reference_status": "MINIMUM PUBLISHED WORK-TIME REFERENCE - NOT MAXIMUM ENDURANCE",
+  "risk_burden_status": "PRELIMINARY SAFETY METRIC - NOT ACCIDENT PROBABILITY",
+  "risk_baseline_status": "PRELIMINARY / NEEDS CALIBRATION",
+  "result_status": "MODEL-BASED HISTORICAL REPLAY",
+  "performance_status": "NOT REAL OPERATIONAL PERFORMANCE",
+  "control_status": "REAL VESSEL CONTROL DISABLED"
+}

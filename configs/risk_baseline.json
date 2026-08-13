@@ -1,0 +1,44 @@
+{
+  "status": "PRELIMINARY / NEEDS CALIBRATION",
+  "description": "V0.2 explainable demo normalizers and weights; not trained and not certified safety limits.",
+  "normalizers": {
+    "wave_height_m": 2.5,
+    "wave_height_to_length_ratio": 0.75,
+    "wave_period_reference_s": 4.0,
+    "wind_speed_m_s": 15.0,
+    "surface_current_m_s": 1.5,
+    "sog_m_s": 3.0,
+    "roll_deg": 20.0,
+    "pitch_deg": 10.0,
+    "roll_rate_deg_s": 12.0,
+    "battery_caution_percent": 30.0
+  },
+  "component_weights": {
+    "wave_risk": 0.35,
+    "wind_risk": 0.20,
+    "motion_risk": 0.30,
+    "navigation_risk": 0.15
+  },
+  "term_weights": {
+    "wave_risk": {
+      "wave_height": 0.45,
+      "wave_period": 0.15,
+      "relative_wave_angle": 0.25,
+      "encounter_speed_proxy": 0.15
+    },
+    "wind_risk": {
+      "wind_speed": 0.65,
+      "relative_wind_angle": 0.35
+    },
+    "motion_risk": {
+      "roll": 0.55,
+      "pitch": 0.20,
+      "roll_rate": 0.25
+    },
+    "navigation_risk": {
+      "surface_current": 0.35,
+      "speed": 0.35,
+      "low_battery": 0.30
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "wind_farm_name": "三峡新能源大连市庄河Ⅲ（300MW）海上风电项目",
+  "source_classification": "PUBLIC OPERATIONAL CONTEXT",
+  "retrieval_date": "2026-08-13",
+  "turbine_count": 72,
+  "farm_area_km2_approx": 47.7,
+  "north_south_extent_km_approx": 8.6,
+  "east_west_extent_km_approx": 7.7,
+  "distance_from_shore_km_approx": 22.2,
+  "port_to_farm_one_way_km_range_approx": [30, 40],
+  "public_operational_water_depth_range_m_approx": [15, 20],
+  "public_reference_polygon": [
+    [39.55, 123.3],
+    [39.535, 123.3883333333],
+    [39.4683333333, 123.39],
+    [39.4669444444, 123.3]
+  ],
+  "public_reference_center": {
+    "latitude": 39.5050694444,
+    "longitude": 123.3445833333,
+    "status": "DERIVED CENTER OF PUBLIC MARITIME WORK-AREA POLYGON; NOT AN OFFICIAL TURBINE COORDINATE"
+  },
+  "reference_notes": [
+    "All values are approximate public operational context and are excluded from risk thresholds, roll models, and mission policy.",
+    "The 30-40 km port transit is background only and is not evidence that the current 2 m vessel can perform that route.",
+    "The polygon is a public maritime construction/work-area reference, not official per-turbine coordinates or a navigation chart.",
+    "Published water-depth references vary by document; the product preserves the approximate range and separately reports the GEBCO sampled value."
+  ],
+  "source_urls": [
+    {
+      "url": "https://www.ctg.com.cn/sxjt/xwzx55/zhxw23/2024081106043995964/index.html",
+      "supports": ["turbine_count", "farm_area_km2_approx", "north_south_extent_km_approx", "east_west_extent_km_approx", "distance_from_shore_km_approx"]
+    },
+    {
+      "url": "https://eps.ctg.com.cn/cms/channel/1ywgg1/240626359.htm",
+      "supports": ["farm_area_km2_approx", "port_to_farm_one_way_km_range_approx", "public_operational_water_depth_range_m_approx"]
+    },
+    {
+      "url": "https://www.msa.gov.cn/public/documents/document/mdmw/mze5/~edisp/20180612030319790.pdf",
+      "supports": ["public_reference_polygon"]
+    }
+  ],
+  "algorithm_use": "PROHIBITED - PRODUCT SCENE AND BUSINESS CONTEXT ONLY"
+}
