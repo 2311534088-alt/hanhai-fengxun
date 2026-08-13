@@ -1,0 +1,3553 @@
+{
+  "schema_version": 1,
+  "demo_name": "V1.0-C COMPETITION CLOSED-LOOP PRODUCT DEMO",
+  "generation_timestamp": "2026-08-13T12:18:18.988611+00:00",
+  "replay_mode": "DYNAMIC CAUSAL HISTORICAL REPLAY WITH SIMULATED ACTION EXECUTION",
+  "display_status": "DISPLAY TIME COMPRESSED - UNDERLYING HISTORICAL TIMESTAMPS UNCHANGED",
+  "source_manifest": "data/manifests/winter_environment_20251101_20260331.json",
+  "input_provenance": {
+    "ERA5": {
+      "product_id": "reanalysis-era5-single-levels",
+      "filename": "era5_winter_20251101_20260331.nc",
+      "filesize_bytes": 2530413,
+      "sha256": "9a92023c2808bbbbf6d3bbc003dd1929cf26497b5b52cf940a68d3e0e6c13d46"
+    },
+    "WAVERYS": {
+      "product_id": "cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+      "filename": "waverys_winter_20251101_20260331.nc",
+      "filesize_bytes": 523756,
+      "sha256": "f399c674f2244363c585e794ee1eb802379a45483f01e639d6bd404f4c0ce9a0"
+    },
+    "GLORYS": {
+      "product_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+      "filename": "glorys_surface_winter_20251101_20260331.nc",
+      "filesize_bytes": 259955,
+      "sha256": "85c2a0e73990b80e0ffa53eef417e6042b7ce5cbd1ea55df174e7caf80ab0b30"
+    },
+    "GEBCO": {
+      "product_id": "GEBCO_2026",
+      "filename": "GEBCO_2026_121.5_124.5E_38.5_40.5N.nc",
+      "filesize_bytes": 724676,
+      "sha256": "1a47ad27af3ab3db1db4ac1ec8fe069aa98ed5f91210b69ff8ac34c87b4c15c0"
+    }
+  },
+  "environment_source": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+  "environment_forecast_status": "NOT REAL-TIME FORECAST",
+  "mission_geometry_source": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+  "vessel_state_source": "SIMULATED VESSEL STATE",
+  "parameter_source": "ENGINEERING_ESTIMATE",
+  "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "core_source": "core.mission.dynamic_replay.DynamicMissionEngine",
+  "core_version": {
+    "freeze": "V0.9",
+    "frozen_commit": "772ec55982eac96eec26b85d5d9a335f4d1127c2"
+  },
+  "selection_rule": "At the declared Zhuanghe III public-reference center, use the fixed simulated near-farm geometry, fixed 0.5 m/s initial speed, and every native three-hour WAVERYS epoch. Select the earliest epoch whose current causal snapshot is acceptable and whose next native environment epoch is unsafe under the frozen V0.9 definition, while the frozen dynamic engine finds an executable constrained local action whose recomputed state improves robust status or GRID_Q90 without leaving single-vessel risk HIGH. This pre-outcome technical screen never reads mission_saved, completion, policy comparison, business outcome, or any future environment in action selection.",
+  "selection_independence": "DETERMINISTIC / POLICY-OUTCOME-INDEPENDENT",
+  "selection_forbidden_inputs": [
+    "mission_saved",
+    "completion",
+    "business_outcome",
+    "policy_comparison"
+  ],
+  "historical_environment_window": [
+    "2026-01-24T06:00:00+00:00",
+    "2026-01-24T11:30:00.789116+00:00"
+  ],
+  "environment_reference_point": {
+    "latitude": 39.5050694444,
+    "longitude": 123.3445833333,
+    "status": "DERIVED CENTER OF PUBLIC MARITIME WORK-AREA POLYGON; NOT AN OFFICIAL TURBINE COORDINATE"
+  },
+  "mission": {
+    "mission_type": "OFFSHORE WIND TURBINE INSPECTION NAVIGATION ASSURANCE",
+    "mission_type_zh": "海上风机巡检航行保障任务",
+    "target": "WT-DEMO-07",
+    "deployment_mode": "SIMULATED NEAR-FARM DEPLOYMENT",
+    "hanhai_role": "NAVIGATION / MISSION ASSURANCE",
+    "inspection_payload": "UAV / VISION PAYLOAD - SIMULATED",
+    "start": [
+      39.474,
+      123.305
+    ],
+    "target_position": [
+      39.532,
+      123.378
+    ],
+    "target_radius_m": 75.0,
+    "target_radius_status": "SIMULATED MISSION PARAMETER",
+    "route_length_m": 8990.062526285801,
+    "port_to_farm_route_used": false
+  },
+  "public_operational_context": {
+    "schema_version": 1,
+    "wind_farm_name": "三峡新能源大连市庄河Ⅲ（300MW）海上风电项目",
+    "source_classification": "PUBLIC OPERATIONAL CONTEXT",
+    "retrieval_date": "2026-08-13",
+    "turbine_count": 72,
+    "farm_area_km2_approx": 47.7,
+    "north_south_extent_km_approx": 8.6,
+    "east_west_extent_km_approx": 7.7,
+    "distance_from_shore_km_approx": 22.2,
+    "port_to_farm_one_way_km_range_approx": [
+      30,
+      40
+    ],
+    "public_operational_water_depth_range_m_approx": [
+      15,
+      20
+    ],
+    "public_reference_polygon": [
+      [
+        39.55,
+        123.3
+      ],
+      [
+        39.535,
+        123.3883333333
+      ],
+      [
+        39.4683333333,
+        123.39
+      ],
+      [
+        39.4669444444,
+        123.3
+      ]
+    ],
+    "public_reference_center": {
+      "latitude": 39.5050694444,
+      "longitude": 123.3445833333,
+      "status": "DERIVED CENTER OF PUBLIC MARITIME WORK-AREA POLYGON; NOT AN OFFICIAL TURBINE COORDINATE"
+    },
+    "reference_notes": [
+      "All values are approximate public operational context and are excluded from risk thresholds, roll models, and mission policy.",
+      "The 30-40 km port transit is background only and is not evidence that the current 2 m vessel can perform that route.",
+      "The polygon is a public maritime construction/work-area reference, not official per-turbine coordinates or a navigation chart.",
+      "Published water-depth references vary by document; the product preserves the approximate range and separately reports the GEBCO sampled value."
+    ],
+    "source_urls": [
+      {
+        "url": "https://www.ctg.com.cn/sxjt/xwzx55/zhxw23/2024081106043995964/index.html",
+        "supports": [
+          "turbine_count",
+          "farm_area_km2_approx",
+          "north_south_extent_km_approx",
+          "east_west_extent_km_approx",
+          "distance_from_shore_km_approx"
+        ]
+      },
+      {
+        "url": "https://eps.ctg.com.cn/cms/channel/1ywgg1/240626359.htm",
+        "supports": [
+          "farm_area_km2_approx",
+          "port_to_farm_one_way_km_range_approx",
+          "public_operational_water_depth_range_m_approx"
+        ]
+      },
+      {
+        "url": "https://www.msa.gov.cn/public/documents/document/mdmw/mze5/~edisp/20180612030319790.pdf",
+        "supports": [
+          "public_reference_polygon"
+        ]
+      }
+    ],
+    "algorithm_use": "PROHIBITED - PRODUCT SCENE AND BUSINESS CONTEXT ONLY"
+  },
+  "public_bathymetry_comparison": {
+    "public_operational_water_depth_range_m_approx": [
+      15,
+      20
+    ],
+    "GEBCO_sample_m": 16.0,
+    "status": "CONSISTENT WITH APPROXIMATE PUBLIC RANGE",
+    "navigation_status": "GEBCO PUBLIC BATHYMETRY REFERENCE - NOT FOR NAVIGATIONAL SAFETY"
+  },
+  "selection_screen": {
+    "initial": {
+      "timestamp": "2026-01-24T06:00:00+00:00",
+      "environment_data_time": "2026-01-24T06:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T06:00:00+00:00",
+        "Tp": "2026-01-24T06:00:00+00:00",
+        "wave_direction": "2026-01-24T06:00:00+00:00",
+        "wind_speed": "2026-01-24T06:00:00+00:00",
+        "wind_direction": "2026-01-24T06:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T06:00:00+00:00",
+      "latitude": 39.474,
+      "longitude": 123.305,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.1379855005091,
+      "Hs": 0.23,
+      "Tp": 3.22,
+      "wave_direction": 163.48000000000002,
+      "wind_speed": 1.7690775010705113,
+      "wind_direction": 118.19455248924021,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 0.84,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 1.23,
+        "wind_risk": 1.15,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 4.071214281551031,
+      "robust_status": "ROBUST_NORMAL",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 161.31494145665687,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE"
+    },
+    "before": {
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508838467372634,
+      "longitude": 123.34884841583109,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.1379855005091,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 3.63,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 15.045899242406552,
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "unsafe": true,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.494953474692,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.494953474692,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.4458663060177,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.4458663060177,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.83529219791308,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE"
+    },
+    "advisory": {
+      "action": "ADJUST_SPEED_HEADING",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.137985500509103
+    },
+    "recomputed_candidate": {
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508838467372634,
+      "longitude": 123.34884841583109,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 29.137985500509103,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.78,
+        "wind_risk": 3.6,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 13.760878654399509,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.568758140691,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.494953474692,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.494953474692,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.4458663060177,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.4458663060177,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.83529219791308,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE"
+    }
+  },
+  "dynamic_result_summary": {
+    "policy": "HANHAI_MISSION_CONTINUITY",
+    "final_mission_state": "COMPLETED",
+    "technical_completed": true,
+    "evidence_qualified_completion": false,
+    "energy_feasibility_status": "NOT VERIFIED ENERGY FEASIBILITY",
+    "future_action_access_count": 0,
+    "business_value_status": "NOT_ESTABLISHED",
+    "mission_saved_claim": false
+  },
+  "before_after_evidence": {
+    "before": {
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508840232515276,
+      "longitude": 123.34885063747613,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 3.63,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 15.04512586342863,
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "unsafe": true,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.73584595840381,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE"
+    },
+    "after": {
+      "timestamp": "2026-01-24T09:10:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:10:00+00:00",
+      "latitude": 39.51119659814027,
+      "longitude": 123.35055375359474,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 29.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.78,
+        "wind_risk": 3.6,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 13.76137964143282,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 157.28805364159555,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE"
+    },
+    "model_improved": true,
+    "executed_maneuver": {
+      "segment_id": "MANEUVER-7",
+      "segment_type": "MANEUVER_SEGMENT",
+      "start_time": "2026-01-24T09:00:00+00:00",
+      "end_time": "2026-01-24T09:10:00+00:00",
+      "start": [
+        39.508840232515276,
+        123.34885063747613
+      ],
+      "end": [
+        39.51119659814027,
+        123.35055375359474
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 29.14474500304692,
+      "source_status": "SIMULATED MISSION MANEUVER",
+      "distance_m": 299.9999999984778
+    },
+    "target_reached": true,
+    "target_arrival_distance_m": 0.39455806875506916
+  },
+  "executed_segments": [
+    {
+      "segment_id": "ROUTE-1",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T06:00:00+00:00",
+      "end_time": "2026-01-24T06:30:00+00:00",
+      "start": [
+        39.474,
+        123.305
+      ],
+      "end": [
+        39.47980641122877,
+        123.31230806930519
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.1379855005091,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.1640686905783
+    },
+    {
+      "segment_id": "ROUTE-2",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T06:30:00+00:00",
+      "end_time": "2026-01-24T07:00:00+00:00",
+      "start": [
+        39.47980641122877,
+        123.31230806930519
+      ],
+      "end": [
+        39.48561294010609,
+        123.31961628668526
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.13911136309184,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.1458222831292
+    },
+    {
+      "segment_id": "ROUTE-3",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T07:00:00+00:00",
+      "end_time": "2026-01-24T07:30:00+00:00",
+      "start": [
+        39.48561294010609,
+        123.31961628668526
+      ],
+      "end": [
+        39.49141958665267,
+        123.3269246521663
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.140237514114574,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.1275739477915
+    },
+    {
+      "segment_id": "ROUTE-4",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T07:30:00+00:00",
+      "end_time": "2026-01-24T08:00:00+00:00",
+      "start": [
+        39.49141958665267,
+        123.3269246521663
+      ],
+      "end": [
+        39.497226350889235,
+        123.33423316577439
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.141363953596056,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.1093236871604
+    },
+    {
+      "segment_id": "ROUTE-5",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T08:00:00+00:00",
+      "end_time": "2026-01-24T08:30:00+00:00",
+      "start": [
+        39.497226350889235,
+        123.33423316577439
+      ],
+      "end": [
+        39.50303323283653,
+        123.34154182753564
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.1424906815659,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.0910715024737
+    },
+    {
+      "segment_id": "ROUTE-6",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T08:30:00+00:00",
+      "end_time": "2026-01-24T09:00:00+00:00",
+      "start": [
+        39.50303323283653,
+        123.34154182753564
+      ],
+      "end": [
+        39.508840232515276,
+        123.34885063747613
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 44.14361769805163,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.0728173922669
+    },
+    {
+      "segment_id": "MANEUVER-7",
+      "segment_type": "MANEUVER_SEGMENT",
+      "start_time": "2026-01-24T09:00:00+00:00",
+      "end_time": "2026-01-24T09:10:00+00:00",
+      "start": [
+        39.508840232515276,
+        123.34885063747613
+      ],
+      "end": [
+        39.51119659814027,
+        123.35055375359474
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 29.14474500304692,
+      "source_status": "SIMULATED MISSION MANEUVER",
+      "distance_m": 299.9999999984778
+    },
+    {
+      "segment_id": "ROUTE-8",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T09:10:00+00:00",
+      "end_time": "2026-01-24T09:30:00+00:00",
+      "start": [
+        39.51119659814027,
+        123.35055375359474
+      ],
+      "end": [
+        39.51497847549047,
+        123.35554324225279
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 45.493866046303424,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 600.0374112646399
+    },
+    {
+      "segment_id": "ROUTE-9",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T09:30:00+00:00",
+      "end_time": "2026-01-24T10:00:00+00:00",
+      "start": [
+        39.51497847549047,
+        123.35554324225279
+      ],
+      "end": [
+        39.520651370078696,
+        123.36302757888915
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 45.49467321567653,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.0374161818296
+    },
+    {
+      "segment_id": "ROUTE-10",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T10:00:00+00:00",
+      "end_time": "2026-01-24T10:30:00+00:00",
+      "start": [
+        39.520651370078696,
+        123.36302757888915
+      ],
+      "end": [
+        39.52632438252829,
+        123.3705120710218
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 45.49588421294669,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.0187131935733
+    },
+    {
+      "segment_id": "ROUTE-11",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T10:30:00+00:00",
+      "end_time": "2026-01-24T11:00:00+00:00",
+      "start": [
+        39.52632438252829,
+        123.3705120710218
+      ],
+      "end": [
+        39.531997512860144,
+        123.37799671867833
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 45.497095507120605,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 900.0000082006461
+    },
+    {
+      "segment_id": "ROUTE-12",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T11:00:00+00:00",
+      "end_time": "2026-01-24T11:00:00.789116+00:00",
+      "start": [
+        39.531997512860144,
+        123.37799671867833
+      ],
+      "end": [
+        39.532,
+        123.378
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 45.497095507120605,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 0.39455806875506916
+    },
+    {
+      "segment_id": "INSPECTION-13",
+      "segment_type": "SIMULATED_INSPECTION_SERVICE",
+      "start_time": "2026-01-24T11:00:00.789116+00:00",
+      "end_time": "2026-01-24T11:30:00.789116+00:00",
+      "start": [
+        39.532,
+        123.378
+      ],
+      "end": [
+        39.532,
+        123.378
+      ],
+      "executed_SOG_m_s": 0.0,
+      "executed_HDG_deg": 45.497095507120605,
+      "source_status": "SIMULATED MISSION PARAMETER",
+      "distance_m": 0.0
+    },
+    {
+      "segment_id": "ROUTE-14",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T11:30:00.789116+00:00",
+      "end_time": "2026-01-24T12:00:00.789116+00:00",
+      "start": [
+        39.532,
+        123.378
+      ],
+      "end": [
+        39.52619358877122,
+        123.37069193069482
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.18442216957322,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.8360082845367
+    },
+    {
+      "segment_id": "ROUTE-15",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T12:00:00.789116+00:00",
+      "end_time": "2026-01-24T12:30:00.789116+00:00",
+      "start": [
+        39.52619358877122,
+        123.37069193069482
+      ],
+      "end": [
+        39.520387295349956,
+        123.36338400966461
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.1832916779648,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.8542577874568
+    },
+    {
+      "segment_id": "ROUTE-16",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T12:30:00.789116+00:00",
+      "end_time": "2026-01-24T13:00:00.789116+00:00",
+      "start": [
+        39.520387295349956,
+        123.36338400966461
+      ],
+      "end": [
+        39.514581119715444,
+        123.35607623688324
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.182161475364,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.8725053729576
+    },
+    {
+      "segment_id": "ROUTE-17",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T13:00:00.789116+00:00",
+      "end_time": "2026-01-24T13:30:00.789116+00:00",
+      "start": [
+        39.514581119715444,
+        123.35607623688324
+      ],
+      "end": [
+        39.508775061846926,
+        123.34876861232458
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.18103156173072,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.8907510411478
+    },
+    {
+      "segment_id": "ROUTE-18",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T13:30:00.789116+00:00",
+      "end_time": "2026-01-24T14:00:00.789116+00:00",
+      "start": [
+        39.508775061846926,
+        123.34876861232458
+      ],
+      "end": [
+        39.502969121723645,
+        123.34146113596252
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.17990193704858,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.9089947894323
+    },
+    {
+      "segment_id": "ROUTE-19",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T14:00:00.789116+00:00",
+      "end_time": "2026-01-24T14:30:00.789116+00:00",
+      "start": [
+        39.502969121723645,
+        123.34146113596252
+      ],
+      "end": [
+        39.49716329932485,
+        123.33415380777093
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.17877260129995,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.9272366197947
+    },
+    {
+      "segment_id": "ROUTE-20",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T14:30:00.789116+00:00",
+      "end_time": "2026-01-24T15:00:00.789116+00:00",
+      "start": [
+        39.49716329932485,
+        123.33415380777093
+      ],
+      "end": [
+        39.49135759462981,
+        123.32684662772373
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.17764355445394,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.9454765274342
+    },
+    {
+      "segment_id": "ROUTE-21",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T15:00:00.789116+00:00",
+      "end_time": "2026-01-24T15:30:00.789116+00:00",
+      "start": [
+        39.49135759462981,
+        123.32684662772373
+      ],
+      "end": [
+        39.48555200761778,
+        123.3195395957948
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.17651479648455,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.9637145145003
+    },
+    {
+      "segment_id": "ROUTE-22",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T15:30:00.789116+00:00",
+      "end_time": "2026-01-24T16:00:00.789116+00:00",
+      "start": [
+        39.48555200761778,
+        123.3195395957948
+      ],
+      "end": [
+        39.47974653826802,
+        123.31223271195803
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.1753863273977,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 899.9819505792483
+    },
+    {
+      "segment_id": "ROUTE-23",
+      "segment_type": "ROUTE_SEGMENT",
+      "start_time": "2026-01-24T16:00:00.789116+00:00",
+      "end_time": "2026-01-24T16:29:42.553495+00:00",
+      "start": [
+        39.47974653826802,
+        123.31223271195803
+      ],
+      "end": [
+        39.474,
+        123.305
+      ],
+      "executed_SOG_m_s": 0.5,
+      "executed_HDG_deg": 224.17425814716242,
+      "source_status": "SIMULATED NEAR-FARM DEPLOYMENT MISSION - NOT OFFICIAL TURBINE COORDINATES",
+      "distance_m": 890.8821896007655
+    }
+  ],
+  "risk_assessments": [
+    {
+      "timestamp": "2026-01-24T06:00:00+00:00",
+      "latitude": 39.474,
+      "longitude": 123.305,
+      "risk_score": 0.84,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.071214281551031,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.1379855005091,
+      "segment_id": "ROUTE-1"
+    },
+    {
+      "timestamp": "2026-01-24T06:30:00+00:00",
+      "latitude": 39.47980641122877,
+      "longitude": 123.31230806930519,
+      "risk_score": 0.84,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.071249203006505,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.13911136309184,
+      "segment_id": "ROUTE-2"
+    },
+    {
+      "timestamp": "2026-01-24T07:00:00+00:00",
+      "latitude": 39.48561294010609,
+      "longitude": 123.31961628668526,
+      "risk_score": 0.94,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.07128413155934,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.140237514114574,
+      "segment_id": "ROUTE-3"
+    },
+    {
+      "timestamp": "2026-01-24T07:30:00+00:00",
+      "latitude": 39.49141958665267,
+      "longitude": 123.3269246521663,
+      "risk_score": 0.94,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.071319067208691,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.141363953596056,
+      "segment_id": "ROUTE-4"
+    },
+    {
+      "timestamp": "2026-01-24T08:00:00+00:00",
+      "latitude": 39.497226350889235,
+      "longitude": 123.33423316577439,
+      "risk_score": 1.11,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.071354009954056,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.1424906815659,
+      "segment_id": "ROUTE-5"
+    },
+    {
+      "timestamp": "2026-01-24T08:30:00+00:00",
+      "latitude": 39.50303323283653,
+      "longitude": 123.34154182753564,
+      "risk_score": 0.93,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 4.305013021353567,
+      "actual_SOG": 0.5,
+      "actual_HDG": 44.14361769805163,
+      "segment_id": "ROUTE-6"
+    },
+    {
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508840232515276,
+      "longitude": 123.34885063747613,
+      "risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 13.76137964143282,
+      "actual_SOG": 0.5,
+      "actual_HDG": 29.14474500304692,
+      "segment_id": "MANEUVER-7"
+    },
+    {
+      "timestamp": "2026-01-24T09:10:00+00:00",
+      "latitude": 39.51119659814027,
+      "longitude": 123.35055375359474,
+      "risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.896794660486005,
+      "actual_SOG": 0.5,
+      "actual_HDG": 45.493866046303424,
+      "segment_id": "ROUTE-8"
+    },
+    {
+      "timestamp": "2026-01-24T09:30:00+00:00",
+      "latitude": 39.51497847549047,
+      "longitude": 123.35554324225279,
+      "risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.896753423934694,
+      "actual_SOG": 0.5,
+      "actual_HDG": 45.49467321567653,
+      "segment_id": "ROUTE-9"
+    },
+    {
+      "timestamp": "2026-01-24T10:00:00+00:00",
+      "latitude": 39.520651370078696,
+      "longitude": 123.36302757888915,
+      "risk_score": 1.21,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.896691550970804,
+      "actual_SOG": 0.5,
+      "actual_HDG": 45.49588421294669,
+      "segment_id": "ROUTE-10"
+    },
+    {
+      "timestamp": "2026-01-24T10:30:00+00:00",
+      "latitude": 39.52632438252829,
+      "longitude": 123.3705120710218,
+      "risk_score": 1.21,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.896629655980004,
+      "actual_SOG": 0.5,
+      "actual_HDG": 45.497095507120605,
+      "segment_id": "ROUTE-11"
+    },
+    {
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "risk_score": 1.41,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.896629655980004,
+      "actual_SOG": 0.5,
+      "actual_HDG": 45.497095507120605,
+      "segment_id": "ROUTE-12"
+    },
+    {
+      "timestamp": "2026-01-24T11:00:00.789116+00:00",
+      "latitude": 39.532,
+      "longitude": 123.378,
+      "risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.742643052939705,
+      "actual_SOG": 0.0,
+      "actual_HDG": 45.497095507120605,
+      "segment_id": "INSPECTION-13"
+    },
+    {
+      "timestamp": "2026-01-24T11:30:00.789116+00:00",
+      "latitude": 39.532,
+      "longitude": 123.378,
+      "risk_score": 1.4,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 14.656677831872564,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.18442216957322,
+      "segment_id": "ROUTE-14"
+    },
+    {
+      "timestamp": "2026-01-24T12:00:00.789116+00:00",
+      "latitude": 39.52619358877122,
+      "longitude": 123.37069193069482,
+      "risk_score": 1.49,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 12.377153166682968,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.1832916779648,
+      "segment_id": "ROUTE-15"
+    },
+    {
+      "timestamp": "2026-01-24T12:30:00.789116+00:00",
+      "latitude": 39.520387295349956,
+      "longitude": 123.36338400966461,
+      "risk_score": 1.49,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 12.376985025495223,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.182161475364,
+      "segment_id": "ROUTE-16"
+    },
+    {
+      "timestamp": "2026-01-24T13:00:00.789116+00:00",
+      "latitude": 39.514581119715444,
+      "longitude": 123.35607623688324,
+      "risk_score": 1.33,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 12.376816923693607,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.18103156173072,
+      "segment_id": "ROUTE-17"
+    },
+    {
+      "timestamp": "2026-01-24T13:30:00.789116+00:00",
+      "latitude": 39.508775061846926,
+      "longitude": 123.34876861232458,
+      "risk_score": 1.33,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 12.376648861278575,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.17990193704858,
+      "segment_id": "ROUTE-18"
+    },
+    {
+      "timestamp": "2026-01-24T14:00:00.789116+00:00",
+      "latitude": 39.502969121723645,
+      "longitude": 123.34146113596252,
+      "risk_score": 1.29,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 12.376480838250417,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.17877260129995,
+      "segment_id": "ROUTE-19"
+    },
+    {
+      "timestamp": "2026-01-24T14:30:00.789116+00:00",
+      "latitude": 39.49716329932485,
+      "longitude": 123.33415380777093,
+      "risk_score": 1.5,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_MODERATE",
+      "GRID_Q90": 11.108838769840325,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.17764355445394,
+      "segment_id": "ROUTE-20"
+    },
+    {
+      "timestamp": "2026-01-24T15:00:00.789116+00:00",
+      "latitude": 39.49135759462981,
+      "longitude": 123.32684662772373,
+      "risk_score": 1.54,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 5.963923821661376,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.17651479648455,
+      "segment_id": "ROUTE-21"
+    },
+    {
+      "timestamp": "2026-01-24T15:30:00.789116+00:00",
+      "latitude": 39.48555200761778,
+      "longitude": 123.3195395957948,
+      "risk_score": 1.54,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 5.963799413704768,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.1753863273977,
+      "segment_id": "ROUTE-22"
+    },
+    {
+      "timestamp": "2026-01-24T16:00:00.789116+00:00",
+      "latitude": 39.47974653826802,
+      "longitude": 123.31223271195803,
+      "risk_score": 1.61,
+      "single_vessel_risk_level": "LOW",
+      "robust_status": "ROBUST_NORMAL",
+      "GRID_Q90": 5.963675035909281,
+      "actual_SOG": 0.5,
+      "actual_HDG": 224.17425814716242,
+      "segment_id": "ROUTE-23"
+    }
+  ],
+  "event_markers": [
+    {
+      "event_type": "MISSION_START",
+      "timestamp": "2026-01-24T06:00:00+00:00",
+      "environment_data_time": "2026-01-24T06:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T06:00:00+00:00",
+        "Tp": "2026-01-24T06:00:00+00:00",
+        "wave_direction": "2026-01-24T06:00:00+00:00",
+        "wind_speed": "2026-01-24T06:00:00+00:00",
+        "wind_direction": "2026-01-24T06:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T06:00:00+00:00",
+      "latitude": 39.474,
+      "longitude": 123.305,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.1379855005091,
+      "Hs": 0.23,
+      "Tp": 3.22,
+      "wave_direction": 163.48000000000002,
+      "wind_speed": 1.7690775010705113,
+      "wind_direction": 118.19455248924021,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 0.84,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 1.23,
+        "wind_risk": 1.15,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 4.071214281551031,
+      "robust_status": "ROBUST_NORMAL",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 161.31494145665687,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      }
+    },
+    {
+      "event_type": "NORMAL_NAVIGATION",
+      "timestamp": "2026-01-24T06:00:00+00:00",
+      "environment_data_time": "2026-01-24T06:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T06:00:00+00:00",
+        "Tp": "2026-01-24T06:00:00+00:00",
+        "wave_direction": "2026-01-24T06:00:00+00:00",
+        "wind_speed": "2026-01-24T06:00:00+00:00",
+        "wind_direction": "2026-01-24T06:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T06:00:00+00:00",
+      "latitude": 39.474,
+      "longitude": 123.305,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.1379855005091,
+      "Hs": 0.23,
+      "Tp": 3.22,
+      "wave_direction": 163.48000000000002,
+      "wind_speed": 1.7690775010705113,
+      "wind_direction": 118.19455248924021,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 0.84,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 1.23,
+        "wind_risk": 1.15,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 4.071214281551031,
+      "robust_status": "ROBUST_NORMAL",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11587.364444767001,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 5534.982569856819,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 21600.0,
+          "spatial_distance_m": 3777.7570794653643,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 161.31494145665687,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      }
+    },
+    {
+      "event_type": "RISK_RISING",
+      "timestamp": "2026-01-24T08:30:00+00:00",
+      "environment_data_time": "2026-01-24T06:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T06:00:00+00:00",
+        "Tp": "2026-01-24T06:00:00+00:00",
+        "wave_direction": "2026-01-24T06:00:00+00:00",
+        "wind_speed": "2026-01-24T08:00:00+00:00",
+        "wind_direction": "2026-01-24T08:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T08:30:00+00:00",
+      "latitude": 39.50303323283653,
+      "longitude": 123.34154182753564,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.14361769805163,
+      "Hs": 0.13,
+      "Tp": 2.7600000000000002,
+      "wave_direction": 155.95000000000005,
+      "wind_speed": 3.869654908950276,
+      "wind_direction": 112.99629881516677,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 0.93,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.72,
+        "wind_risk": 2.46,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 4.305013021353567,
+      "robust_status": "ROBUST_NORMAL",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.0,
+          "spatial_distance_m": 11890.106162704093,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.0,
+          "spatial_distance_m": 11890.106162704093,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.0,
+          "spatial_distance_m": 11890.106162704093,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 1800.0,
+          "spatial_distance_m": 7861.434107000912,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 1800.0,
+          "spatial_distance_m": 7861.434107000912,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 30600.0,
+          "spatial_distance_m": 780.6803879386167,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 30600.0,
+          "spatial_distance_m": 780.6803879386167,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 198.47414497366262,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "next_unsafe_decision_epoch": "2026-01-24T09:00:00+00:00"
+    },
+    {
+      "event_type": "RISK_DETECTED",
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508840232515276,
+      "longitude": 123.34885063747613,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 3.63,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 15.04512586342863,
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "unsafe": true,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.73584595840381,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      }
+    },
+    {
+      "event_type": "ADVISORY_ISSUED",
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508840232515276,
+      "longitude": 123.34885063747613,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 3.63,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 15.04512586342863,
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "unsafe": true,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.73584595840381,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "decision_source": "core.mission.dynamic_replay.DynamicMissionEngine"
+    },
+    {
+      "event_type": "SIMULATED_ACTION_ACCEPTED",
+      "timestamp": "2026-01-24T09:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:00:00+00:00",
+      "latitude": 39.508840232515276,
+      "longitude": 123.34885063747613,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 44.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 16.0,
+      "single_vessel_risk_score": 1.19,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 3.63,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 15.04512586342863,
+      "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "unsafe": true,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11044.312966874295,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 8537.706782230087,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 32400.0,
+          "spatial_distance_m": 1654.7157791617515,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 192.73584595840381,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      }
+    },
+    {
+      "event_type": "SIMULATED_ACTION_EXECUTED",
+      "timestamp": "2026-01-24T09:10:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:10:00+00:00",
+      "latitude": 39.51119659814027,
+      "longitude": 123.35055375359474,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 29.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.78,
+        "wind_risk": 3.6,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 13.76137964143282,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 157.28805364159555,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": 0.5,
+      "executed_HDG": 29.14474500304692,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "executed_segment": {
+        "segment_id": "MANEUVER-7",
+        "segment_type": "MANEUVER_SEGMENT",
+        "start_time": "2026-01-24T09:00:00+00:00",
+        "end_time": "2026-01-24T09:10:00+00:00",
+        "start": [
+          39.508840232515276,
+          123.34885063747613
+        ],
+        "end": [
+          39.51119659814027,
+          123.35055375359474
+        ],
+        "executed_SOG_m_s": 0.5,
+        "executed_HDG_deg": 29.14474500304692,
+        "source_status": "SIMULATED MISSION MANEUVER",
+        "distance_m": 299.9999999984778
+      }
+    },
+    {
+      "event_type": "RISK_REASSESSED",
+      "timestamp": "2026-01-24T09:10:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:10:00+00:00",
+      "latitude": 39.51119659814027,
+      "longitude": 123.35055375359474,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 29.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.78,
+        "wind_risk": 3.6,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 13.76137964143282,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 157.28805364159555,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": 0.5,
+      "executed_HDG": 29.14474500304692,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "before": {
+        "timestamp": "2026-01-24T09:00:00+00:00",
+        "environment_data_time": "2026-01-24T09:00:00+00:00",
+        "environment_data_time_by_field": {
+          "Hs": "2026-01-24T09:00:00+00:00",
+          "Tp": "2026-01-24T09:00:00+00:00",
+          "wave_direction": "2026-01-24T09:00:00+00:00",
+          "wind_speed": "2026-01-24T09:00:00+00:00",
+          "wind_direction": "2026-01-24T09:00:00+00:00",
+          "surface_current_speed": "2026-01-24T00:00:00+00:00",
+          "surface_current_direction": "2026-01-24T00:00:00+00:00",
+          "water_depth": "STATIC"
+        },
+        "decision_epoch": "2026-01-24T09:00:00+00:00",
+        "latitude": 39.508840232515276,
+        "longitude": 123.34885063747613,
+        "mission_state": "OUTBOUND",
+        "SOG": 0.5,
+        "HDG": 44.14474500304692,
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wave_direction": 138.01999999999998,
+        "wind_speed": 5.460769854907879,
+        "wind_direction": 129.51955312963196,
+        "surface_current_speed": 0.11453023698588943,
+        "surface_current_direction": 73.59322785309735,
+        "water_depth": 16.0,
+        "single_vessel_risk_score": 1.19,
+        "single_vessel_risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 0.8,
+          "wind_risk": 3.63,
+          "motion_risk": 0.0,
+          "navigation_risk": 1.22
+        },
+        "GRID_Q90": 15.04512586342863,
+        "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+        "unsafe": true,
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 8537.706782230087,
+            "within_tolerance": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 8537.706782230087,
+            "within_tolerance": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 1654.7157791617515,
+            "within_tolerance": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 1654.7157791617515,
+            "within_tolerance": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 192.73584595840381,
+            "within_tolerance": true
+          }
+        },
+        "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+        "vessel_state_source": "SIMULATED VESSEL STATE"
+      },
+      "after": {
+        "timestamp": "2026-01-24T09:10:00+00:00",
+        "environment_data_time": "2026-01-24T09:00:00+00:00",
+        "environment_data_time_by_field": {
+          "Hs": "2026-01-24T09:00:00+00:00",
+          "Tp": "2026-01-24T09:00:00+00:00",
+          "wave_direction": "2026-01-24T09:00:00+00:00",
+          "wind_speed": "2026-01-24T09:00:00+00:00",
+          "wind_direction": "2026-01-24T09:00:00+00:00",
+          "surface_current_speed": "2026-01-24T00:00:00+00:00",
+          "surface_current_direction": "2026-01-24T00:00:00+00:00",
+          "water_depth": "STATIC"
+        },
+        "decision_epoch": "2026-01-24T09:10:00+00:00",
+        "latitude": 39.51119659814027,
+        "longitude": 123.35055375359474,
+        "mission_state": "OUTBOUND",
+        "SOG": 0.5,
+        "HDG": 29.14474500304692,
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wave_direction": 138.01999999999998,
+        "wind_speed": 5.460769854907879,
+        "wind_direction": 129.51955312963196,
+        "surface_current_speed": 0.11453023698588943,
+        "surface_current_direction": 73.59322785309735,
+        "water_depth": 17.0,
+        "single_vessel_risk_score": 1.18,
+        "single_vessel_risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 0.78,
+          "wind_risk": 3.6,
+          "motion_risk": 0.0,
+          "navigation_risk": 1.22
+        },
+        "GRID_Q90": 13.76137964143282,
+        "robust_status": "ROBUST_MODERATE",
+        "unsafe": false,
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 8716.277537245842,
+            "within_tolerance": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 8716.277537245842,
+            "within_tolerance": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 33000.0,
+            "spatial_distance_m": 1931.8723210070066,
+            "within_tolerance": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 33000.0,
+            "spatial_distance_m": 1931.8723210070066,
+            "within_tolerance": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 157.28805364159555,
+            "within_tolerance": true
+          }
+        },
+        "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+        "vessel_state_source": "SIMULATED VESSEL STATE"
+      }
+    },
+    {
+      "event_type": "RISK_IMPROVED",
+      "timestamp": "2026-01-24T09:10:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T09:00:00+00:00",
+        "wind_direction": "2026-01-24T09:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T09:10:00+00:00",
+      "latitude": 39.51119659814027,
+      "longitude": 123.35055375359474,
+      "mission_state": "OUTBOUND",
+      "SOG": 0.5,
+      "HDG": 29.14474500304692,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 5.460769854907879,
+      "wind_direction": 129.51955312963196,
+      "surface_current_speed": 0.11453023698588943,
+      "surface_current_direction": 73.59322785309735,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.18,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.78,
+        "wind_risk": 3.6,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.22
+      },
+      "GRID_Q90": 13.76137964143282,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 10745.873066863964,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 600.0,
+          "spatial_distance_m": 8716.277537245842,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 33000.0,
+          "spatial_distance_m": 1931.8723210070066,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 157.28805364159555,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "ADJUST_SPEED_HEADING",
+      "decision_reason": "Constrained candidate passes the 30 min causal current-snapshot rollout and will be executed as a simulated maneuver segment.",
+      "recommended_SOG": 0.5,
+      "recommended_HDG": 29.14474500304692,
+      "executed_SOG": 0.5,
+      "executed_HDG": 29.14474500304692,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "before": {
+        "timestamp": "2026-01-24T09:00:00+00:00",
+        "environment_data_time": "2026-01-24T09:00:00+00:00",
+        "environment_data_time_by_field": {
+          "Hs": "2026-01-24T09:00:00+00:00",
+          "Tp": "2026-01-24T09:00:00+00:00",
+          "wave_direction": "2026-01-24T09:00:00+00:00",
+          "wind_speed": "2026-01-24T09:00:00+00:00",
+          "wind_direction": "2026-01-24T09:00:00+00:00",
+          "surface_current_speed": "2026-01-24T00:00:00+00:00",
+          "surface_current_direction": "2026-01-24T00:00:00+00:00",
+          "water_depth": "STATIC"
+        },
+        "decision_epoch": "2026-01-24T09:00:00+00:00",
+        "latitude": 39.508840232515276,
+        "longitude": 123.34885063747613,
+        "mission_state": "OUTBOUND",
+        "SOG": 0.5,
+        "HDG": 44.14474500304692,
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wave_direction": 138.01999999999998,
+        "wind_speed": 5.460769854907879,
+        "wind_direction": 129.51955312963196,
+        "surface_current_speed": 0.11453023698588943,
+        "surface_current_direction": 73.59322785309735,
+        "water_depth": 16.0,
+        "single_vessel_risk_score": 1.19,
+        "single_vessel_risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 0.8,
+          "wind_risk": 3.63,
+          "motion_risk": 0.0,
+          "navigation_risk": 1.22
+        },
+        "GRID_Q90": 15.04512586342863,
+        "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+        "unsafe": true,
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 11044.312966874295,
+            "within_tolerance": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 8537.706782230087,
+            "within_tolerance": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 0.0,
+            "spatial_distance_m": 8537.706782230087,
+            "within_tolerance": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 1654.7157791617515,
+            "within_tolerance": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 32400.0,
+            "spatial_distance_m": 1654.7157791617515,
+            "within_tolerance": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 192.73584595840381,
+            "within_tolerance": true
+          }
+        },
+        "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+        "vessel_state_source": "SIMULATED VESSEL STATE"
+      },
+      "after": {
+        "timestamp": "2026-01-24T09:10:00+00:00",
+        "environment_data_time": "2026-01-24T09:00:00+00:00",
+        "environment_data_time_by_field": {
+          "Hs": "2026-01-24T09:00:00+00:00",
+          "Tp": "2026-01-24T09:00:00+00:00",
+          "wave_direction": "2026-01-24T09:00:00+00:00",
+          "wind_speed": "2026-01-24T09:00:00+00:00",
+          "wind_direction": "2026-01-24T09:00:00+00:00",
+          "surface_current_speed": "2026-01-24T00:00:00+00:00",
+          "surface_current_direction": "2026-01-24T00:00:00+00:00",
+          "water_depth": "STATIC"
+        },
+        "decision_epoch": "2026-01-24T09:10:00+00:00",
+        "latitude": 39.51119659814027,
+        "longitude": 123.35055375359474,
+        "mission_state": "OUTBOUND",
+        "SOG": 0.5,
+        "HDG": 29.14474500304692,
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wave_direction": 138.01999999999998,
+        "wind_speed": 5.460769854907879,
+        "wind_direction": 129.51955312963196,
+        "surface_current_speed": 0.11453023698588943,
+        "surface_current_direction": 73.59322785309735,
+        "water_depth": 17.0,
+        "single_vessel_risk_score": 1.18,
+        "single_vessel_risk_level": "LOW",
+        "risk_components": {
+          "wave_risk": 0.78,
+          "wind_risk": 3.6,
+          "motion_risk": 0.0,
+          "navigation_risk": 1.22
+        },
+        "GRID_Q90": 13.76137964143282,
+        "robust_status": "ROBUST_MODERATE",
+        "unsafe": false,
+        "provenance_by_field": {
+          "Hs": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "Tp": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "wave_direction": {
+            "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 10745.873066863964,
+            "within_tolerance": true
+          },
+          "wind_speed": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 8716.277537245842,
+            "within_tolerance": true
+          },
+          "wind_direction": {
+            "source": "ERA5:reanalysis-era5-single-levels",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 600.0,
+            "spatial_distance_m": 8716.277537245842,
+            "within_tolerance": true
+          },
+          "surface_current_speed": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 33000.0,
+            "spatial_distance_m": 1931.8723210070066,
+            "within_tolerance": true
+          },
+          "surface_current_direction": {
+            "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+            "sampling_method": "nearest",
+            "time_offset_seconds": 33000.0,
+            "spatial_distance_m": 1931.8723210070066,
+            "within_tolerance": true
+          },
+          "water_depth": {
+            "source": "GEBCO:GEBCO_2026",
+            "sampling_method": "nearest",
+            "time_offset_seconds": null,
+            "spatial_distance_m": 157.28805364159555,
+            "within_tolerance": true
+          }
+        },
+        "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+        "vessel_state_source": "SIMULATED VESSEL STATE"
+      },
+      "improvement_status": "MODEL-BASED REASSESSMENT - NOT EXPERIMENTALLY MEASURED"
+    },
+    {
+      "event_type": "TARGET_APPROACH",
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "mission_state": "ON_STATION",
+      "SOG": 0.0,
+      "HDG": 45.497095507120605,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.79,
+        "wind_risk": 4.76,
+        "motion_risk": 0.0,
+        "navigation_risk": 0.35
+      },
+      "GRID_Q90": 14.742643052939705,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.21489640848537,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": 0.5,
+      "executed_HDG": 45.497095507120605,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "arrival_distance_m": 0.39455806875506916,
+      "target_radius_m": 75.0,
+      "target_radius_status": "SIMULATED MISSION PARAMETER",
+      "trigger": "EXECUTED_TRACK_DISTANCE_TO_TARGET"
+    },
+    {
+      "event_type": "TARGET_REACHED",
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "mission_state": "ON_STATION",
+      "SOG": 0.0,
+      "HDG": 45.497095507120605,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.79,
+        "wind_risk": 4.76,
+        "motion_risk": 0.0,
+        "navigation_risk": 0.35
+      },
+      "GRID_Q90": 14.742643052939705,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.21489640848537,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": 0.5,
+      "executed_HDG": 45.497095507120605,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "arrival_distance_m": 0.39455806875506916,
+      "target_radius_m": 75.0,
+      "target_radius_status": "SIMULATED MISSION PARAMETER",
+      "trigger": "EXECUTED_TRACK_DISTANCE_TO_TARGET"
+    },
+    {
+      "event_type": "INSPECTION_AREA_ENTERED",
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "mission_state": "ON_STATION",
+      "SOG": 0.0,
+      "HDG": 45.497095507120605,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.79,
+        "wind_risk": 4.76,
+        "motion_risk": 0.0,
+        "navigation_risk": 0.35
+      },
+      "GRID_Q90": 14.742643052939705,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.21489640848537,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "inspection_area_source": "SIMULATED INSPECTION AREA",
+      "arrival_distance_m": 0.39455806875506916,
+      "target_radius_m": 75.0,
+      "target_radius_status": "SIMULATED MISSION PARAMETER",
+      "trigger": "EXECUTED_TRACK_DISTANCE_TO_TARGET"
+    },
+    {
+      "event_type": "INSPECTION_PAYLOAD_READY",
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "mission_state": "ON_STATION",
+      "SOG": 0.0,
+      "HDG": 45.497095507120605,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.79,
+        "wind_risk": 4.76,
+        "motion_risk": 0.0,
+        "navigation_risk": 0.35
+      },
+      "GRID_Q90": 14.742643052939705,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.21489640848537,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": null,
+      "executed_HDG": null,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "DECISION ADVICE ONLY",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "payload_status": "UAV / VISION PAYLOAD READY (SIMULATED)"
+    },
+    {
+      "event_type": "INSPECTION_PAYLOAD_ACTIVE",
+      "timestamp": "2026-01-24T11:00:00+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:00:00+00:00",
+      "latitude": 39.531997512860144,
+      "longitude": 123.37799671867833,
+      "mission_state": "ON_STATION",
+      "SOG": 0.0,
+      "HDG": 45.497095507120605,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.28,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.79,
+        "wind_risk": 4.76,
+        "motion_risk": 0.0,
+        "navigation_risk": 0.35
+      },
+      "GRID_Q90": 14.742643052939705,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 7200.0,
+          "spatial_distance_m": 7793.089351128608,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 0.0,
+          "spatial_distance_m": 11053.840160829519,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 39600.0,
+          "spatial_distance_m": 4864.274210054945,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.21489640848537,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": 0.0,
+      "executed_HDG": 45.497095507120605,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      },
+      "payload_status": "SIMULATED PAYLOAD ACTIVE - NO DEFECT DETECTION CLAIM"
+    },
+    {
+      "event_type": "RETURN_START",
+      "timestamp": "2026-01-24T11:30:00.789116+00:00",
+      "environment_data_time": "2026-01-24T09:00:00+00:00",
+      "environment_data_time_by_field": {
+        "Hs": "2026-01-24T09:00:00+00:00",
+        "Tp": "2026-01-24T09:00:00+00:00",
+        "wave_direction": "2026-01-24T09:00:00+00:00",
+        "wind_speed": "2026-01-24T11:00:00+00:00",
+        "wind_direction": "2026-01-24T11:00:00+00:00",
+        "surface_current_speed": "2026-01-24T00:00:00+00:00",
+        "surface_current_direction": "2026-01-24T00:00:00+00:00",
+        "water_depth": "STATIC"
+      },
+      "decision_epoch": "2026-01-24T11:30:00.789116+00:00",
+      "latitude": 39.532,
+      "longitude": 123.378,
+      "mission_state": "RETURNING",
+      "SOG": 0.5,
+      "HDG": 224.18442216957322,
+      "Hs": 0.14,
+      "Tp": 1.8800000000000001,
+      "wave_direction": 138.01999999999998,
+      "wind_speed": 7.44937038843959,
+      "wind_direction": 155.66897660585641,
+      "surface_current_speed": 0.10380780258098464,
+      "surface_current_direction": 65.69545073406329,
+      "water_depth": 17.0,
+      "single_vessel_risk_score": 1.4,
+      "single_vessel_risk_level": "LOW",
+      "risk_components": {
+        "wave_risk": 0.8,
+        "wind_risk": 4.73,
+        "motion_risk": 0.0,
+        "navigation_risk": 1.18
+      },
+      "GRID_Q90": 14.656677831872564,
+      "robust_status": "ROBUST_MODERATE",
+      "unsafe": false,
+      "provenance_by_field": {
+        "Hs": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.789116,
+          "spatial_distance_m": 7792.752931882421,
+          "within_tolerance": true
+        },
+        "Tp": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.789116,
+          "spatial_distance_m": 7792.752931882421,
+          "within_tolerance": true
+        },
+        "wave_direction": {
+          "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 9000.789116,
+          "spatial_distance_m": 7792.752931882421,
+          "within_tolerance": true
+        },
+        "wind_speed": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 1800.789116,
+          "spatial_distance_m": 11053.66251058674,
+          "within_tolerance": true
+        },
+        "wind_direction": {
+          "source": "ERA5:reanalysis-era5-single-levels",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 1800.789116,
+          "spatial_distance_m": 11053.66251058674,
+          "within_tolerance": true
+        },
+        "surface_current_speed": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 41400.789116,
+          "spatial_distance_m": 4864.2845361419795,
+          "within_tolerance": true
+        },
+        "surface_current_direction": {
+          "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+          "sampling_method": "nearest",
+          "time_offset_seconds": 41400.789116,
+          "spatial_distance_m": 4864.2845361419795,
+          "within_tolerance": true
+        },
+        "water_depth": {
+          "source": "GEBCO:GEBCO_2026",
+          "sampling_method": "nearest",
+          "time_offset_seconds": null,
+          "spatial_distance_m": 114.60916570506491,
+          "within_tolerance": true
+        }
+      },
+      "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+      "vessel_state_source": "SIMULATED VESSEL STATE",
+      "decision_action": "CONTINUE_RETURN_TO_BASE",
+      "decision_reason": "Current dynamic multi-source and robust assessments are acceptable.",
+      "recommended_SOG": null,
+      "recommended_HDG": null,
+      "executed_SOG": 0.5,
+      "executed_HDG": 224.18442216957322,
+      "source_labels": {
+        "environment": "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+        "vessel": "SIMULATED VESSEL STATE",
+        "mission_geometry": "SIMULATED NEAR-FARM MISSION GEOMETRY",
+        "parameters": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+        "action": "SIMULATED ACTION EXECUTED",
+        "control": "REAL VESSEL CONTROL DISABLED"
+      }
+    }
+  ],
+  "truth_labels": [
+    "REAL PUBLIC HISTORICAL ENVIRONMENT - NOT IN-SITU OBSERVATION",
+    "PUBLIC OPERATIONAL CONTEXT",
+    "PUBLIC GEOSPATIAL REFERENCE",
+    "SIMULATED TURBINE LAYOUT - NOT OFFICIAL TURBINE COORDINATES",
+    "SIMULATED NEAR-FARM MISSION GEOMETRY",
+    "SIMULATED VESSEL STATE",
+    "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
+    "NOT VERIFIED ENERGY FEASIBILITY",
+    "DECISION ADVICE ONLY",
+    "SIMULATED ACTION EXECUTED",
+    "REAL VESSEL CONTROL DISABLED",
+    "SEA ICE / ICE RISK: UNAVAILABLE / FUTURE EXTENSION"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "source": "data/replay/v1.0c_competition_demo.json",
+  "status": "STRUCTURED STORYBOARD ONLY - NO VIDEO GENERATED",
+  "scenes": [
+    {
+      "scene_id": "mission_start",
+      "start_event": "MISSION_START",
+      "end_event": "RISK_RISING",
+      "duration_hint_s": 2.0,
+      "camera_focus": "mission map",
+      "primary_ui_state": "MISSION_START",
+      "vessel_state": {
+        "SOG": 0.5,
+        "HDG": 44.1379855005091,
+        "latitude": 39.474,
+        "longitude": 123.305
+      },
+      "environment_state": {
+        "timestamp": "2026-01-24T06:00:00+00:00",
+        "Hs": 0.23,
+        "Tp": 3.22,
+        "wind_speed": 1.7690775010705113
+      },
+      "caption_hint": "normal navigation"
+    },
+    {
+      "scene_id": "risk_detected",
+      "start_event": "RISK_RISING",
+      "end_event": "ADVISORY_ISSUED",
+      "duration_hint_s": 3.0,
+      "camera_focus": "risk and WHY panel",
+      "primary_ui_state": "RISK_RISING",
+      "vessel_state": {
+        "SOG": 0.5,
+        "HDG": 44.14361769805163,
+        "latitude": 39.50303323283653,
+        "longitude": 123.34154182753564
+      },
+      "environment_state": {
+        "timestamp": "2026-01-24T06:00:00+00:00",
+        "Hs": 0.13,
+        "Tp": 2.7600000000000002,
+        "wind_speed": 3.869654908950276
+      },
+      "caption_hint": "risk detected"
+    },
+    {
+      "scene_id": "maneuver",
+      "start_event": "ADVISORY_ISSUED",
+      "end_event": "SIMULATED_ACTION_EXECUTED",
+      "duration_hint_s": 3.0,
+      "camera_focus": "map and WHAT TO DO",
+      "primary_ui_state": "ADVISORY_ISSUED",
+      "vessel_state": {
+        "SOG": 0.5,
+        "HDG": 44.14474500304692,
+        "latitude": 39.508840232515276,
+        "longitude": 123.34885063747613
+      },
+      "environment_state": {
+        "timestamp": "2026-01-24T09:00:00+00:00",
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wind_speed": 5.460769854907879
+      },
+      "caption_hint": "simulated maneuver"
+    },
+    {
+      "scene_id": "reassessment",
+      "start_event": "SIMULATED_ACTION_EXECUTED",
+      "end_event": "RISK_IMPROVED",
+      "duration_hint_s": 3.0,
+      "camera_focus": "WHAT CHANGES",
+      "primary_ui_state": "SIMULATED_ACTION_EXECUTED",
+      "vessel_state": {
+        "SOG": 0.5,
+        "HDG": 29.14474500304692,
+        "latitude": 39.51119659814027,
+        "longitude": 123.35055375359474
+      },
+      "environment_state": {
+        "timestamp": "2026-01-24T09:00:00+00:00",
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wind_speed": 5.460769854907879
+      },
+      "caption_hint": "model reassessment"
+    },
+    {
+      "scene_id": "arrival",
+      "start_event": "RISK_IMPROVED",
+      "end_event": "INSPECTION_PAYLOAD_READY",
+      "duration_hint_s": 4.0,
+      "camera_focus": "target turbine",
+      "primary_ui_state": "RISK_IMPROVED",
+      "vessel_state": {
+        "SOG": 0.5,
+        "HDG": 29.14474500304692,
+        "latitude": 39.51119659814027,
+        "longitude": 123.35055375359474
+      },
+      "environment_state": {
+        "timestamp": "2026-01-24T09:00:00+00:00",
+        "Hs": 0.14,
+        "Tp": 1.8800000000000001,
+        "wind_speed": 5.460769854907879
+      },
+      "caption_hint": "inspection area reached"
+    }
+  ]
+}
