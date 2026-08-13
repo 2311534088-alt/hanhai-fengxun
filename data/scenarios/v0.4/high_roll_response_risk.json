@@ -123,7 +123,14 @@
     "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
     "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
-    "roll_response_classification": "HIGH_ROLL_RESPONSE_RISK"
+    "roll_response_classification": "HIGH_ROLL_RESPONSE_RISK",
+    "roll_response_proxy": 29.295746686602353,
+    "roll_response_degree_equivalent": 29.295746686602353,
+    "actual_roll_response_deg": null,
+    "roll_transfer_gain": null,
+    "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+    "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION",
+    "legacy_estimated_roll_response_deg_status": "DEPRECATED COMPATIBILITY FIELD"
   },
   "after": {
     "SOG": 3.0,
@@ -142,7 +149,14 @@
     "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
     "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
-    "roll_response_classification": "MODERATE_ROLL_RESPONSE_RISK"
+    "roll_response_classification": "MODERATE_ROLL_RESPONSE_RISK",
+    "roll_response_proxy": 13.14920145936274,
+    "roll_response_degree_equivalent": 13.14920145936274,
+    "actual_roll_response_deg": null,
+    "roll_transfer_gain": null,
+    "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+    "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION",
+    "legacy_estimated_roll_response_deg_status": "DEPRECATED COMPATIBILITY FIELD"
   },
   "before_uncertainty": {
     "sample_count": 55,
@@ -169,7 +183,13 @@
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
     "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
     "grid_method": "DETERMINISTIC SENSITIVITY GRID",
-    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
+    "proxy_units": "degree-equivalent response proxy",
+    "actual_roll_response_deg": null,
+    "roll_transfer_gain": null,
+    "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+    "response_proxy_status": "LOW_FIDELITY_RESPONSE_PROXY",
+    "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION"
   },
   "after_uncertainty": {
     "sample_count": 55,
@@ -196,7 +216,13 @@
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
     "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
     "grid_method": "DETERMINISTIC SENSITIVITY GRID",
-    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
+    "proxy_units": "degree-equivalent response proxy",
+    "actual_roll_response_deg": null,
+    "roll_transfer_gain": null,
+    "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+    "response_proxy_status": "LOW_FIDELITY_RESPONSE_PROXY",
+    "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION"
   },
   "recommended_mode": "JOINT_SPEED_HEADING",
   "decision_status": "RECOMMENDED",

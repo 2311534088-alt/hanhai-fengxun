@@ -124,6 +124,8 @@ def assess_roll_response(
         classification,
         parameters.parameter_source.value,
         parameters.parameter_status,
+        roll_response_proxy=response_deg,
+        roll_response_degree_equivalent=response_deg,
     )
 
 

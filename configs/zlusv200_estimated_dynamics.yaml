@@ -3,6 +3,10 @@
   "model": "ZLUSV-200",
   "parameter_source": "ENGINEERING_ESTIMATE",
   "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "roll_transfer_gain": {
+    "value": null,
+    "status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION"
+  },
   "description": "基于实艇尺度与低保真水动力模型的工程估计",
   "reference_displacement_kg": 100.0,
   "GM_m": {"nominal": 0.18, "lower": 0.12, "upper": 0.25},

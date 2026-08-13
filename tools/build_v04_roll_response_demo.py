@@ -90,6 +90,13 @@ def _candidate(candidate) -> dict | None:
         "response_model_status": candidate.response_model_status,
         "response_validation_status": candidate.response_validation_status,
         "roll_response_classification": candidate.roll_response_classification,
+        "roll_response_proxy": candidate.estimated_roll_response_deg,
+        "roll_response_degree_equivalent": candidate.estimated_roll_response_deg,
+        "actual_roll_response_deg": None,
+        "roll_transfer_gain": None,
+        "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
+        "angle_prediction_status": "NOT A CALIBRATED ROLL ANGLE PREDICTION",
+        "legacy_estimated_roll_response_deg_status": "DEPRECATED COMPATIBILITY FIELD",
     }
 
 

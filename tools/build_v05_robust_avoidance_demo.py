@@ -25,6 +25,14 @@ def _grid(grid) -> dict:
     data = asdict(grid)
     for key in ("nominal_roll_risk", "grid_q90_roll_risk", "worst_case_roll_risk", "robust_decision_status"):
         data[key] = getattr(grid, key).value
+    data.update({
+        "nominal_roll_response_proxy": grid.nominal_roll_response_proxy,
+        "grid_q10_roll_response_proxy": grid.grid_q10_roll_response_proxy,
+        "grid_q50_roll_response_proxy": grid.grid_q50_roll_response_proxy,
+        "grid_q90_roll_response_proxy": grid.grid_q90_roll_response_proxy,
+        "maximum_roll_response_proxy": grid.maximum_roll_response_proxy,
+        "legacy_degree_fields_status": "DEPRECATED COMPATIBILITY FIELDS",
+    })
     return data
 
 

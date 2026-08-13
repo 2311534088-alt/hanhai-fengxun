@@ -8,6 +8,9 @@ from enum import Enum
 
 MODEL_STATUS = "LOW_FIDELITY_ENGINEERING_ESTIMATE"
 VALIDATION_STATUS = "NOT VALIDATED AGAINST REAL ROLL DATA"
+PROXY_STATUS = "LOW_FIDELITY_RESPONSE_PROXY"
+ANGLE_STATUS = "NOT A CALIBRATED ROLL ANGLE PREDICTION"
+TRANSFER_GAIN_STATUS = "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION"
 THRESHOLD_STATUS = "PRELIMINARY / NEEDS CALIBRATION"
 GRID_METHOD = "DETERMINISTIC SENSITIVITY GRID"
 GRID_STATISTICAL_STATUS = "NOT A STATISTICAL CONFIDENCE INTERVAL"
@@ -75,6 +78,14 @@ class RollResponseAssessment:
     response_model_status: str = MODEL_STATUS
     response_validation_status: str = VALIDATION_STATUS
     threshold_status: str = THRESHOLD_STATUS
+    roll_response_proxy: float | None = None
+    roll_response_degree_equivalent: float | None = None
+    actual_roll_response_deg: None = None
+    roll_transfer_gain: None = None
+    roll_transfer_gain_status: str = TRANSFER_GAIN_STATUS
+    response_proxy_status: str = PROXY_STATUS
+    angle_prediction_status: str = ANGLE_STATUS
+    estimated_roll_response_deg_deprecation: str = "DEPRECATED COMPATIBILITY FIELD - USE ROLL_RESPONSE_PROXY"
 
 
 @dataclass(frozen=True, slots=True)
@@ -98,3 +109,29 @@ class RollResponseUncertainty:
     response_validation_status: str = VALIDATION_STATUS
     grid_method: str = GRID_METHOD
     grid_statistical_status: str = GRID_STATISTICAL_STATUS
+    proxy_units: str = "degree-equivalent response proxy"
+    actual_roll_response_deg: None = None
+    roll_transfer_gain: None = None
+    roll_transfer_gain_status: str = TRANSFER_GAIN_STATUS
+    response_proxy_status: str = PROXY_STATUS
+    angle_prediction_status: str = ANGLE_STATUS
+
+    @property
+    def nominal_roll_response_proxy(self) -> float:
+        return self.nominal_estimated_roll_response_deg
+
+    @property
+    def grid_q10_roll_response_proxy(self) -> float:
+        return self.grid_q10_estimated_roll_response_deg
+
+    @property
+    def grid_q50_roll_response_proxy(self) -> float:
+        return self.grid_q50_estimated_roll_response_deg
+
+    @property
+    def grid_q90_roll_response_proxy(self) -> float:
+        return self.grid_q90_estimated_roll_response_deg
+
+    @property
+    def maximum_roll_response_proxy(self) -> float:
+        return self.maximum_estimated_roll_response_deg
