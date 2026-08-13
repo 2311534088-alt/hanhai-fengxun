@@ -151,8 +151,10 @@ def main() -> None:
             "parameter_status": parameters.parameter_status,
             "parameter_classification": PARAMETER_LABEL,
             "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
-            "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
-            "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
+        "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+        "parameter_grid_method": "DETERMINISTIC SENSITIVITY GRID",
+        "parameter_grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
+        "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
             "selection_method": seed["selection"],
             "source_manifest": "data/manifests/winter_environment_20251101_20260331.json",
             "source_file_sha256": {
@@ -183,6 +185,8 @@ def main() -> None:
         "parameter_classification": PARAMETER_LABEL,
         "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
         "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+        "parameter_grid_method": "DETERMINISTIC SENSITIVITY GRID",
+        "parameter_grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
         "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
         "formula_note": "Standard SDOF DAF uses sqrt((1-r^2)^2 + (2*zeta*r)^2); response proxy is excitation multiplied by DAF.",
         "winter_screening_grid": {

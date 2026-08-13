@@ -9,6 +9,8 @@ from enum import Enum
 MODEL_STATUS = "LOW_FIDELITY_ENGINEERING_ESTIMATE"
 VALIDATION_STATUS = "NOT VALIDATED AGAINST REAL ROLL DATA"
 THRESHOLD_STATUS = "PRELIMINARY / NEEDS CALIBRATION"
+GRID_METHOD = "DETERMINISTIC SENSITIVITY GRID"
+GRID_STATISTICAL_STATUS = "NOT A STATISTICAL CONFIDENCE INTERVAL"
 
 
 class ResonanceProximityStatus(str, Enum):
@@ -22,6 +24,13 @@ class RollResponseRisk(str, Enum):
     LOW = "LOW"
     MODERATE = "MODERATE"
     HIGH = "HIGH"
+    UNAVAILABLE = "UNAVAILABLE"
+
+
+class RobustDecisionStatus(str, Enum):
+    ROBUST_NORMAL = "ROBUST_NORMAL"
+    ROBUST_MODERATE = "ROBUST_MODERATE"
+    RESIDUAL_HIGH_RISK = "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY"
     UNAVAILABLE = "UNAVAILABLE"
 
 
@@ -71,14 +80,21 @@ class RollResponseAssessment:
 @dataclass(frozen=True, slots=True)
 class RollResponseUncertainty:
     sample_count: int
-    p10_estimated_roll_response_deg: float
-    p50_estimated_roll_response_deg: float
-    p90_estimated_roll_response_deg: float
+    nominal_estimated_roll_response_deg: float
+    grid_q10_estimated_roll_response_deg: float
+    grid_q50_estimated_roll_response_deg: float
+    grid_q90_estimated_roll_response_deg: float
     minimum_estimated_roll_response_deg: float
     maximum_estimated_roll_response_deg: float
+    nominal_roll_risk: RollResponseRisk
+    grid_q90_roll_risk: RollResponseRisk
+    worst_case_roll_risk: RollResponseRisk
+    robust_decision_status: RobustDecisionStatus
     natural_period_range_s: tuple[float, float]
     damping_ratio_range: tuple[float, float]
     parameter_source: str
     parameter_status: str
     response_model_status: str = MODEL_STATUS
     response_validation_status: str = VALIDATION_STATUS
+    grid_method: str = GRID_METHOD
+    grid_statistical_status: str = GRID_STATISTICAL_STATUS

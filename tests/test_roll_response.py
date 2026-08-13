@@ -72,13 +72,15 @@ class RollResponsePhysicsTests(unittest.TestCase):
             relative_wave_angle_deg=105.0, parameters=self.parameters,
         )
         self.assertEqual(result.sample_count, 55)
-        self.assertLessEqual(result.p10_estimated_roll_response_deg, result.p50_estimated_roll_response_deg)
-        self.assertLessEqual(result.p50_estimated_roll_response_deg, result.p90_estimated_roll_response_deg)
+        self.assertLessEqual(result.grid_q10_estimated_roll_response_deg, result.grid_q50_estimated_roll_response_deg)
+        self.assertLessEqual(result.grid_q50_estimated_roll_response_deg, result.grid_q90_estimated_roll_response_deg)
         self.assertEqual(result.natural_period_range_s, (1.32, 2.32))
         self.assertEqual(result.damping_ratio_range, (0.10, 0.30))
         self.assertEqual(result.parameter_source, "ENGINEERING_ESTIMATE")
         self.assertEqual(result.parameter_status, "NOT_EXPERIMENTALLY_CALIBRATED")
         self.assertEqual(result.response_model_status, "LOW_FIDELITY_ENGINEERING_ESTIMATE")
+        self.assertEqual(result.grid_method, "DETERMINISTIC SENSITIVITY GRID")
+        self.assertEqual(result.grid_statistical_status, "NOT A STATISTICAL CONFIDENCE INTERVAL")
 
 
 class RollAwareAvoidanceTests(unittest.TestCase):

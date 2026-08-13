@@ -8,6 +8,8 @@
   "parameter_classification": "ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED",
   "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
   "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+  "parameter_grid_method": "DETERMINISTIC SENSITIVITY GRID",
+  "parameter_grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
   "threshold_status": "PRELIMINARY / NEEDS CALIBRATION",
   "selection_method": "Real WAVERYS point screened on declared simulated SOG/relative-angle grid.",
   "source_manifest": "data/manifests/winter_environment_20251101_20260331.json",
@@ -144,11 +146,16 @@
   },
   "before_uncertainty": {
     "sample_count": 55,
-    "p10_estimated_roll_response_deg": 5.166400172551478,
-    "p50_estimated_roll_response_deg": 7.865092559289347,
-    "p90_estimated_roll_response_deg": 13.039172638222997,
+    "nominal_estimated_roll_response_deg": 11.500062962489672,
+    "grid_q10_estimated_roll_response_deg": 5.166400172551478,
+    "grid_q50_estimated_roll_response_deg": 7.865092559289347,
+    "grid_q90_estimated_roll_response_deg": 13.039172638222997,
     "minimum_estimated_roll_response_deg": 4.01020809045886,
     "maximum_estimated_roll_response_deg": 20.070420820796656,
+    "nominal_roll_risk": "MODERATE",
+    "grid_q90_roll_risk": "MODERATE",
+    "worst_case_roll_risk": "HIGH",
+    "robust_decision_status": "ROBUST_MODERATE",
     "natural_period_range_s": [
       1.32,
       2.32
@@ -160,15 +167,22 @@
     "parameter_source": "ENGINEERING_ESTIMATE",
     "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
-    "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA"
+    "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+    "grid_method": "DETERMINISTIC SENSITIVITY GRID",
+    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
   },
   "after_uncertainty": {
     "sample_count": 55,
-    "p10_estimated_roll_response_deg": 1.1074567573711702,
-    "p50_estimated_roll_response_deg": 2.037637273135713,
-    "p90_estimated_roll_response_deg": 4.861590457134206,
+    "nominal_estimated_roll_response_deg": 2.5783814431860574,
+    "grid_q10_estimated_roll_response_deg": 1.1074567573711702,
+    "grid_q50_estimated_roll_response_deg": 2.037637273135713,
+    "grid_q90_estimated_roll_response_deg": 4.861590457134206,
     "minimum_estimated_roll_response_deg": 0.9814101167953648,
     "maximum_estimated_roll_response_deg": 9.699908587604442,
+    "nominal_roll_risk": "LOW",
+    "grid_q90_roll_risk": "LOW",
+    "worst_case_roll_risk": "MODERATE",
+    "robust_decision_status": "ROBUST_NORMAL",
     "natural_period_range_s": [
       1.32,
       2.32
@@ -180,7 +194,9 @@
     "parameter_source": "ENGINEERING_ESTIMATE",
     "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
     "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
-    "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA"
+    "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+    "grid_method": "DETERMINISTIC SENSITIVITY GRID",
+    "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
   },
   "recommended_mode": "JOINT_SPEED_HEADING",
   "decision_status": "RECOMMENDED",

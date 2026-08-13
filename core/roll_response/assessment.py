@@ -11,7 +11,7 @@ from core.resonance.parameters import RollDynamicsParameters
 from core.resonance.physics import ResonanceStatus, assess_resonance
 from core.roll_response.models import (
     MODEL_STATUS, VALIDATION_STATUS, ResonanceProximityStatus, RollResponseAssessment,
-    RollResponseRisk, RollResponseThresholds, RollResponseUncertainty,
+    RobustDecisionStatus, RollResponseRisk, RollResponseThresholds, RollResponseUncertainty,
 )
 from core.roll_response.physics import deep_water_wave_number, dynamic_amplification_factor
 
@@ -49,6 +49,15 @@ def _risk(response_deg: float, thresholds: RollResponseThresholds) -> RollRespon
     if response_deg >= thresholds.moderate_at_or_above_deg:
         return RollResponseRisk.MODERATE
     return RollResponseRisk.LOW
+
+
+def robust_status(risk: RollResponseRisk) -> RobustDecisionStatus:
+    return {
+        RollResponseRisk.LOW: RobustDecisionStatus.ROBUST_NORMAL,
+        RollResponseRisk.MODERATE: RobustDecisionStatus.ROBUST_MODERATE,
+        RollResponseRisk.HIGH: RobustDecisionStatus.RESIDUAL_HIGH_RISK,
+        RollResponseRisk.UNAVAILABLE: RobustDecisionStatus.UNAVAILABLE,
+    }[risk]
 
 
 def assess_roll_response(
@@ -162,13 +171,28 @@ def scan_roll_response_uncertainty(
             )
             values.append(assessment.estimated_roll_response_deg)
     values.sort()
+    nominal = assess_roll_response(
+        Hs_m=Hs_m, Tp_s=Tp_s, vessel_speed_m_s=vessel_speed_m_s,
+        relative_wave_angle_deg=relative_wave_angle_deg, parameters=parameters,
+        thresholds=thresholds,
+    )
+    grid_q90 = _percentile(values, 0.90)
+    maximum = values[-1]
+    configured_thresholds = thresholds or load_roll_response_thresholds()
+    q90_risk = _risk(grid_q90, configured_thresholds)
+    worst_risk = _risk(maximum, configured_thresholds)
     return RollResponseUncertainty(
         sample_count=len(values),
-        p10_estimated_roll_response_deg=_percentile(values, 0.10),
-        p50_estimated_roll_response_deg=_percentile(values, 0.50),
-        p90_estimated_roll_response_deg=_percentile(values, 0.90),
+        nominal_estimated_roll_response_deg=nominal.estimated_roll_response_deg,
+        grid_q10_estimated_roll_response_deg=_percentile(values, 0.10),
+        grid_q50_estimated_roll_response_deg=_percentile(values, 0.50),
+        grid_q90_estimated_roll_response_deg=grid_q90,
         minimum_estimated_roll_response_deg=values[0],
-        maximum_estimated_roll_response_deg=values[-1],
+        maximum_estimated_roll_response_deg=maximum,
+        nominal_roll_risk=nominal.roll_response_risk,
+        grid_q90_roll_risk=q90_risk,
+        worst_case_roll_risk=worst_risk,
+        robust_decision_status=robust_status(q90_risk),
         natural_period_range_s=(period_low, period_high),
         damping_ratio_range=(damping_low, damping_high),
         parameter_source=parameters.parameter_source.value,

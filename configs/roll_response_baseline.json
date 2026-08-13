@@ -12,6 +12,20 @@
   },
   "uncertainty_scan": {
     "natural_period_samples": 11,
-    "damping_ratio_samples": 5
+    "damping_ratio_samples": 5,
+    "method": "DETERMINISTIC SENSITIVITY GRID",
+    "statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+  },
+  "simulation_search_bound": {
+    "minimum_speed_m_s": 0.5,
+    "maximum_speed_m_s": 3.0,
+    "speed_step_m_s": 0.1,
+    "status": "SIMULATION_SEARCH_BOUND",
+    "operational_range_status": "NOT ZLUSV-200 OPERATIONAL SPEED RANGE"
+  },
+  "preliminary_maneuver_constraint": {
+    "maximum_relative_speed_change": 0.20,
+    "status": "PRELIMINARY_MANEUVER_CONSTRAINT",
+    "validation_status": "PRELIMINARY / NEEDS REAL VESSEL VALIDATION"
   }
 }

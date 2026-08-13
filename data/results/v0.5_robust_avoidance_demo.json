@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "demo_name": "V0.5 PARAMETER-UNCERTAINTY-AWARE ROBUST ROLL AVOIDANCE",
+  "environment_source": "REAL PUBLIC ENVIRONMENT DATA - NOT IN-SITU ZHUANGHE OBSERVATION",
+  "vessel_state_source": "SIMULATED VESSEL STATE",
+  "parameter_source": "ENGINEERING_ESTIMATE",
+  "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+  "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
+  "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+  "parameter_grid_method": "DETERMINISTIC SENSITIVITY GRID",
+  "parameter_grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL",
+  "source_scenario": "data/scenarios/v0.4/high_roll_response_risk.json",
+  "environment": {
+    "timestamp": "2026-02-05T00:00:00+00:00",
+    "latitude": 39.2,
+    "longitude": 122.2,
+    "Hs": 0.38,
+    "Tp": 2.02,
+    "wave_direction": 109.65999999999997,
+    "wind_speed": 7.7325681046176165,
+    "wind_direction": 151.0381136744616,
+    "surface_current_speed": 0.17069534612622939,
+    "surface_current_direction": 193.439951593748,
+    "water_depth": 7.0,
+    "provenance_by_field": {
+      "Hs": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "Tp": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wave_direction": {
+        "source": "Copernicus WAVERYS:cmems_mod_glo_wav_my_0.2deg_PT3H-i",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 0.27631544430824223,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_speed": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 7032.839120497674,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "wind_direction": {
+        "source": "ERA5:reanalysis-era5-single-levels",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 7032.839120497674,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_speed": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 4689.625629524974,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "surface_current_direction": {
+        "source": "Copernicus GLORYS:cmems_mod_glo_phy_my_0.083deg_P1D-m",
+        "sampling_method": "nearest",
+        "time_offset_seconds": 0.0,
+        "spatial_distance_m": 4689.625629524974,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      },
+      "water_depth": {
+        "source": "GEBCO:GEBCO_2026",
+        "sampling_method": "nearest",
+        "time_offset_seconds": null,
+        "spatial_distance_m": 293.0724831626054,
+        "within_tolerance": true,
+        "decision": "ACCEPTED"
+      }
+    }
+  },
+  "simulated_vessel_state": {
+    "SOG": 1.8,
+    "HDG": 214.66,
+    "roll": null,
+    "pitch": null,
+    "roll_rate": null,
+    "label": "SIMULATED VESSEL STATE"
+  },
+  "maximum_operational_speed_m_s": null,
+  "maximum_operational_speed_status": "REQUIRES MANUFACTURER DATA OR REAL SPEED TEST",
+  "before": {
+    "SOG": 1.8,
+    "HDG": 214.66,
+    "relative_wave_angle": 105.00000000000003,
+    "speed_change_percent": 0.0,
+    "heading_change_deg": 0.0,
+    "response_grid": {
+      "sample_count": 55,
+      "nominal_estimated_roll_response_deg": 29.295746686602353,
+      "grid_q10_estimated_roll_response_deg": 12.263942533117039,
+      "grid_q50_estimated_roll_response_deg": 19.557384951818964,
+      "grid_q90_estimated_roll_response_deg": 33.41025980046935,
+      "minimum_estimated_roll_response_deg": 9.591747957015105,
+      "maximum_estimated_roll_response_deg": 51.73002182007802,
+      "nominal_roll_risk": "HIGH",
+      "grid_q90_roll_risk": "HIGH",
+      "worst_case_roll_risk": "HIGH",
+      "robust_decision_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+      "natural_period_range_s": [
+        1.32,
+        2.32
+      ],
+      "damping_ratio_range": [
+        0.1,
+        0.3
+      ],
+      "parameter_source": "ENGINEERING_ESTIMATE",
+      "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+      "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
+      "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+      "grid_method": "DETERMINISTIC SENSITIVITY GRID",
+      "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+    },
+    "speed_search_boundary_hit": false,
+    "heading_search_boundary_hit": false,
+    "boundary_status": null,
+    "decision_confidence_warning": null,
+    "conflict_status": null
+  },
+  "unrestricted_simulation_best": {
+    "label": "UNRESTRICTED_SIMULATION_BEST",
+    "candidate": {
+      "SOG": 3.0,
+      "HDG": 229.66,
+      "relative_wave_angle": 120.00000000000003,
+      "speed_change_percent": 66.66666666666666,
+      "heading_change_deg": 15.0,
+      "response_grid": {
+        "sample_count": 55,
+        "nominal_estimated_roll_response_deg": 13.14920145936274,
+        "grid_q10_estimated_roll_response_deg": 4.982104248315126,
+        "grid_q50_estimated_roll_response_deg": 9.784112486260874,
+        "grid_q90_estimated_roll_response_deg": 23.38447300875771,
+        "minimum_estimated_roll_response_deg": 4.364463695606714,
+        "maximum_estimated_roll_response_deg": 45.331810549414584,
+        "nominal_roll_risk": "MODERATE",
+        "grid_q90_roll_risk": "HIGH",
+        "worst_case_roll_risk": "HIGH",
+        "robust_decision_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+        "natural_period_range_s": [
+          1.32,
+          2.32
+        ],
+        "damping_ratio_range": [
+          0.1,
+          0.3
+        ],
+        "parameter_source": "ENGINEERING_ESTIMATE",
+        "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+        "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
+        "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+        "grid_method": "DETERMINISTIC SENSITIVITY GRID",
+        "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+      },
+      "speed_search_boundary_hit": true,
+      "heading_search_boundary_hit": true,
+      "boundary_status": "OPTIMUM_LIES_ON_SIMULATION_SEARCH_BOUNDARY",
+      "decision_confidence_warning": "Simulation search boundary reached; not a validated real-vessel speed recommendation.",
+      "conflict_status": "NOMINAL_IMPROVES_BUT_ROBUST_RISK_REMAINS_HIGH"
+    },
+    "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+    "operator_advice": "PAUSE / RETURN ASSESSMENT",
+    "evaluated_candidate_count": 182,
+    "search_bound_status": "SIMULATION_SEARCH_BOUND",
+    "operational_range_status": "NOT ZLUSV-200 OPERATIONAL SPEED RANGE"
+  },
+  "constrained_recommendation": {
+    "label": "CONSTRAINED_RECOMMENDATION",
+    "candidate": {
+      "SOG": 2.1,
+      "HDG": 229.66,
+      "relative_wave_angle": 120.00000000000003,
+      "speed_change_percent": 16.666666666666668,
+      "heading_change_deg": 15.0,
+      "response_grid": {
+        "sample_count": 55,
+        "nominal_estimated_roll_response_deg": 19.284183901358713,
+        "grid_q10_estimated_roll_response_deg": 6.783534516273451,
+        "grid_q50_estimated_roll_response_deg": 14.153522464899865,
+        "grid_q90_estimated_roll_response_deg": 28.809833527601786,
+        "minimum_estimated_roll_response_deg": 5.713505683942661,
+        "maximum_estimated_roll_response_deg": 46.34174065386204,
+        "nominal_roll_risk": "HIGH",
+        "grid_q90_roll_risk": "HIGH",
+        "worst_case_roll_risk": "HIGH",
+        "robust_decision_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+        "natural_period_range_s": [
+          1.32,
+          2.32
+        ],
+        "damping_ratio_range": [
+          0.1,
+          0.3
+        ],
+        "parameter_source": "ENGINEERING_ESTIMATE",
+        "parameter_status": "NOT_EXPERIMENTALLY_CALIBRATED",
+        "response_model_status": "LOW_FIDELITY_ENGINEERING_ESTIMATE",
+        "response_validation_status": "NOT VALIDATED AGAINST REAL ROLL DATA",
+        "grid_method": "DETERMINISTIC SENSITIVITY GRID",
+        "grid_statistical_status": "NOT A STATISTICAL CONFIDENCE INTERVAL"
+      },
+      "speed_search_boundary_hit": false,
+      "heading_search_boundary_hit": true,
+      "boundary_status": "OPTIMUM_LIES_ON_SIMULATION_SEARCH_BOUNDARY",
+      "decision_confidence_warning": "Simulation search boundary reached; not a validated real-vessel speed recommendation.",
+      "conflict_status": "NOMINAL_IMPROVES_BUT_ROBUST_RISK_REMAINS_HIGH"
+    },
+    "robust_status": "RESIDUAL_HIGH_RISK_UNDER_PARAMETER_UNCERTAINTY",
+    "operator_advice": "PAUSE / RETURN ASSESSMENT",
+    "evaluated_candidate_count": 49,
+    "search_bound_status": "SIMULATION_SEARCH_BOUND",
+    "operational_range_status": "NOT ZLUSV-200 OPERATIONAL SPEED RANGE"
+  },
+  "preliminary_maneuver_constraint": {
+    "maximum_relative_speed_change": 0.2,
+    "status": "PRELIMINARY_MANEUVER_CONSTRAINT",
+    "validation_status": "PRELIMINARY / NEEDS REAL VESSEL VALIDATION"
+  },
+  "residual_high_risk": true,
+  "model_result_expression_limit": "USE MODEL-ESTIMATED RELATIVE REDUCTION; DO NOT DESCRIBE AS MEASURED ROLL REDUCTION",
+  "algorithm_status": "NOT SAC / NOT REINFORCEMENT LEARNING",
+  "control_status": "REAL VESSEL CONTROL DISABLED"
+}

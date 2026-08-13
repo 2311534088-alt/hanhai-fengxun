@@ -10,6 +10,7 @@ mass:
   net_payload_min_kg: 50
   full_load_displacement_min_kg: 100
 endurance_min_h: 4
+maximum_operational_speed_m_s: null
 propulsion: twin_propeller_twin_rudder
 environment_support:
   wind_force: 4
@@ -27,4 +28,5 @@ notes:
   - "TODO: identify GM and roll damping through controlled experiments."
   - "TODO: identify roll moment of inertia through controlled experiments."
   - "Unknown values must not be inferred from the demo data."
+  - "Maximum operational speed requires manufacturer data or a real speed test."
 
