@@ -10,7 +10,8 @@
   "roll_transfer_gain": null,
   "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
   "actual_roll_response_deg": null,
-  "historical_replay_status": "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST",
+  "historical_replay_status": "ORACLE_HISTORICAL_LOOKAHEAD - ORACLE UPPER BOUND - NOT OPERATIONALLY AVAILABLE",
+  "used_for_business_metrics": false,
   "current_environment": {
     "timestamp": "2026-02-05T00:00:00+00:00",
     "latitude": 39.2,
@@ -179,7 +180,7 @@
       "control_status": "DECISION ADVICE ONLY - REAL VESSEL CONTROL DISABLED"
     },
     "business_outcome": {
-      "mission_completed": true,
+      "mission_completed": false,
       "mission_interrupted": false,
       "unplanned_return": false,
       "mission_delayed": true,
@@ -187,7 +188,8 @@
       "hold_used": true,
       "estimated_extra_travel_time_s": 10800.0,
       "high_risk_exposure_duration_or_steps": 0,
-      "result_status": "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY",
+      "mission_outcome_status": "PENDING_REASSESSMENT",
+      "result_status": "DEVELOPMENT SMOKE TEST / ORACLE LOOKAHEAD - NOT BUSINESS EVIDENCE",
       "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
     },
     "manufacturer_operating_context": {
@@ -229,7 +231,7 @@
   "policy_replay_input": {
     "representative_simulated_mission_count": 4,
     "source_mix": "REAL PUBLIC ENVIRONMENT + SIMULATED MISSION/VESSEL STATE + ENGINEERING ESTIMATE PARAMETERS",
-    "status": "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY",
+    "status": "DEVELOPMENT SMOKE TEST / ORACLE LOOKAHEAD - NOT BUSINESS EVIDENCE",
     "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
   },
   "algorithm_status": "NOT SAC / NOT REINFORCEMENT LEARNING",

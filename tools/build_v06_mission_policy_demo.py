@@ -17,7 +17,7 @@ from adapters.marine_data import copernicus_wave
 from adapters.marine_data.netcdf import StudyRegion
 from core.mission import MissionState
 from core.mission.decision import (
-    HistoricalWindow, SimulatedMissionOutcome, calibration_warning, decide_mission_action,
+    HistoricalReplayMode, HistoricalWindow, SimulatedMissionOutcome, calibration_warning, decide_mission_action,
     evaluate_simulated_route, manufacturer_operating_context, summarize_policy_replay,
 )
 from core.resonance import load_engineering_estimate, search_robust_roll_avoidance
@@ -81,6 +81,7 @@ def main() -> None:
         constrained_adjustment_acceptable=False,
         route_candidates=routes,
         historical_windows=tuple(windows),
+        replay_mode=HistoricalReplayMode.ORACLE,
         manufacturer_operating_context=context,
         model_calibration_warning=calibration_warning(source["environment"]["Hs"], current_proxy),
     )
@@ -122,7 +123,8 @@ def main() -> None:
         "roll_transfer_gain": None,
         "roll_transfer_gain_status": "REQUIRES REAL ROLL DATA OR HYDRODYNAMIC CALIBRATION",
         "actual_roll_response_deg": None,
-        "historical_replay_status": "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST",
+        "historical_replay_status": "ORACLE_HISTORICAL_LOOKAHEAD - ORACLE UPPER BOUND - NOT OPERATIONALLY AVAILABLE",
+        "used_for_business_metrics": False,
         "current_environment": source["environment"],
         "current_simulated_vessel_state": state,
         "historical_windows": [asdict(item) for item in windows],
@@ -132,7 +134,7 @@ def main() -> None:
         "policy_replay_input": {
             "representative_simulated_mission_count": 4,
             "source_mix": "REAL PUBLIC ENVIRONMENT + SIMULATED MISSION/VESSEL STATE + ENGINEERING ESTIMATE PARAMETERS",
-            "status": "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY",
+            "status": "DEVELOPMENT SMOKE TEST / ORACLE LOOKAHEAD - NOT BUSINESS EVIDENCE",
             "performance_status": "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE",
         },
         "algorithm_status": "NOT SAC / NOT REINFORCEMENT LEARNING",

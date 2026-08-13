@@ -1,6 +1,6 @@
 from core.mission.decision.models import (
-    BusinessOutcome, HistoricalWindow, MissionAction, MissionDecision, RouteEvaluation,
-    TechnicalOutcome,
+    BusinessOutcome, HistoricalReplayMode, HistoricalWindow, MissionAction, MissionDecision,
+    MissionOutcomeStatus, RouteEvaluation, TechnicalOutcome,
 )
 from core.mission.decision.policy import decide_mission_action
 from core.mission.decision.routes import evaluate_simulated_route
@@ -11,7 +11,8 @@ from core.mission.decision.replay import (
 )
 
 __all__ = [
-    "BusinessOutcome", "HistoricalWindow", "MissionAction", "MissionDecision",
+    "BusinessOutcome", "HistoricalReplayMode", "HistoricalWindow", "MissionAction", "MissionDecision",
+    "MissionOutcomeStatus",
     "RouteEvaluation", "TechnicalOutcome", "decide_mission_action", "evaluate_simulated_route",
     "PERFORMANCE_STATUS", "REPLAY_STATUS", "PolicyReplaySummary", "SimulatedMissionOutcome",
     "calibration_warning", "manufacturer_operating_context", "summarize_policy_replay",

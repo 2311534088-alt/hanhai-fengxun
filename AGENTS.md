@@ -16,4 +16,8 @@
 - 不得把 nearest-neighbor 字段组装描述为最终“多源融合”；超出采样容差必须返回空值并保留拒绝 provenance。
 - 工程估计动力学只能标记为 `ENGINEERING_ESTIMATE / NOT_EXPERIMENTALLY_CALIBRATED`，不得称为厂家、实测或水池试验参数。
 - 禁止读取、输出、记录或提交 CDS/Copernicus Marine 的账号、密码、token、API key 或 credential 文件；manifest 只允许记录非敏感产品与文件 provenance。
+- 历史回放的动作选择必须因果：决策时刻 `t` 不得读取 `t` 之后的环境；未来历史值只允许用于 outcome evaluation。Oracle 后视实验必须标记为不可运行上限，不能进入商业指标。
+- 任务动作不等于任务结果；只有包含出航、到站、模拟巡检服务、返航并最终进入 `MissionState.COMPLETED` 的完整时间线才可计为完成。
+- 厂家 `>=4 h` 只能描述为最低公开工作时间参考，不是最大续航。超过该参考的模拟任务必须标记续航可行性未验证。
+- 商业指标必须由确定性完整任务回放计算 counts 和 rates；不得用开发 smoke test、硬编码风险暴露或未完成的 HOLD 任务声称任务已保住。
 

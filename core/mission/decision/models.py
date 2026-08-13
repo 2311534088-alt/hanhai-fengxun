@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum
 
-from core.mission import MissionState
+from core.mission.state import MissionState
 
 
 class MissionAction(str, Enum):
@@ -15,6 +15,23 @@ class MissionAction(str, Enum):
     HOLD_AND_REASSESS = "HOLD_AND_REASSESS"
     DELAY_MISSION = "DELAY_MISSION"
     RETURN = "RETURN"
+
+
+class MissionOutcomeStatus(str, Enum):
+    """A mission result/state, deliberately separate from an advisory action."""
+
+    IN_PROGRESS = "IN_PROGRESS"
+    PENDING_REASSESSMENT = "PENDING_REASSESSMENT"
+    DELAYED = "DELAYED"
+    COMPLETED = "COMPLETED"
+    INTERRUPTED = "INTERRUPTED"
+    RETURNED_UNPLANNED = "RETURNED_UNPLANNED"
+    ABORTED = "ABORTED"
+
+
+class HistoricalReplayMode(str, Enum):
+    CAUSAL = "CAUSAL_HISTORICAL_REPLAY"
+    ORACLE = "ORACLE_HISTORICAL_LOOKAHEAD"
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,6 +57,7 @@ class RouteEvaluation:
     estimated_time_penalty_percent: float
     acceptable: bool
     source_status: str = "SIMULATED MISSION ROUTE"
+    evaluation_method: str = "SEGMENT-START DEVELOPMENT LEGACY"
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,6 +82,9 @@ class BusinessOutcome:
     hold_used: bool
     estimated_extra_travel_time_s: float
     high_risk_exposure_duration_or_steps: int
+    mission_outcome_status: MissionOutcomeStatus = MissionOutcomeStatus.IN_PROGRESS
+    mission_elapsed_time_s: float | None = None
+    mission_time_feasibility_status: str = "NOT_YET_EVALUATED"
     result_status: str = "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY"
     performance_status: str = "NOT REAL WIND-FARM OPERATIONAL PERFORMANCE"
 

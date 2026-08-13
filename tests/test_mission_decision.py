@@ -4,7 +4,7 @@ from pathlib import Path
 
 from core.mission import MissionState
 from core.mission.decision import (
-    HistoricalWindow, MissionAction, RouteEvaluation, calibration_warning,
+    HistoricalReplayMode, HistoricalWindow, MissionAction, RouteEvaluation, calibration_warning,
     decide_mission_action, manufacturer_operating_context,
 )
 from core.resonance import load_engineering_estimate
@@ -35,32 +35,51 @@ class MissionDecisionTests(unittest.TestCase):
         self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.DELAY_MISSION)
         self.assertNotEqual(result.technical_outcome.preferred_mission_action, MissionAction.RETURN)
 
-    def test_three_hour_window_prefers_hold_over_return(self):
+    def test_oracle_three_hour_window_is_explicit_upper_bound(self):
         result = decide_mission_action(
             mission_state=MissionState.OUTBOUND, current_robust_status=HIGH,
             constrained_adjustment_acceptable=False, historical_windows=(window(True),),
+            replay_mode=HistoricalReplayMode.ORACLE,
         )
         self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.HOLD_AND_REASSESS)
         self.assertTrue(result.business_outcome.hold_used)
+        self.assertIn("ORACLE UPPER BOUND", result.technical_outcome.decision_reason)
 
     def test_safe_route_prefers_reroute_over_hold_and_return(self):
         result = decide_mission_action(
             mission_state=MissionState.OUTBOUND, current_robust_status=HIGH,
             constrained_adjustment_acceptable=False, route_candidates=(route(True),),
-            historical_windows=(window(True),),
+            historical_windows=(window(True),), replay_mode=HistoricalReplayMode.ORACLE,
         )
         self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.REROUTE)
         self.assertTrue(result.business_outcome.reroute_used)
 
-    def test_return_only_after_adjust_route_and_wait_fail(self):
+    def test_oracle_explicit_failed_windows_return(self):
         result = decide_mission_action(
             mission_state=MissionState.OUTBOUND, current_robust_status=HIGH,
             constrained_adjustment_acceptable=False, route_candidates=(route(False),),
-            historical_windows=(window(False),),
+            historical_windows=(window(False),), replay_mode=HistoricalReplayMode.ORACLE,
         )
         self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.RETURN)
         self.assertTrue(result.technical_outcome.return_last_resort)
         self.assertTrue(result.business_outcome.unplanned_return)
+
+    def test_causal_mode_ignores_even_acceptable_future_window(self):
+        result = decide_mission_action(
+            mission_state=MissionState.OUTBOUND, current_robust_status=HIGH,
+            constrained_adjustment_acceptable=False, historical_windows=(window(True),),
+        )
+        self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.HOLD_AND_REASSESS)
+        self.assertNotIn("shows an acceptable window", result.technical_outcome.decision_reason)
+
+    def test_causal_policy_holds_without_reading_future_window(self):
+        result = decide_mission_action(
+            mission_state=MissionState.OUTBOUND, current_robust_status=HIGH,
+            constrained_adjustment_acceptable=False,
+        )
+        self.assertEqual(result.technical_outcome.preferred_mission_action, MissionAction.HOLD_AND_REASSESS)
+        self.assertFalse(result.business_outcome.mission_completed)
+        self.assertEqual(result.business_outcome.estimated_extra_travel_time_s, 10_800)
 
     def test_safety_deterioration_never_forces_continue_to_reduce_returns(self):
         result = decide_mission_action(
@@ -102,10 +121,12 @@ class ResponseProxyContractTests(unittest.TestCase):
 class MissionEvidenceTests(unittest.TestCase):
     def test_policy_sources_and_business_metrics_are_simulation_labels(self):
         data = json.loads((ROOT / "data" / "results" / "v0.6_mission_policy_demo.json").read_text())
-        self.assertEqual(data["historical_replay_status"], "HISTORICAL_ENVIRONMENT_REPLAY - NOT A FORECAST")
+        self.assertIn("ORACLE_HISTORICAL_LOOKAHEAD", data["historical_replay_status"])
+        self.assertFalse(data["used_for_business_metrics"])
         self.assertIsNone(data["actual_roll_response_deg"])
         self.assertEqual(data["response_model_status"], "LOW_FIDELITY_RESPONSE_PROXY")
         self.assertEqual(data["mission_decision"]["technical_outcome"]["preferred_mission_action"], "HOLD_AND_REASSESS")
+        self.assertFalse(data["mission_decision"]["business_outcome"]["mission_completed"])
         self.assertEqual(len(data["policy_replay_comparison"]), 2)
         for policy in data["policy_replay_comparison"]:
             self.assertEqual(policy["result_status"], "MODEL-BASED / HISTORICAL-ENVIRONMENT REPLAY")
